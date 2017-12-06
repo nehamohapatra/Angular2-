@@ -1,0 +1,76 @@
+<!--<div class="auth-bg">-->
+<div class="login-bg">
+    <div class="loginText">
+        <div class="lHeightH">Make disruption the norm</div>
+        <div class="lHeight">LEAP AHEAD,</div>
+        <div class="lHeight">WITH NEOMEGHA</div>
+        <div>
+        <p class="lHeightH">A new approach to software development built on agile<br/>
+        principles offering robustness and ease of use.</p>
+        </div>
+    </div>
+    <div class="copyRight">© 2017-2018 PwC. All rights reserved.</div>
+</div>
+
+<div class="auth-wrap"  [style.top.px]="elemTop">
+    <div class="logg-wrap">
+        <!--<div class="app-logo"><img src="images/logo.png"></div>-->
+        <!--<div class="input-wrap">-->
+        <div class="input-wrap padTop">
+            <h2 class="loginHeading"><span class="loginHeadingBef">Login to</span><span class="loginHeadingAft"> Neomegha</span></h2>
+            <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+                <!--<md-tab-group>
+                    <md-tab label="Email">
+                        <div class="auth-input auth-padding">
+                            <div class="project-input">
+                                <md-input placeholder="Email" value={{email}} formControlName="email" type='email'></md-input>
+
+                            </div>
+                            <div class="project-input">
+                                <md-input placeholder="Password" formControlName="password" type='password'></md-input>
+
+                            </div>
+                            <div class="error-msg-container">
+                                  <p class="error-txt-common text-center" [hidden]="!isAuthError">Invalid credentials. Retry !</p>
+                            </div>
+                            <p [hidden]="urlMsg" class="error-txt-common text-center">{{pageMsg}}</p>
+                        </div>
+                    </md-tab>
+                    <md-tab label="Phone" [disabled]="true">
+                        <p>Phone</p>
+                    </md-tab>
+                </md-tab-group>-->
+                         <div class="auth-input auth-padding">
+                            <div class="project-input">
+                                <md-input placeholder="Email" value={{email}} formControlName="email" type='email'></md-input>
+
+                            </div>
+                            <div class="project-input">
+                                <md-input placeholder="Password" formControlName="password" type='password'></md-input>
+
+                            </div>
+                            <div class="error-msg-container">
+                                  <p class="error-txt-common text-center" [hidden]="!isAuthError">Invalid credentials. Retry !</p>
+                            </div>
+                            <p [hidden]="urlMsg" class="error-txt-common text-center">{{pageMsg}}</p>
+                        </div>
+                <div class="out-email" [hidden]="!loginForm.controls['email'].valid" >
+                    <md-icon>done</md-icon>
+                </div>
+                <div class="out-pwd" [hidden]="!loginForm.controls['password'].valid">
+                    <md-icon>done</md-icon>
+                </div>
+                <button type="submit" md-raised-button class="btn primary-btn" [disabled]="!loginForm.valid">login</button>
+                <br>
+                <br>
+                <!--<p class="resend-txt" (click)="onReset()">Can't access my account</p>
+                <br/>
+                <p (click)="onRegister()" class="resend-txt">New user?</p>-->
+                <div class="userAssist">
+                <div (click)="onRegister()" class="newUser">Request Access</div>
+                <div class="resend-txt cantAccess" (click)="onReset()">Reset Password</div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

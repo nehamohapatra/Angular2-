@@ -1,0 +1,255 @@
+<header-menu (changeProject)="changeEvent()">
+    
+    </header-menu>
+    <side-menu [flag]="flag"></side-menu>
+    <div class="nav-height"></div>
+    
+    <div class="project-wrap tab-pad">
+    
+        <div class="project-cont " [style.width.px]="resWidth" [style.height.px]="resHeight">
+            <md-tab-group class="cloud-main-tab tab-min" [selectedIndex]="cloudIndex" #tabGroup (selectChange)="onSelectChange($event)">
+                <md-tab>
+                    <template md-tab-label>
+                        LAUNCH
+                    </template>
+    
+                </md-tab>
+    
+                <md-tab>
+                    <template md-tab-label>
+                        MANAGE
+                    </template>
+    
+    
+                </md-tab>
+    
+            </md-tab-group>
+    
+            <div class="cust-link" (click)="onCustomAppClick()" *ngIf="!nextEnabled">
+                Deploy custom app
+            </div>
+    
+            <div class="bundle-tab-container" *ngIf="!tableShow">
+                <div class="flex-container act-scroll microservice-scrollbar" fxLayout="row" fxLayoutAlign="center center" id="repo-table"
+                    *ngIf="!tableShow">
+    
+                    <div [hidden]="!manageLoader">
+                        <div class="detail-loader vm-launch-load">
+                            <md-spinner class="loader-size"></md-spinner>
+                        </div>
+                    </div>
+    
+                    <table cellspacing="0" class="table-microservice">
+                        <thead class="table-head virtualManage">
+                            <tr>
+                                <th class="repo-table vm-manage">
+                                    <md-icon>arrow_upward</md-icon>Name </th>
+                                <th class="repo-table vm-manage">
+                                    <md-icon>arrow_upward</md-icon>Application </th>
+                                <th class="repo-table vm-manage">
+                                    <md-icon>arrow_upward</md-icon>Cloud</th>
+                                <th class="repo-table vm-manage">
+                                    <md-icon>arrow_upward</md-icon>IP</th>
+    
+                                <th class="repo-table vm-manage">
+                                    <md-icon>arrow_upward</md-icon>Created
+    
+                                </th>
+    
+                                <th class="repo-table vm-manage detail">
+                                    <md-icon>arrow_upward</md-icon>
+                                    <!--<md-icon *ngIf="Detail[0].showDetails" (click)="hideDetails(i)">arrow_downward</md-icon>-->
+                                </th>
+                                <th class="repo-table vm-manage detail"></th>
+    
+    
+                            </tr>
+                        </thead>
+    
+                        <tbody class="table-body" [class.table-body-scroll]="tbody" *ngFor="let Detail of details; let i = index">
+                            <tr class="repo-data flex-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="Detail.length>0">
+                                <!--style="word-wrap : break-word ; line-height: 1.5;"-->
+                                <td class="repo-table flex-item table-data-wrap" fxFlex="20%">{{(Detail[0].Spec.Labels.StackName!='')?Detail[0].Spec.Labels.StackName:Detail[0].Spec.Name }}</td>
+                                <td class="repo-table flex-item" fxFlex="20%">{{Detail[0].Spec.TaskTemplate.ContainerSpec.Image}}</td>
+                                <td class="repo-table flex-item" fxFlex="20%">AWS</td>
+    
+                                <td class="repo-table flex-item" fxFlex="20%" style="position : relative;">
+                                    132.23.34
+    
+                                </td>
+                                <td class="repo-table flex-item word-break" fxFlex="18%">{{Detail[0].CreatedAt | date: 'dd-MMM-yyyy'}}</td>
+                                <td class="repo-table flex-item" fxFlex="9%">
+                                    <img src="../images/refresh-icon.png" alt="Refresh" />
+    
+                                </td>
+                                <td class="repo-table flex-item" fxFlex="3%">
+                                    <!--<md-icon *ngIf="!Detail[0].showDetails" (click)="hideDetails(i)">expand_less</md-icon>
+                                    <md-icon *ngIf="Detail[0].showDetails" (click)="hideDetails(i)">keyboard_arrow_down</md-icon>-->
+    
+                                </td>
+                            </tr>
+                            <!--<tr  class="repo-data flex-container" fxLayout="row" fxLayoutAlign="center center" *ngIf="!Detail[0].showDetails">
+                                <td colspan="7">
+                                    hi
+                                </td>
+                            </tr>-->
+    
+                        </tbody>
+                    </table>
+    
+                </div>
+            </div>
+            <div *ngIf="nextEnabled" [hidden]="ftUser" [class.hideplaceholder]="enviromentOptions" class="app-launch-info">
+                <md-icon class="material-icons" id="app-launch-info-icon">error_outline</md-icon>
+                <span id="app-launch-info-text">All applications will be launched in</span>&nbsp;
+                <md-select placeholder="AWS" [(ngModel)]="enviromentOptions" floatPlaceholder="never" id="app-launch-info-env">
+                    <md-option *ngFor="let env of applaunchEnv" [value]="applaunchEnv.value" #arrayEnv>
+                        {{ env.viewValue }}
+                    </md-option>
+                </md-select>
+            </div>
+    
+            <div class="bundle-data-container act-scroll" [style.height.px]="actHeight" id="scroll-style" *ngIf="!nextEnabled"  >
+            <div class="flex-container" fxLayout="row" *ngIf="!nextEnabled">
+                <div class="flex-item mt20" fxFlex="65%" id="microSelectRow">
+                    <div class="relative flex-row " *ngFor="let item of selectedValues ; let i = index " id="microSelect">
+                        <img src="{{item.img}}" class="aws-icon micro-icon" /> &nbsp; <span class="micro-text"> {{item.text}} </span>
+                        <img src="../images/close.png" id="microUnSelect" (click)="removeSelection(i , item.text)" />
+                    </div>
+                </div>
+                <div class="flex-item" fxFlex="35%">
+                    <div class="search-deploy ">
+                        <md-icon class="search-icon" (click)="onSearchExp()">search</md-icon>
+                        <div class="search-input-wrap" [class.search-exp]="searchExp">
+                            <md-input type="text" id="tableSearch" [(ngModel)]="tableSearch" class="search-input" placeholder="Search"></md-input>
+                            <md-icon class="cancel-icon" (click)="onSearchExp()">clear</md-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="flex-container microser-container" fxLayout="row" *ngIf="!nextEnabled">
+    
+                <div class="flex-item mt20 microTab" fxFlex="25%">
+    
+                    <div class="relative flex-row mb20 act-scroll">
+                        <p class="secondary-txt lisTitle">Deploy preconfigured app</p>
+    
+                        <div class="flex-item microFlex" *ngFor="let serverItem of Stack | sort:sortName|search:tableSearch ">
+                            <button md-raised-button class="btn  repo-btn martop6 microSelect" (click)="ButtonClick(serverItem.imgageUrl,serverItem.serverName)"
+                                [disabled]="booleanObj[serverItem.serverName] " [class.button-clicked]="booleanObj[serverItem.serverName]"><p class="repo-icon microIcon"><img src={{serverItem.imgageUrl}} class="aws-icon" /></p><p class="repo-name" >{{serverItem.serverName}}</p></button>
+    
+                        </div>
+                    </div>
+    
+                </div>
+    
+                <div class="flex-item mt20 microTab" fxFlex="25%">
+                    <div class="relative flex-row mb20">
+                        <p class="secondary-txt lisTitle">Database Servers</p>
+    
+                        <div class="flex-item microFlex" fxFlex="1366px" fxFlex.md="55%" fxFlex.sm="75%" *ngFor="let serverItem of Servers | sort:sortName|search:tableSearch ">
+                            <button md-raised-button class="btn  repo-btn martop6 microSelect" (click)="ButtonClick(serverItem.imgageUrl,serverItem.serverName)"
+                                [disabled]="booleanObj[serverItem.serverName] " [class.button-clicked]="booleanObj[serverItem.serverName]"><p class="repo-icon microIcon"><img src={{serverItem.imgageUrl}} class="aws-icon" /></p><p class="repo-name" >{{serverItem.serverName}}</p></button>
+    
+                        </div>
+                    </div>
+                </div>
+    
+    
+                <div class="flex-item mt20 microTab" fxFlex="25%">
+                    <div class="relative flex-row mb20">
+                        <p class="secondary-txt lisTitle">Operating System </p>
+    
+                        <div class="flex-item microFlex" fxFlex="1366px" fxFlex.md="55%" fxFlex.sm="75%" *ngFor="let opSysItem of operatingSystem | sort:sortName|search:tableSearch ">
+                            <button md-raised-button class="btn  repo-btn martop6 microSelect" (click)="ButtonClick(opSysItem.imgageUrl,opSysItem.name)"
+                                [disabled]="booleanObj[opSysItem.name] " [class.button-clicked]="booleanObj[opSysItem.name]"><p class="repo-icon microIcon"><img src={{opSysItem.imgageUrl}} class="aws-icon" /></p><p class="repo-name" >{{opSysItem.name}}</p></button>
+    
+    
+                        </div>
+    
+    
+                    </div>
+                </div>
+    
+    
+                <div class="flex-item mt20 microTab" fxFlex="25%" style="margin-right : 20px ;">
+                    <div class="relative flex-row mb20">
+                        <p class="secondary-txt lisTitle">Programming Language </p>
+    
+                        <div class="flex-item microFlex" fxFlex="1366px" fxFlex.md="55%" fxFlex.sm="75%" *ngFor="let progLangItem of progLang | sort:sortName|search:tableSearch ">
+                            <button md-raised-button class="btn  repo-btn martop6 microSelect" (click)="ButtonClick(progLangItem.imgageUrl,progLangItem.name)"
+                                [disabled]="booleanObj[progLangItem.name] " [class.button-clicked]="booleanObj[progLangItem.name]"><p class="repo-icon microIcon"><img src={{progLangItem.imgageUrl}} class="aws-icon" /></p><p class="repo-name" >{{progLangItem.name}}</p></button>
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+              
+            
+            </div>
+           
+            <div class="flex-container" fxLayout="row">
+                <div class="box-btn" *ngIf="!nextEnabled">
+                    <span *ngIf="activeClick" class="selectedMicroServices">({{counter}} items selected)</span>
+                    <button md-raised-button class="auto-btn-prime" [disabled]="!activeClick || selectedValues.length == 0" (click)="SelectedOptions()">Next</button>
+                </div>
+           
+            </div>
+            <div class="flex-container formDesign " fxLayout="row" *ngIf="nextEnabled" [hidden]="ftUser">
+                <form [formGroup]="microserviceForm" (ngSubmit)="submitForm()">
+                    <div formArrayName="someArray" class="flex-item mt20 formDisplay act-scroll" [hidden]="ftUser" style="min-height: 50vh; max-height: 60vh; ;margin-right:5px " id="scroll-style">
+    
+                        <div [hidden]="ftUser" class="relative flex-row mb20 formDataDisplay" *ngFor="let infractionRaciste of microserviceForm.controls['someArray'].controls; let idx = index"
+                            [class.form-body-scroll]="tbody">
+    
+                            <div [formGroupName]="idx">
+                                <img src="{{infractionRaciste.get('img').value}}" class="aws-icon" />
+                                <md-input type="text" formControlName="textDisp" type="hidden"></md-input>
+                                <label>{{infractionRaciste.get('textDisp').value }}</label>
+    
+    
+                                <div class="flex-container" fxLayout="row">
+                                    <div class="flex-item mt20" fxFlex="30%">
+                                        <div class="form-group relative flex-row mb20">
+                                            <label> Name: </label>
+                                        </div>
+                                    </div>
+                                    <div class="flex-row">
+    
+                                        <md-input type="text" class="form-control flex-row " formControlName="name"  >
+                                        <!--minlength="3" maxlength="15"-->
+                                        </md-input>
+    
+                                    </div>
+                                </div>
+    
+    
+    
+                               
+    
+                            </div>
+    
+                        </div>
+    
+                    </div>
+    
+    
+    
+                    <div class="box-btn" *ngIf="nextEnabled" [hidden]="ftUser">
+                        <button md-raised-button class="auto-btn-prime auto-btn-gray micro-back-btn" (click)="previousView() ">BACK</button>
+    
+                        <button md-raised-button class="form-group auto-btn-prime" [disabled]="!microserviceForm.valid" type="submit">LAUNCH</button>
+                    </div>
+    
+                </form>
+    
+            </div>
+    
+    
+        </div>
+    
+    
+    
+    </div>
+    

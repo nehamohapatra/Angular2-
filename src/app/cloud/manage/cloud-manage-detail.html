@@ -1,0 +1,194 @@
+<div class="flex-container calc-width" fxLayout="row" fxLayoutAlign="center center" id="repo-head">
+    <div class="flex-item" fxFlex="50%">
+        <p class="normal-gray-txt"><b>Virtual Machine</b></p>
+    </div>
+    <div class="flex-item" fxFlex="35%">
+        <div class="search-deploy margin-zero">
+            <md-icon class="search-icon" (click)="onSearchExp()">search</md-icon>
+            <div class="search-input-wrap" [class.search-exp]="searchExp">
+                <md-input type="text" [(ngModel)]="tableSearch" class="search-input" placeholder="Search"></md-input>
+                <md-icon class="cancel-icon" (click)="onSearchExp()">clear</md-icon>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex-item" fxFlex="15%">
+        <div>
+            <md-select placeholder="Virtual Machine" class="repo-select-wrap fright" [(ngModel)]="selectedItem" (ngModelChange)="selectMng($event)">
+                <md-option value="1">Virtual Machine</md-option>
+                <md-option value="2">Build</md-option>
+                <md-option value="3">Something</md-option>
+            </md-select>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="flex-container" fxLayout="row" fxLayoutAlign="center center" id="repo-table">
+        <table cellspacing="0">
+            <thead class="table-head">
+                <tr>
+                    <th class="repo-table">Name
+                        <!--<th class="repo-table" (click)="filter('name')">Name-->
+                        <!--<span class="filter-arrow" [class.show-filter]="showArrowOne">
+                                             <span [hidden]="!nameFlag">
+                                            <md-icon class="sort-icon">arrow_upward</md-icon>
+                                        </span>
+                        <span [hidden]="nameFlag">
+                                        <md-icon class="sort-icon">arrow_downward</md-icon>
+                                        </span>
+                        </span>-->
+
+                    </th>
+                    <th class="repo-table">Provider
+                        <!--<th class="repo-table" (click)="filter('type')">Provider-->
+                        <!--<span class="filter-arrow" [class.show-filter]="showArrowTwo">
+                                              <span [hidden]="!providerFlag">
+                                            <md-icon class="sort-icon">arrow_upward</md-icon>
+                                        </span>
+                        <span [hidden]="providerFlag">
+                                        <md-icon class="sort-icon">arrow_downward</md-icon>
+                                        </span>
+                        </span>-->
+
+                    </th>
+                    <th class="repo-table">URL</th>
+                    <th class="repo-table">Status
+                        <!--<th class="repo-table" (click)="filter('stack')">Deployed stack-->
+                        <!--<span class="filter-arrow" [class.show-filter]="showArrowThree">
+                                             <span [hidden]="!stackFlag">
+                                            <md-icon class="sort-icon">arrow_upward</md-icon>
+                                                 </span>
+                        <span [hidden]="stackFlag">
+                                            <md-icon class="sort-icon">arrow_downward</md-icon>
+                                        </span>
+                        </span>-->
+
+                    </th>
+                </tr>
+            </thead>
+            <!--<tbody class="table-body" [class.table-body-scroll]="tbody" *ngIf="!showTableValue">
+                <tr class="repo-data flex-container" fxLayout="row" fxLayoutAlign="center center" *ngFor="let repoItem of empty" (click)="repoClick(repoItem)"
+                    [class.activeDetail]="repoItem === currentDetail" [ngClass]="{'uncompleteData':repoItem === currentDetail && uncompData}">
+                    <td class="repo-table flex-item" fxFlex="25%">{{repoItem.name}}</td>
+                    <td class="repo-table flex-item" fxFlex="25%">{{repoItem.type}}</td>
+                    <td class="repo-table flex-item word-break" fxFlex="25%">{{repoItem.repoURL}}</td>
+                    <td class="repo-table flex-item" fxFlex="25%">{{repoItem.stack}}</td>
+                </tr>
+            </tbody>-->
+            <tbody class="table-body" [class.table-body-scroll]="tbody">
+                <tr class="repo-data flex-container" fxLayout="row" fxLayoutAlign="center center" *ngFor="let repoItem of repository | search:tableSearch"
+                    [class.activeDetail]="repoItem === currentDetail" [ngClass]="{'uncompleteData':repoItem === currentDetail && uncompData}"
+                    (click)="repoClick(repoItem)">
+                    <td class="repo-table flex-item" fxFlex="25%">{{repoItem.name}}</td>
+                    <td class="repo-table flex-item" fxFlex="25%">{{repoItem.provider}}</td>
+                    <td class="repo-table flex-item word-break normal-link-txt" fxFlex="25%">{{repoItem.access}}</td>
+                    <td class="repo-table flex-item" fxFlex="25%">{{repoItem.stack}}</td>
+                    <md-progress-bar mode="indeterminate" color="primary" class="table-progress" *ngIf="false"></md-progress-bar>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="flex-container" fxLayout="row" fxLayoutAlign="center center">
+        <div class="flex-row">
+            <div class="repo-proj-detail" id="repo-detail" [style.height.px]="detailHeight" *ngIf="currentDetail">
+                <!--<div [hidden]="detailLoader">
+                    <div class="detail-loader">
+                        <md-spinner class="loader-size"></md-spinner>
+                    </div>
+                </div>-->
+                <p class="normal-gray-txt mb20 pb20"><b>Details</b></p>
+                <div class="flex-container" fxLayout="row" fxLayoutAlign="center center">
+
+                    <div class="flex-item" fxFlex="40%">
+                        <div class="flex-container mb20" fxLayout="row">
+                            <div fxFlex="50%">
+                                <p class="normal-gray-txt">Project Name</p>
+                                <p class="xsmall-gray-txt">{{currentDetail?.name}}</p>
+                                <p class="normal-gray-txt mt20">Region</p>
+                                <p class="xsmall-gray-txt">N. Virginia</p>
+                            </div>
+                            <div fxFlex="50%">
+                                <p class="normal-gray-txt">Instance Type</p>
+                                <p class="xsmall-gray-txt">micro</p>
+                                <p class="xsmall-gray-txt">1 (VCPU)</p>
+                                <p class="xsmall-gray-txt">6 (CPU Credits/ Hr) </p>
+                                <p class="xsmall-gray-txt">1 (Mem)</p>
+                            </div>
+                        </div>
+                        <div class="flex-container mb20" fxLayout="row">
+                            <div fxFlex="50%">
+                                <p class="normal-gray-txt">Public IP</p>
+                                <p class="xsmall-gray-txt">192.168.1.2</p>
+                                <p class="normal-gray-txt mt20">Private IP</p>
+                                <p class="xsmall-gray-txt">192.168.1.2</p>
+                            </div>
+                            <div fxFlex="50%">
+                                <p class="normal-gray-txt">OS</p>
+                                <p class="xsmall-gray-txt">Ubuntu 1.5.1</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-item" fxFlex="60%">
+                        <div class="flex-row relative">
+                            <div class="manage-repo-footer" [style.width.px]="contWidth">
+                                <div class="full-height" class="flex-container" fxLayout="row" fxLayoutAlign="center center">
+                                    <div class="flex-item" fxFlex="50%" class="padding-10" fxLayoutAlign="start center" layout-align="start center">
+                                        &nbsp;
+                                    </div>
+                                    <div class="flex-item" fxFlex="50%" fxLayoutAlign="end center" layout-align="end center">
+                                        <button md-raised-button class="orange-btn" (click)="onStop()">stop</button>
+                                        <button md-raised-button class="auto-btn-prime ml10">start</button>
+                                        <button md-raised-button class="orange-btn ml10" (click)="onTerminate()">TERMINATE</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="no-data" [class.display-flex]="noData" [style.height.px]="nodataTop">
+                <div class="text-center">
+                    <img src="images/search.png" />
+                    <p class="xsmall-gray-txt">Unfortunately, no result were found matching: <span class="normal-gray-txt">Project</span></p>
+                    <p class="xsmall-gray-txt">Try modifying your search terms</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div [hidden]="selectBuild">
+    <div class="flex-container" fxLayout="row" fxLayoutAlign="center center">
+        <div class="flex-item" fxFlex="100%">
+            <md-list class="bt-list-wrap">
+                <md-list-item *ngFor="let item of buildItem" class="bt-list">
+                    <p class="normal-gray-txt" md-line>Build on {{item.period}} </p>
+                    <p class="normal-gray-txt" md-line>Executed in #{{item.acname}}</p>
+                    <div class="mr8">
+                        <p class="badge-{{item.status}} fleft">{{item.status}}</p>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </div>
+    </div>
+</div>-->
+<!--<div *ngIf="manageLoader" [style.height.px]="resHeight" [style.width.px]="resWidth">
+    <div class="detail-spinner-wrap" [style.width.px]="resWidth" [style.height.px]="resHeight">
+        <md-progress-spinner mode="indeterminate" color="primary" class="detail-spinner"></md-progress-spinner>
+    </div>
+</div>-->
+<div class="terms" [class.terms-visible]="vmModel">
+    <div class="terms-wrap width-auto" *ngIf="vmStop">
+        <h4 class="terms-ht text-center">Are you sure you want to stop Test_VM1 ?</h4>
+        <div class="popup-btn">
+            <button md-raised-button class="orange-btn" (click)="onUnlinkYes()">yes</button>
+            <button md-raised-button class="auto-btn-gray" (click)="onStop()">cancel</button>
+        </div>
+    </div>
+    <div class="terms-wrap width-auto" *ngIf="vmTerminate">
+        <h4 class="terms-ht text-center">Are you sure you want to terminate Test_VM1 ?</h4>
+        <div class="popup-btn">
+            <button md-raised-button class="orange-btn" (click)="onUnlinkYes()">yes</button>
+            <button md-raised-button class="auto-btn-gray" (click)="onTerminate()">cancel</button>
+        </div>
+    </div>
+</div>

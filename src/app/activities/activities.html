@@ -1,0 +1,74 @@
+<header-menu></header-menu>
+<side-menu [flag]="flag"></side-menu>
+<div class="nav-height">
+</div>
+<div class="project-wrap tab-pad">
+    <div class="project-cont" [style.width.px]="resWidth" [style.height.px]="resHeight">
+        <md-tab-group class="activities-main-tab tab-min" [selectedIndex]="activitiesIndex">
+            <md-tab>
+                <template md-tab-label>ACTIVITIES</template>
+
+                <div class="bundle-tab-container pad-rlt">
+                    <div class="flex-container" fxLayout="row">
+                        <div class="flex-item" fxFlex="50%">
+                            <div class="flex-row act-scroll" [style.height.px]="actHeight">
+                                <md-list *ngFor="let item of actItem" class="list-pad0">
+                                    <md-list-item>
+                                        <img md-list-avatar class="act-img" />
+                                        <p md-line>
+                                            <span class="normal-gray-txt">{{item.name}}</span>
+                                            <span class="xsmall-gray-txt">{{item.time}}</span>
+                                        </p>
+                                        <div md-line>
+                                            <p class="normal-gray-txt"> Deployed a mobile stack #Project-Two in Github </p>
+                                            <p class="xsmall-{{item.status}}-txt">Build {{item.status}}</p>
+                                        </div>
+                                    </md-list-item>
+                                </md-list>
+                            </div>
+                            <div id="act-scroll-height">
+                                <div class="flex-row mb20">
+                                    <md-list>
+                                        <md-list-item class="list-pad0">
+                                            <p md-list-avatar class="act-img act-img-txt">D</p>
+                                            <p md-line class="normal-gray-txt">DFP BOT</p>
+                                            <p md-line class="normal-gray-txt">Your VM deployment #My-VM has failed</p>
+                                            <p md-line class="normal-gray-txt">Type "#My-VM retry" to retry deployment</p>
+                                        </md-list-item>
+                                    </md-list>
+                                </div>
+                                <div class="flex-row mt20">
+                                    <p class="normal-ccc-txt">Start a conversation, # tag your instances, stacks and ask for options</p>
+                                    <p class="normal-ccc-txt">Example: #mobile-stack deploy to QA</p>
+                                </div>
+                                <div class="act-input mt20">
+                                    <md-input type="text" placeholder="#My-VM retry" class="flex-row"></md-input>
+                                    <md-icon class="act-arrow">keyboard_arrow_right</md-icon>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-item" fxFlex="35%">
+                            <div class="search-deploy mt8">
+                                <md-icon class="search-icon" (click)="onSearchExp()">search</md-icon>
+                                <div class="search-input-wrap" [class.search-exp]="searchExp">
+                                    <md-input type="text" [(ngModel)]="tableSearch" class="search-input" placeholder="Search"></md-input>
+                                    <md-icon class="cancel-icon" (click)="onSearchExp()">clear</md-icon>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex-item" fxFlex="15%">
+                            <div>
+                                <md-select placeholder="All" class="flex-row">
+                                    <md-option value="1">All</md-option>
+                                    <md-option value="2">Code</md-option>
+                                    <md-option value="3">Cloud</md-option>
+                                </md-select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </md-tab>
+        </md-tab-group>
+    </div>
+</div>

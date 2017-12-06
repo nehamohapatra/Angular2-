@@ -1,0 +1,153 @@
+<p class="bold-gray-txt">Details</p>
+<form [formGroup]="azureDetail" [style.height.px]="formHeight" [hidden]="addDetail">
+    <!-- <p class="bold-gray-txt" id="azure">Details</p>
+<form [formGroup]="azureDetail" [style.height.px]="formHeight" [hidden]="awsDetail"> -->
+
+    <div class="form-input-wrap margin-zero">
+        <div class="auth-input">
+            <div class="project-input">
+                <md-input formControlName="name" type="text" value="{{azureDetail.name}}" placeholder="Account Name" [class.errorBorder]="!azureDetail.controls['name'].valid && azureDetail.controls['name'].touched"></md-input>
+                <br/>
+                <div class="clear-icon" *ngIf="!azureDetail.controls['name'].valid && azureDetail.controls['name'].touched">
+                    <md-icon>clear</md-icon>
+                </div>
+                <div class="ok-icon" *ngIf="azureDetail.controls['name'].valid && azureDetail.controls['name'].touched">
+                    <md-icon>done</md-icon>
+                </div>
+            </div>
+            <div class="project-input">
+                <md-input class="cloud-input1 visible-input" formControlName="clientId" [type]="idType" placeholder="Client ID" [class.errorBorder]="!azureDetail.controls['clientId'].valid && azureDetail.controls['clientId'].touched"></md-input>
+                <br/>
+                <div class="clear-icon" *ngIf="!azureDetail.controls['clientId'].valid && azureDetail.controls['clientId'].touched">
+                    <md-icon>clear</md-icon>
+                </div>
+                <div class="ok-icon" *ngIf="azureDetail.controls['clientId'].valid && azureDetail.controls['clientId'].touched">
+                    <md-icon>done</md-icon>
+                </div>
+                <div [hidden]="!idVisible">
+                    <md-icon (click)="onIdVisible()" class="input_visibility">visibility_off</md-icon>
+                </div>
+                <div [hidden]="idVisible">
+                    <md-icon (click)="onIdVisibleOff()" class="input_visibility">visibility</md-icon>
+                </div>
+            </div>
+
+            <div class="project-input">
+                <md-input class="cloud-input1 visible-input" formControlName="secretId" [type]="secretType" placeholder="Client Secret ID"
+                    [class.errorBorder]="!azureDetail.controls['secretId'].valid && azureDetail.controls['secretId'].touched"></md-input>
+                <!--<span class="error-txt" *ngIf="!azureDetail.controls['secretId'].valid && azureDetail.controls['secretId'].touched">{{invalidTxt}}</span>-->
+                <br/>
+                <div class="clear-icon" *ngIf="!azureDetail.controls['secretId'].valid && azureDetail.controls['secretId'].touched">
+                    <md-icon>clear</md-icon>
+                </div>
+                <div class="ok-icon" *ngIf="azureDetail.controls['secretId'].valid && azureDetail.controls['secretId'].touched">
+                    <md-icon>done</md-icon>
+                </div>
+                <div [hidden]="!secretVisible">
+                    <md-icon (click)="onSecretVisible()" class="input_visibility">visibility_off</md-icon>
+                </div>
+                <div [hidden]="secretVisible">
+                    <md-icon (click)="onSecretVisibleOff()" class="input_visibility">visibility</md-icon>
+                </div>
+            </div>
+
+            <div class="project-input">
+                <md-input class="cloud-input1 visible-input" formControlName="tenantId" [type]="tenantType" placeholder="Tenant ID" [class.errorBorder]="!azureDetail.controls['tenantId'].valid && azureDetail.controls['tenantId'].touched"></md-input>
+                <!--<span class="error-txt" *ngIf="!azureDetail.controls['tenantId'].valid && azureDetail.controls['tenantId'].touched">{{invalidTxt}}</span>-->
+                <br/>
+                <div class="clear-icon" *ngIf="!azureDetail.controls['tenantId'].valid && azureDetail.controls['tenantId'].touched">
+                    <md-icon>clear</md-icon>
+                </div>
+                <div class="ok-icon" *ngIf="azureDetail.controls['tenantId'].valid && azureDetail.controls['tenantId'].touched">
+                    <md-icon>done</md-icon>
+                </div>
+                <div [hidden]="!tenantVisible">
+                    <md-icon (click)="onTenantVisible()" class="input_visibility">visibility_off</md-icon>
+                </div>
+                <div [hidden]="tenantVisible">
+                    <md-icon (click)="onTenantVisibleOff()" class="input_visibility">visibility</md-icon>
+                </div>
+            </div>
+
+            <div class="project-input">
+                <md-input class="cloud-input1 visible-input" formControlName="subscriptionId" [type]="subcriptionType" placeholder="Subcription ID"
+                    [class.errorBorder]="!azureDetail.controls['subscriptionId'].valid && azureDetail.controls['subscriptionId'].touched"></md-input>
+                <!--<span class="error-txt" *ngIf="!azureDetail.controls['subscriptionId'].valid && azureDetail.controls['subscriptionId'].touched">{{invalidTxt}}</span>-->
+                <br/>
+                <div class="clear-icon" *ngIf="!azureDetail.controls['subscriptionId'].valid && azureDetail.controls['subscriptionId'].touched">
+                    <md-icon>clear</md-icon>
+                </div>
+                <div class="ok-icon" *ngIf="azureDetail.controls['subscriptionId'].valid && azureDetail.controls['subscriptionId'].touched">
+                    <md-icon>done</md-icon>
+                </div>
+                <div [hidden]="!subcriptionVisible">
+                    <md-icon (click)="onSubcriptionVisible()" class="input_visibility">visibility_off</md-icon>
+                </div>
+                <div [hidden]="subcriptionVisible">
+                    <md-icon (click)="onSubcriptionVisibleOff()" class="input_visibility">visibility</md-icon>
+                </div>
+            </div>
+
+            <!--<div class="project-input form-input-wrap margint-10 mb20">
+                <div class="select-input-wrap">
+                </div>
+            </div>-->
+        </div>
+        <div class="xsmall-gray-txt warn-text" *ngIf="!azureDetail.valid && azureDetail.touched">
+            <md-icon class="info_outline">info_outline</md-icon>One or more of entered credentials is/are invalid.
+        </div>
+        <div class="box-btn">
+            <button md-raised-button class="auto-btn-prime" [disabled]="!azureDetail.valid" (click)="onAzureDetailsAdd()">add</button>
+        </div>
+    </div>
+    <a href="#" target="_blank" class="resend-txt mb20 text-left azureLink">Need help finding IDs ?</a>
+    <br/><br/>
+    <p class="xsmall-gray-txt">
+        <md-icon class="info_outline">info_outline</md-icon>&nbsp;This is for DFP to access your account securely</p>
+</form>
+<div *ngIf="azureLoader">
+    <div class="detail-spinner-wrap">
+        <md-progress-spinner mode="indeterminate" color="primary" class="detail-spinner"></md-progress-spinner>
+    </div>
+</div>
+
+<div class="relative flex-row" [style.height.px]="formHeight" [hidden]="!awsDetail" style="margin-top:40px">
+    <div class="form-input-wrap margin-zero">
+        <md-input placeholder="Account Name" type="text" class="flex-row" [(ngModel)]="azureName" readonly></md-input>
+        <!-- <md-select placeholder="Default Region" (ngModelChange)="enableUpdate()" class="flex-row margint-10  mb20" [(ngModel)]="cloudDetailRegion"
+                [hidden]="!awsDetail">
+                <md-option *ngFor='let item of awsRegions; let i = index' value={{item.region}}>
+                    {{item.region}}
+                </md-option>
+            </md-select> -->
+
+        <a href="https://azure.microsoft.com" target="_blank" class="resend-txt text-left onBoardLink">https://azure.microsoft.com/</a>
+        <div class="box-btn">
+            <span *ngIf="enableUpdateFlag == true">
+            <button md-raised-button class="orange-btn cloudOnboard" (click)="onOpenPopUp()">unlink</button>
+             </span>
+
+            <span *ngIf="enableUpdateFlag == false">
+            <button md-raised-button class="orange-btn" (click)="updateAwsDetail()" [disabled]="enableUpdateFlag">update</button>
+            <button md-raised-button class="auto-btn-gray" (click)="onCancel()">cancel</button>
+            </span>
+        </div>
+
+        <div class="repo-status">
+            <div class="terms" [class.terms-visible]="unlinkPop">
+                <div class="terms-wrap width-auto">
+                    <h4 class="terms-ht text-center">Are you sure you want to unlink your AZURE account?</h4>
+                    <p class="text-center" style="color:#ff9900;">Note: Unlinking will not affect any of your running services.</p>
+                    <div class="popup-btn">
+                        <button md-raised-button class="orange-btn" (click)='onUnlink()'>yes</button>
+
+                        <button md-raised-button class="auto-btn-gray" (click)="onOpenPopUp()">cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

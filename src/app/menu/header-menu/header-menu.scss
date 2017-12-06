@@ -1,0 +1,305 @@
+.header-wrap {
+    height: 60px;
+    position: fixed;
+    background-color: $header-bg-color; border: 1px solid rgba(204, 204, 204, 0.5); box-shadow: 0 2px 6.9px 0.1px rgba(51, 51, 51, 0.5);
+    width: 100%;
+    z-index: 11;
+}
+
+.split-wrap {
+    position: relative;
+    width: 50%;
+    float: left;
+    height: 60px;
+}
+
+.logo-wrap {
+    width: 21px;      height: 24px;      
+    margin: 20px 20px 20px 16px;      float: left;      cursor: pointer;
+}
+
+.selpro {
+    width: 204px;
+    float: left;
+    margin-top: 15px;
+}
+
+.fright {
+    outline: none !important;
+}
+
+.selpro select {
+    border: none;
+    background: transparent;
+    width: 95%;
+    outline: none;
+}
+
+.add-pro {
+    width: 5%;
+    float: left;
+    line-height: 75px;
+    color: $primary-color;
+    cursor: pointer;
+}
+.notif-wrap {
+    // float: right;
+    padding: 0 15px;
+    // width: 13%;
+    text-align: center;
+}
+
+// .selpro-cont {
+//     padding: 0 15px;
+// }
+
+.user-profile {
+    width: 25px;
+    height: 25px;
+    background: $primary-color;
+    border-radius: 100px;
+    margin-top: 17px;
+    float: left;
+    margin-left: 10px;
+    cursor: pointer;  
+}
+.profile-wrap .user-profile{
+    z-index: 2222;
+}
+.notif-icon{
+    line-height: 60px;
+    margin-left:20px;
+    margin-right: 5px;
+    color: $font-primary-color;
+    height: 60px;
+    cursor: pointer;
+}
+.notif-visible .notif-icon{
+    color: $primary-color;
+    position: relative;
+    z-index: 2222;
+}
+.no-notif {
+    position: absolute;
+    top: 20px;
+    background:$primary-color;
+    border-radius: 50px;
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    color: #fff;
+    font-size: 12px;
+    line-height: 15px;
+    right: 20px;
+    cursor: pointer;
+}
+.notif-visible .no-notif{
+    display: none;
+}
+.logout-wrap{
+    background: #fff;
+    position: absolute;
+    right: 50px;
+    top: 7px;
+    padding: 20px;
+    width: 200px;
+    border-radius: 2px;
+    box-shadow: 0 2px 5px rgba(51, 51, 51, 0.23);
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s .2s, opacity .2s linear;
+}
+.notif-cont{
+    background: #fff;
+    position: absolute;
+    overflow-y: auto;
+    right: 0px;
+    // top: 7px;
+    top: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+    padding-bottom: 10px;
+    width: 62%;
+    flex-wrap: nowrap;
+    height: 98vh;
+    border-radius: 2px;
+    box-shadow: 0 2px 5px rgba(51, 51, 51, 0.23);
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s .2s, opacity .2s linear;
+}
+
+.notif-cont::-webkit-scrollbar {
+    width: 10px;
+}
+ 
+.notif-cont::-webkit-scrollbar-track {
+    background: transparent; 
+}
+ 
+.notif-cont::-webkit-scrollbar-thumb {
+    background: #ccc; 
+    height: 50px;
+}
+.profopen .logout-wrap, .notifopen .notif-cont{
+    visibility: visible;
+    opacity: 1;
+    transition: opacity .2s linear;
+}
+.hideload{
+    visibility: hidden;
+}
+.profopen{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    left: 0;
+    top: 0;
+}
+// .notifopen{
+    // position: fixed;
+    // width: 40%;
+    // // height: 100%;
+    // background: transparent;
+    // left: 0;
+    // top: 0;
+// }
+.logout-set {
+    width: 100%;
+    float: left;
+    margin: 20px 0 0;
+    cursor: pointer;
+}
+.logout-set img{
+    width: 20px;
+    float: left;
+}
+.logout-set p{
+    width: 80%;
+    float: left;
+    color: $font-secodary-color;
+    margin: 0 0 0 10px;
+    text-align: left;
+    font-family: $primary-font;
+}
+.logout-mar5{
+    margin-top: 5px;
+}
+.nav-height{
+    height:123px;
+}
+.new-notif{
+    font-size: 17px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+.notif-common{
+    font-size: $notif-font-size;
+    text-align: left;
+    margin:0px;
+}
+.notif-hd{
+    color: $font-primary-color;
+    @extend .notif-common;
+    font-weight: bold;
+}
+.notif-desc{
+    color: $font-secodary-color;
+    @extend .notif-common;
+    padding-right: 2%;
+}
+
+.notif-time{
+    color: $grey-color;
+    @extend .notif-common;
+}
+.notif-info-wrap {
+    top: 10%;
+    position: relative;
+    width: 95%;
+    float: left;
+    text-align: left;
+    padding-top: 12px;
+    padding-right: 5px;
+    padding-bottom: 12px;
+    padding-left: 10px;
+    cursor: pointer;
+}
+.notif-info-wrap-head {
+    // top: 10%;
+    // position: relative;
+    // width: 95%;
+    // float: left;
+    text-align: left;
+    padding-top: 15px;
+    padding-right: 5px;
+    padding-bottom: 12px;
+    padding-left: 10px;
+    position: fixed;
+    top: 0%;
+    width: 45%;
+    float: left;
+    height: 6%;
+    opacity: 1.0;
+    background: #fff;
+    z-index: 111;
+}
+.notif-info-wrap:hover{
+    background: #f0f0f0;
+}
+.notif-info-wrap:nth-child(2){
+    margin-top: 0 !important;
+}
+.imp-info {
+    border-left: 5px solid $notif-color;
+    margin: 15px 0;
+    padding: 0 15px;
+}
+.notif-txt{
+    // padding-left: 10px;
+    // padding-right: 5px;
+    // padding-top: 20px;
+    // padding-bottom: 20px;
+    // position: fixed;
+    // // width: 100%;
+    // height: 10%;
+    // text-align: left;
+    // margin:0;
+}
+
+.notif-hr {
+    // height: 2px;
+    background: rgba(204, 204, 204, 0.5);
+    margin: 20px 0 0 !important;
+}
+
+.notif-hr::before {
+    background: rgba(102, 102, 102, 0.5);
+    height: 2px;
+    width: 50% !important;
+    content: '';
+    margin: 0 auto;
+}
+.new-notif-hr {
+    height: 2px;
+    background: #ccc;
+    clear: both;
+}
+.show-more{
+    text-align: left;
+    color: blue;
+    cursor: pointer;  
+    padding-left: 10px;
+    position: relative;
+    top: inherit;
+}
+.notif-info-wrap-load{
+    top: 10%;
+    position: relative;
+    width: 95%;
+    float: left;
+    text-align: left;
+}

@@ -1,0 +1,74 @@
+.role-wrap, .upgrade-wrap{
+    width: 100%;
+    clear: both;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.role-cont{
+    float: left;
+    margin: 0 20px;
+    text-align: center;
+}
+.info-icon{
+    color: $font-primary-color;
+    margin-right: 10px;
+}
+.role-list-wrap {
+    width: 47%;
+    float: left;
+    height: 80px; background-color: white;  border-radius: 2px;
+    padding-top: 5px;
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.developer-role{
+    border: 2px solid $developer-border-color;
+}
+.developer-role span{
+    color: $developer-color;
+}
+.admin-role{
+    border: 2px solid $admin-border-color;
+}
+.admin-role span{
+    color: $admin-color;
+}
+.re-invite{
+    float: right;
+    margin-top: 10px;
+}
+.role-list-wrap:nth-child(even){
+    margin-left: 10px;
+}
+.role-list-wrap:nth-child(odd){
+    margin-right: 10px;
+}
+.user-remove{
+    position: absolute;
+    top: 5px;
+    right: 0px;
+    font-size: 20px;
+    color: $font-primary-color;
+    cursor: pointer;
+}
+.role-scroll {
+    position: relative;
+    float: left;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.role-scroll::-webkit-scrollbar {
+    width: 10px;
+}
+ 
+.role-scroll::-webkit-scrollbar-track {
+    background: transparent; 
+}
+ 
+.role-scroll::-webkit-scrollbar-thumb {
+    background: #ccc; 
+    height: 50px;
+}

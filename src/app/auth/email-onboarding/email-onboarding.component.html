@@ -1,0 +1,30 @@
+<div class="setup-bg">
+    <div class="auth-wrap" [style.top.px]="elemTop">
+        <div class="app-logo"><img src="images/logo.png"></div>
+        <p class="info-txt">Enter the verification code you received</p>
+        <div class="input-wrap">
+            <div id="auth-code">
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <div class="flex-horizontal">
+                        <md-input class="inputs" formControlName="one" maxlength="1" (keyup.Backspace)="keyValue( $event )"></md-input>
+                        <md-input class="inputs" formControlName="two" maxlength="1" (keyup.Backspace)="keyValue( $event )"></md-input>
+                        <md-input class="inputs" formControlName="three" maxlength="1" (keyup.Backspace)="keyValue( $event )"></md-input>
+                        <md-input class="inputs" formControlName="four" maxlength="1" (keyup.Backspace)="keyValue( $event )"></md-input>
+                        <md-input class="inputs" formControlName="five" maxlength="1" (keyup.Backspace)="keyValue( $event )"></md-input>
+                        <md-input class="last-code-input inputs" formControlName="six" maxlength="1" (keyup.Backspace)="keyValue( $event )"></md-input>
+                    </div>
+                    <div class="text-center msg-container" [hidden]="!uiMsg ||form.valid ">
+                        <span class="success-msg">{{uiMsg}}</span>
+                    </div>
+                    <button md-raised-button class="btn primary-btn" [disabled]="disableVerify?disableVerify:!form.valid">Verify Me</button>
+                    <div class="ok-icon" [hidden]="!form.valid">
+                        <md-icon>done</md-icon>
+                    </div>
+                </form>
+            </div>
+            <br/>
+            <!--<button md-raised-button class="btn primary-btn" (click)="onVerified()">Verify Me</button>-->
+            <p class="resend-txt" [hidden]="resendLink" (click)="onResendCodeClick()">Resend verification code</p>
+        </div>
+    </div>
+</div>

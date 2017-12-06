@@ -1,0 +1,15 @@
+<div class="auth-bg">
+    <div class="auth-wrap" [style.top.px]="elemTop">
+        <div class="app-logo"><img src="images/logo.png"></div>
+        <form [formGroup]="onBoardMeForm" (ngSubmit)="onBoardme()">
+            <div class="input-wrap padtop2">
+                <div class="auth-input">
+                    <md-input formControlName="email" placeholder="Email"></md-input>
+                </div>
+                <button type="submit" md-raised-button class="btn primary-btn" [disabled]="!onBoardMeForm.valid">onboard me</button>
+                <br/><br/>
+                <p (click)="onNewuserClick()" class="resend-txt">Already registered user?</p>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,106 @@
+
+#auth-code md-input{
+    width: 40px !important;
+    margin-right: 8px;
+}
+
+.app-logo{
+    position: absolute;
+    width:100%;
+    top:-100px;
+    text-align: center;
+}
+.error-msg-container{
+    width:100%;
+}
+.auth-padding{
+        padding-bottom: 20px;
+}
+.login-bg{
+    background: url("/images/2-layers.png");
+    width: 830px;
+    height: 345px;
+    position: absolute;
+    right: 0;
+    left: 0;
+    margin: 12% auto auto auto;
+    overflow: hidden;
+    background-repeat: no-repeat;
+}
+
+.padTop{
+    padding-top: 50px;
+}
+
+.loginHeading{
+    text-align: center;
+}
+
+.loginText{
+    width: 46%;
+    margin-top: 135px;
+}
+
+.lHeight{
+    font-weight: bold;
+    color: ghostwhite;
+    text-align: right;
+    font-size:27px;
+}
+
+.lHeightH{
+    font-weight: 400;
+    color: ghostwhite;
+    text-align: right;
+    font-size: 15px;
+}
+
+.loginHeadingBef{
+    color: #666;
+    font-weight: lighter;
+}
+
+.loginHeadingAft{
+    color: #666;
+    font-weight: bolder;
+}
+
+.copyRight{
+    margin: 40px 0 0 170px;
+    color: #cccccc;
+    font-size: 13px;
+}
+
+.logg-wrap{
+    width: 388px;
+    height: 459px;
+    position: relative;
+    margin: 0 auto;
+    //top: 92px;
+    top: 12px;
+    background: white;
+    height: 450px;
+    right: -180px;
+    box-shadow: 0 1px 7px rgba(0, 0, 0, 0.15);
+}
+
+.newUser{
+    color: #e0301e;
+    font-family: PT Sans, sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    margin: 0;
+    cursor: pointer;
+    width: 38%;
+    float: left;
+}
+
+.cantAccess{
+    width: 62%;
+    float: left;
+    font-size: 13px !important;
+}
+
+.userAssist{
+    margin-top: 30px;
+}

@@ -1,0 +1,38 @@
+.info_outline{
+    float: left;
+    margin-right: 5px;
+    line-height: 15px;
+}
+.txt-handler{
+    width:80%;
+}
+.cloud-arrow{
+    margin-top:10px !important;
+}
+.instance-table{
+    margin: 0;
+    height: 52px;
+    border: none;
+}
+.instance-table-detail{
+    height: 33px;
+    border-bottom: 1px solid #ccc;
+}
+.instance-table-detail:last-child{
+    border-bottom:none !important;
+}
+.dashboard-icon{
+        float: right;
+    margin-right: -50px;
+    margin-top: -2px;
+}
+
+.GreyAssign
+{
+    cursor: pointer; 
+    color: #666;
+}
+
+.GreyAssignImg{
+    background-color: #666;
+}

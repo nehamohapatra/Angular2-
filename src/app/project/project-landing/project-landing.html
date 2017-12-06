@@ -1,0 +1,268 @@
+<!--<header-menu></header-menu>-->
+<header-menu (changeProject)="changePro()" (selectProject)="selectPro()"></header-menu>
+<side-menu [flag]="flag"></side-menu>
+<br/>
+<br/>
+<br/>
+<br/>
+<div class="project-wrap">
+    <!--<label class="switch">
+      <input type="checkbox" [(ngModel)]="pageSwitch" (click)="onSwitch()">
+      <div class="slider round"></div>
+      </label>-->
+    <div [hidden]="!pageSwitch">
+        <md-grid-list cols="3" rowHeight="2:2" gutterSize="12px">
+            <md-grid-tile class="grapcol">
+                <div class="flex-item">
+                    <div class="flex-container flex-row graph-header-area" fxLayout="row">
+                        <div class="flex-item graph-header-text" fxFlex="50%"> Code build trends
+                            <div class=" layout-coloumn sub-header-text">
+                                <label>Avarage commits/{{perDayToggle?'Day':'Week'}}: {{avgCommitsCount}} </label>
+                            </div>
+                            <!--<div class=" layout-coloumn sub-header-text">
+                                <label> Last build: Passed at 8.00 PM </label>
+                            </div>-->
+                        </div>
+                        <div class="flex-item graph-header-text" fxFlex="50%">
+                            <div class="flex-item dropdown-right" fxFlex="15%">
+                                <md-select placeholder="All" class="vm-select-wrap" (ngModelChange)="onChangeLinkedRepos($event)" name="selectedRepo" [(ngModel)]="selectedRepo" floatPlaceholder="never">
+                                    <md-option *ngFor="let dfpLinkRepo of dfpLinkRepos" [value]="dfpLinkRepo.name">{{dfpLinkRepo.name}}</md-option>
+                                </md-select>
+                            </div>
+                            <div class="layout-coloumn ml83" fxFlex="15%">
+                                <md-slide-toggle [(ngModel)]="perDayToggle" (change)="flifToggle()">
+                                    <span class="rgt-lbl">Daily</span>
+                                    <span class="lft-lbl">Weekly</span>
+                                </md-slide-toggle>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="graph-header-border "></div>
+                    <div class="gradient-color">
+                        <google-chart [data]="costChartOptions"></google-chart>
+                    </div>
+                </div>
+                <div class="terms-small page-loader-small" [class.terms-visible]="showLoadChart1">
+                    <div>
+                        <md-spinner class="loader-small-size"></md-spinner>
+                    </div>
+                </div>
+            </md-grid-tile>
+            <md-grid-tile class="grapcol">
+                <div class="flex-item pb28">
+                    <div class="flex-container flex-row graph-header-area" fxLayout="row">
+                        <div class="flex-item graph-header-text" fxFlex="50%"> Cloud Utilisation
+                            <div class="layout-coloumn sub-header-text">
+                                <label>Total Cloud Utilisation: {{totalInstancesCount}} </label>
+                            </div>
+                        </div>
+                        <div class="flex-item graph-header-text" fxFlex="50%">
+                            <div class="flex-item dropdown-right" fxFlex="15%">
+                                <md-select placeholder="All" [(ngModel)]="selectedInstance" class="vm-select-wrap">
+                                    <md-option value="aws">AWS</md-option>
+                                </md-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="graph-header-border "></div>
+                    <div class="gradient-color">
+                        <google-chart [data]="donutChartOptions"></google-chart>
+                    </div>
+                </div>
+                <div class="terms-small page-loader-small" [class.terms-visible]="showLoadChart2">
+                    <div>
+                        <md-spinner class="loader-small-size"></md-spinner>
+                    </div>
+                </div>
+            </md-grid-tile>
+            <md-grid-tile class="grapcol">
+                <div class="flex-item pb28">
+                    <div class="flex-container flex-row graph-header-area" fxLayout="row">
+                        <div class="flex-item graph-header-text" fxFlex="50%"> Cloud cost
+                            <div class=" layout-coloumn sub-header-text">
+                                <!--<label>Current month estimated: 8 </label> &nbsp;--> 
+                            </div>
+                        </div>
+                        <div class="flex-item graph-header-text" fxFlex="50%">
+                            <div class="flex-item dropdown-right" fxFlex="15%">
+                                <md-select placeholder="All" [(ngModel)]="selectedInstance" class="vm-select-wrap">
+                                    <md-option value="aws">AWS</md-option>
+                                </md-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="graph-header-border "></div>
+                    <div class="gradient-color p-l-15">
+                        <google-chart [data]="cpuUtilChartOptions"></google-chart>
+                    </div>
+                </div>
+                <div class="terms-small page-loader-small" [class.terms-visible]="showLoadChart3">
+                    <div>
+                        <md-spinner class="loader-small-size"></md-spinner>
+                    </div>
+                </div>
+            </md-grid-tile>
+        </md-grid-list>
+        <div class="flex-container graph-padding" fxLayout="row" fxLayoutAlign="center center">
+            <div class="flex-item button-align" fxFlex="50%">
+                <div class="buttons-area" fxLayout="row" style="padding-right: 5px">
+                    <div class="flex-item graph-header-text gitlab-style" fxFlex="33%">
+                        <div class="">
+                            <button md-raised-button class="repo-act-wrap"> <img src="images/GitHub.png" class="git-icon" />
+                                <p class="git-txt1">Onboard</p>
+                                <p class="git-txt2">GitHub</p>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex-item graph-header-text gitlab-style" fxFlex="33%">
+                        <div class="">
+                            <button md-raised-button class="repo-act-wrap"> <img src="images/GitLab.png" class="git-icon" />
+                                <p class="git-txt1">Onboard</p>
+                                <p class="git-txt2">Gitlab</p>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex-item graph-header-text gitlab-style" fxFlex="33%">
+                        <div class="">
+                            <button md-raised-button class="repo-act-wrap"> <img src="images/BitBucket.png" class="git-icon" />
+                                <p class="git-txt1">Onboard</p>
+                                <p class="git-txt2">Bitbucket</p>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="graph-header-border"></div> 
+               <div class="gradient-color">
+               <google-chart [data]="vmUsageChartOptions"></google-chart></div>--></div>
+            <div class="flex-item pl12" fxFlex="50%">
+                <div class="flex-container flex-row buttons-area " fxLayout="row">
+                    <div class="flex-item graph-header-text gitlab-style" fxFlex="33%">
+                        <div class="">
+                            <button md-raised-button class="repo-act-wrap"> <img src="images/cloud-mng/aws.png" class="git-icon" />
+                                <p class="git-txt1">Onboard</p>
+                                <p class="git-txt2">AWS</p>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex-item graph-header-text gitlab-style" fxFlex="33%">
+                        <div class="">
+                            <button md-raised-button class="repo-act-wrap"> <img src="images/cloud-mng/azure.png" class="git-icon" />
+                                <p class="git-txt1">Onboard</p>
+                                <p class="git-txt2">Azure</p>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex-item graph-header-text gitlab-style" fxFlex="33%">
+                        <div class="">
+                            <button md-raised-button class="repo-act-wrap"> <img src="images/cloud-mng/google_cloud.png" class="git-icon" />
+                                <p class="git-txt1">Onboard</p>
+                                <p class="git-txt2">GCP</p>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="graph-header-border"></div>
+               <google-chart [data]="pieChartOptions"></google-chart>
+               <div class="overview-item"></div>--></div>
+        </div>
+    </div>
+    <div [hidden]="pageSwitch">
+        <md-grid-list [cols]="parentCol" rowHeight="340px">
+            <md-grid-tile [colspan]="codeCol">
+                <div class="ac-det">
+                    <div>
+                        <h3 class="ac-det-title">code</h3> </div>
+                    <div class="ac-create">
+                        <div class="flex-container flex-row" fxLayout="row" fxLayoutAlign="center center">
+                            <!--with account-->
+                            <div *ngIf="!gitHub" class="flex-item" fxFlex="40%" fxFlex.md="55%" fxFlex.sm="75%">
+                                <p class="secondary-txt">Add your code source host</p>
+                                <button md-raised-button class="btn secondary-btn repo-btn martop6" (click)="onGithubClick()">
+                                    <p class="repo-icon"><img src="images/GitHub.png" class="github-icon" /></p>
+                                    <p class="repo-name">Github</p>
+                                </button>
+                                <button md-raised-button class="btn secondary-btn repo-btn martop6">
+                                    <p class="repo-icon"><img src="images/BitBucket.png" class="bitbucket-icon" /></p>
+                                    <p class="repo-name">Bitbucket</p>
+                                </button>
+                                <button md-raised-button class="btn secondary-btn repo-btn martop6">
+                                    <p class="repo-icon"><img src="images/GitLab.png" class="gitlab-icon" /></p>
+                                    <p class="repo-name">Gitlab</p>
+                                </button>
+                            </div>
+                            <!--without account-->
+                            <div *ngIf="connectDfp" class="flex-item padding10 pr0" fxFlex="40%" fxFlex.md="45%" fxFlex.sm="25%">
+                                <p class="secondary-txt">From your Github, we see</p>
+                                <button md-raised-button class="btn secondary-btn link-count-btn">
+                                    <p class="link-count-no">8</p>
+                                    <p class="xsmall-gray-txt link-count-txt">Repositories</p>
+                                </button>
+                                <button md-raised-button class="btn secondary-btn link-count-btn">
+                                    <p class="link-count-no">0</p>
+                                    <p class="xsmall-gray-txt link-count-txt">Repositories linked to DFP </p>
+                                </button>
+                            </div>
+                            <div *ngIf="gitHub" class="flex-item padding10" fxFlex="40%" fxFlex.md="55%" fxFlex.sm="75%">
+                                <p class="secondary-txt" *ngIf="!doMore">Get started with Github</p>
+                                <p class="secondary-txt" *ngIf="doMore">Do more in Github</p>
+                                <button md-raised-button class="btn secondary-btn repo-btn martop6" (click)="connectDfpClick()">
+                                    <p class="repo-icon"><img src="images/stack-icon.png" class="github-icon" /></p>
+                                    <p class="repo-name">Deploy a stack/bundle</p>
+                                </button>
+                                <button md-raised-button class="btn secondary-btn repo-btn martop6" *ngIf="connectDfp">
+                                    <p class="repo-icon"><img src="images/link-icon.png" class="link-icon" /></p>
+                                    <p class="repo-name">Link existing repository</p>
+                                </button>
+                                <button md-raised-button class="btn secondary-btn repo-btn martop6">
+                                    <p class="repo-icon"><img src="images/repository-icon.png" class="bitbucket-icon" /></p>
+                                    <p class="repo-name">Create empty repository</p>
+                                </button>
+                            </div>
+                            <div *ngIf="DfpStatus" class="flex-item padding10" fxFlex="100%">
+                                <p class="secondary-txt">Code Status Graph</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </md-grid-tile>
+            <md-grid-tile [colspan]="cloudCol">
+                <div class="flex-row">
+                    <md-grid-list [cols]="cloudCol" rowHeight="340px">
+                        <md-grid-tile [colspan]="utilSpan" *ngIf="utilCol">
+                            <div class="ac-det">
+                                <div>
+                                    <h3 class="ac-det-title">utilisation</h3> </div>
+                            </div>
+                        </md-grid-tile>
+                        <md-grid-tile [colspan]="cloudSpan">
+                            <div class="ac-det margin-zero">
+                                <div>
+                                    <h3 class="ac-det-title">Cloud</h3> </div>
+                            </div>
+                        </md-grid-tile>
+                    </md-grid-list>
+                    <div class="ac-create top61">
+                        <div class="flex-container flex-row" fxLayout="row" fxLayoutAlign="center center">
+                            <!--with account-->
+                            <div class="flex-item" fxFlex="40%" fxFlex.md="55%" fxFlex.sm="75%">
+                                <p class="secondary-txt">Add your cloud providers</p>
+                                <button (click)="connnectAws()" md-raised-button class="btn secondary-btn repo-btn martop6">
+                                    <p class="repo-icon"><img src="images/cloud-mng/aws.png" class="aws-icon" /></p>
+                                    <p class="repo-name">AWS</p>
+                                </button>
+                                <button md-raised-button class="btn secondary-btn repo-btn martop6">
+                                    <p class="repo-icon"><img src="images/cloud-mng/azure.png" class="azure-icon" /></p>
+                                    <p class="repo-name">Azure</p>
+                                </button>
+                                <button md-raised-button class="btn secondary-btn repo-btn martop6">
+                                    <p class="repo-icon"><img src="images/cloud-mng/google_cloud.png" class="gcp-icon" /></p>
+                                    <p class="repo-name">GCP</p>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </md-grid-tile>
+        </md-grid-list>
+    </div>
+</div>

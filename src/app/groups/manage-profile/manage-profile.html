@@ -1,0 +1,215 @@
+<header-menu></header-menu>
+<side-menu></side-menu>
+<div class="nav-height"></div>
+<div class="project-wrap tab-pad">
+    <div class="project-cont manageProfCont">
+        <md-tab-group class="cloud-main-tab tab-min">
+            <md-tab label="PROFILE">
+                <div class="bundle-tab-container container-top">
+                    <div fxLayout="row" class="basicInfoStyle">
+                        <div class="flex-item mb20" fxFlex="35%">
+                            <h5>Basic Info</h5>
+                        </div>
+                        <div class="flex-item mb20" fxFlex="35%">
+                            <h5>Projects</h5>
+                        </div>
+                    </div>
+                    <div class="flex-container mt20" fxLayout="row">
+                        <div class="flex-item" fxFlex="35%">
+                            <!-- <form [formGroup]="profileForm" (ngSubmit)="onUpdateClick()"> -->
+                            <form [formGroup]="profileForm">
+                                <div class="flex-container ht45" fxLayout="row">
+                                    <div class="flex-item mt20 " fxFlex="25%">
+                                        <div class="relative flex-row mb20">
+                                            <label>First Name </label>
+                                        </div>
+                                    </div>
+                                    <div class="flex-row">
+                                        <div class="flex-item mt20 " fxFlex="75%">
+                                            <md-input type="text" [readonly]="readonlyFlag" class="flex-row fieldHeight" formControlName="firstName"></md-input>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex-container ht45 labelTextHeight" fxLayout="row">
+                                    <div class="flex-item mt20" fxFlex="25%">
+                                        <div class="relative flex-row mb20">
+                                            <label>Last Name </label>
+                                        </div>
+                                    </div>
+                                    <div class="flex-row">
+                                        <div class="flex-item mt20" fxFlex="75%">
+                                            <md-input type="text" [readonly]="readonlyFlag" class="flex-row fieldHeight" formControlName="lastName"></md-input>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex-container ht45 labelTextHeight" fxLayout="row">
+                                    <div class="flex-item mt20" fxFlex="25%">
+                                        <div class="relative flex-row mb20">
+                                            <label>Email </label>
+                                        </div>
+                                    </div>
+                                    <div class="flex-row">
+                                        <div class="flex-item mt20" fxFlex="75%">
+                                            <md-input type="text" [readonly]="true" class="flex-row fieldHeight"></md-input>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex-container ht45 labelTextHeight" fxLayout="row">
+                                    <div class="flex-item mt20" fxFlex="25%">
+                                        <div class="relative flex-row mb20">
+                                            <label>Mobile </label>
+                                        </div>
+                                    </div>
+                                    <div class="flex-row">
+                                        <div class="flex-item mt20" fxFlex="75%">
+                                            <md-input type="phone" [readonly]="readonlyFlag" class="flex-row fieldHeight" formControlName="mobile"></md-input>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex-container ht45 labelTextHeight" fxLayout="row">
+                                    <div class="flex-item mt20" fxFlex="25%">
+                                        <div class="relative flex-row mb20">
+                                            <label>Organization </label>
+                                        </div>
+                                    </div>
+                                    <div class="flex-row">
+                                        <div class="flex-item mt20" fxFlex="75%">
+                                            <md-input type="text" [readonly]="readonlyFlag" class="flex-row fieldHeight" formControlName="organization"></md-input>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex-container ht45 manageProfBtn" fxLayout="row" *ngIf="editBtnFlag">
+                                    <div class="flex-row">
+                                        <div class="flex-item mt20" fxFlex="25%">
+                                        </div>
+                                    </div>
+                                    <div class="flex-row">
+                                        <div class="flex-item mt20 " fxFlex="75%">
+                                            <button type="submit" md-raised-button class="fieldHeight" class="primary-btn" (click)="onEditProfile()">EDIT</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex-container ht45 manageProfBtn" *ngIf="saveCanBtnFlag" fxLayout="row">
+
+                                    <div class="flex-item mt20" fxFlex="100%">
+                                        <button md-raised-button class="auto-btn-prime" (click)="onSaveBtn()">SAVE</button>
+                                        <button md-raised-button class="auto-btn-gray" (click)="onCancelBtn()">CANCEL</button>
+                                    </div>
+                                </div>
+
+                                <br />
+                                <h5>Credential</h5>
+                                <div class="flex-container ht45 labelTextHeight" fxLayout="row">
+                                    <div class="flex-item mt20" fxFlex="25%">
+                                        <div class="relative flex-row mb20">
+                                            <label>Password </label>
+                                        </div>
+                                    </div>
+                                    <div class="flex-row">
+                                        <div class="flex-item mt20" fxFlex="75%">
+                                            <md-input type="password" [readonly]="false" class="flex-row fieldHeight"></md-input>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex-container ht45 labelTextHeight" *ngIf="passwordFlag" fxLayout="row">
+                                    <div class="flex-item mt20" fxFlex="25%">
+                                        <div class="relative flex-row mb20">
+                                            <label>New </label>
+                                        </div>
+                                    </div>
+                                    <div class="flex-row">
+                                        <div class="flex-item mt20" fxFlex="75%">
+                                            <md-input type="password" [readonly]="false" class="flex-row fieldHeight"></md-input>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex-container ht45 labelTextHeight" *ngIf="passwordFlag" fxLayout="row">
+                                    <div class="flex-item mt20" fxFlex="25%">
+                                        <div class="relative flex-row mb20">
+                                            <label>Confirm </label>
+                                        </div>
+                                    </div>
+                                    <div class="flex-row">
+                                        <div class="flex-item mt20" fxFlex="75%">
+                                            <md-input type="password" [readonly]="false" class="flex-row fieldHeight"></md-input>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex-container ht45 manageProfBtn" *ngIf="changeBtnFlag" fxLayout="row">
+                                    <div class="flex-item mt20 " fxFlex="100%">
+                                        <button type="submit" md-raised-button class="fieldHeight" class="primary-btn" (click)="onChangeBtn()">CHANGE</button>
+                                    </div>
+                                </div>
+
+                                <div class="flex-container ht45 manageProfBtn" *ngIf="updateCanBtnFlag" fxLayout="row">
+                                    <div class="flex-item mt20" fxFlex="100%">
+                                        <button md-raised-button class="auto-btn-prime">UPDATE</button>
+                                        <button md-raised-button class="auto-btn-gray" (click)="onPassChangeCancel()">CANCEL</button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+
+                        <div class="flex-item" fxFlex="21%">
+                            <div class="flex-container ht45" fxLayout="row">
+                                <div class="flex-item mt20 " fxFlex="15%">
+                                    <div class="relative flex-row mb20">
+                                        <img src="./images/cloud-mng/develepor-icon.png">
+                                    </div>
+                                </div>
+                                <div class="flex-item mt20 " fxFlex="50%">
+                                    <div class="relative flex-row mb20">
+                                        Project Name 1<br /> <sub>Developer</sub>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-item" fxFlex="21%">
+                            <div class="flex-container ht45" fxLayout="row">
+                                <div class="flex-item mt20 " fxFlex="15%">
+                                    <div class="relative flex-row mb20">
+                                        <img src="./images/cloud-mng/develepor-icon.png">
+                                    </div>
+                                </div>
+                                <div class="flex-item mt20 " fxFlex="50%">
+                                    <div class="relative flex-row mb20">
+                                        Project Name 2<br /> <sub>Admin</sub>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-item" fxFlex="22%">
+                            <div class="flex-container ht45" fxLayout="row">
+                                <div class="flex-item mt20 " fxFlex="15%">
+                                    <div class="relative flex-row mb20">
+                                        <img src="./images/cloud-mng/develepor-icon.png">
+                                    </div>
+                                </div>
+                                <div class="flex-item mt20 " fxFlex="50%">
+                                    <div class="relative flex-row mb20">
+                                        Project Name 3<br /> <sub>Admin</sub>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </md-tab>
+            <md-tab label="ADMINISTRATION">
+                <div>ADMINISTRATION</div>
+            </md-tab>
+            <md-tab label="BILLING">
+                <div>BILLING</div>
+            </md-tab>
+        </md-tab-group>
+    </div>
+</div>

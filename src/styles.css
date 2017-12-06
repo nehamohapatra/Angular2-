@@ -1,0 +1,437 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+/*@font-face {
+        font-family: "PT Sans";
+        src: url('font/PTS55F.ttf');
+        font-weight: normal;
+        font-style: normal;
+}
+
+@font-face {
+        font-family: "PT Sans Caption";
+        src: url('font/PTS55F.ttf');
+        font-weight: normal;
+        font-style: normal;
+}*/
+
+body {
+    margin: 0;
+    font-family: PT Sans, sans-serif !important;
+}
+
+.input-wrap .md-tab-header-pagination-controls-enabled .md-tab-header-pagination,
+.md-tab-header-pagination-controls-enabled .md-tab-header-pagination {
+    display: none !important;
+}
+
+.primary-tab .md-tab-header {
+    width: 57%;
+}
+
+.repo-tab .md-tab-header {
+    width: 320px;
+}
+
+
+.three-tab .md-tab-header {
+    width: 475px !important;
+
+}
+
+.four-tab .md-tab-header{
+    width:689px;
+}
+.cloud-main-tab .md-tab-header{
+    width:535px;
+}
+
+.cloud-main-tab,
+.usermng-main-tab,
+.activities-main-tab {
+    position: relative;
+    width: 100%;
+    float: left;
+    margin-top: -52px;
+    border-bottom: none;
+}
+
+.usermng-main-tab .md-tab-header {
+    width: 95px !important;
+}
+
+.activities-main-tab .md-tab-header {
+    width: 125px !important;
+}
+
+.three-tab .md-tab-label {
+    min-width: inherit !important;
+}
+
+.build-tab .md-tab-header{
+    width:360px;
+}
+
+.one-tab-width .md-tab-header
+{
+ width: 160px !important;
+}
+
+
+/* .content-block md-grid-tile figure{ */
+.build-tab .md-tab-header {
+    width: 419px;
+}
+
+.content-block md-grid-tile figure {
+
+    display: block !important;
+}
+
+md-select {
+    text-align: left;
+}
+
+md-textarea {
+    width: 100%;
+}
+
+.margin7 .md-input-wrapper {
+    margin: 7px 0 !important;
+}
+
+.margin7 .md-input-underline {
+    margin: 5px 0 0 !important;
+}
+
+.tab-min .md-tab-label {
+    min-width: inherit !important;
+}
+
+.app-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(33, 33, 33, 0.5);
+    z-index: 1111;
+}
+
+.loader-container {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: transparent;
+    z-index: 11111;
+}
+
+.loader-size {
+    width: 50px !important;
+}
+
+#loader {
+    display: none;
+}
+
+.droplist-label-hide .md-select-placeholder.md-floating-placeholder {
+    visibility: hidden !important;
+}
+
+md-select:focus:not(.md-select-disabled) .md-select-arrow {
+    color: rgba(0, 0, 0, 0.38) !important;
+}
+
+md-select:focus:not(.md-select-disabled) .md-select-trigger {
+    color: rgba(0, 0, 0, 0.38) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.38) !important;
+}
+
+@import "../node_modules/ng2-toastr/bundles/ng2-toastr.min.css";
+
+/*@import "../node_modules/angular2-flex/layout.css";*/
+
+.toast {
+    top: 50px;
+    height: 30px;
+    line-height: 0px !important;
+    width: 50vw !important;
+    border-radius: 0 0 2px 2px !important;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    right: 25vw !important;
+    padding-left: 0 !important;
+}
+
+.toast-success {
+    background-color: #396;
+    opacity: 1 !important;
+}
+
+#toast-container>.toast-success,
+#toast-container>.toast-error {
+    background-image: none !important;
+}
+
+.toast-success:hover,
+.toast-error:hover {
+    box-shadow: 0 0 12px #999 !important;
+}
+
+.search-input-wrap .md-input-wrapper {
+    margin: 0;
+}
+
+
+/*.search-input-wrap .md-input-underline, .search-input-wrap .md-focused{
+    display: none !important;
+}*/
+
+.no-border md-ink-bar {
+    display: none !important;
+}
+
+.repo-select-wrap .md-select-value {
+    top: -5px !important;
+}
+
+.repo-select-wrap.bt-select .md-select-value {
+    top: 7px !important;
+}
+
+.repo-select-wrap .md-select-placeholder.md-floating-placeholder {
+    line-height: 20px !important;
+}
+
+.cloud-tab .md-tab-header {
+    width: 100% !important;
+}
+
+.cloud-tab .md-tab-label {
+    min-width: 25% !important;
+}
+
+.cloud-tab .md-tab-label:first-child {
+    min-width: 20% !important;
+}
+
+.cloud-tab .md-tab-label:nth-child(3) {
+    min-width: 30% !important;
+}
+
+.errorBorder .md-input-underline {
+    border-color: #c33 !important;
+}
+
+.changeIconColor {
+    color: #c33 !important;
+}
+
+
+.md-tab-label {
+    z-index: 111 !important;
+    padding: 0 24px !important;
+}
+
+.bt-list .md-list-item {
+
+    height: 60px !important;
+}
+
+md-select.ng-invalid.ng-touched:not(.md-select-disabled) .md-select-trigger {
+    color: #c33 !important;
+    border-bottom: 1px solid #c33;
+}
+
+.instance-option .md-radio-container {
+    top: 5px !important;
+    width: 15px !important;
+    height: 15px !important;
+}
+
+.instance-option .md-radio-outer-circle {
+    border-color: #ccc !important;
+    width: 15px !important;
+    height: 15px !important;
+}
+
+.instance-option .md-radio-inner-circle {
+    background-color: #09c !important;
+}
+
+.instance-option.md-radio-checked .md-radio-outer-circle {
+    border-color: #09c !important;
+}
+
+.instance-option .md-radio-label-content {
+    color: #666 !important;
+}
+
+.visible-input .md-input-element {
+    width: 88.5%;
+    color: #666;
+}
+
+.md-input-element {
+    color: #666;
+}
+
+.role-user-img {
+    border-radius: 0 !important;
+}
+
+.role-list-wrap .md-list-text {
+    padding-right: 0;
+}
+
+.md-select-placeholder {
+    text-transform: capitalize !important;
+}
+
+.role-list-wrap .md-list-item {
+    height: 80px !important;
+    padding: 0 8px 0 16px !important;
+}
+
+.act-img {
+    width: 50px !important;
+    height: 50px !important;
+    background: #ccc !important;
+}
+
+.list-pad0 .md-list-item {
+    padding: 0 !important;
+}
+
+.act-img-txt {
+    text-align: center;
+    line-height: 50px;
+    color: #fff;
+}
+
+@media all and (max-width: 1100px) and (min-width: 700px) {
+    .cloud-tab .md-tab-header {
+        width: 100% !important;
+    }
+    .role-list-wrap {
+        width: 95% !important;
+        margin: 10px 0 !important;
+    }
+}
+
+@media all and (max-width: 1200px) and (min-width: 1100px) {
+    .cloud-tab .md-tab-header {
+        width: 945px !important;
+    }
+}
+
+@-webkit-keyframes rotating {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+.rotating {
+    -webkit-animation: rotating 1s linear infinite;
+}
+
+.hideplaceholder .md-floating-placeholder{
+        transform: scale(0) !important;
+}
+
+
+
+.placeholdCenter .md-input-element {
+    text-align: center !important;
+}
+
+.subheadTab .md-tab-header{
+    width:195px !important;
+}
+
+.vm-select-wrap .md-select-trigger{
+    border-top: 1px solid lightgrey;
+}
+
+
+
+
+/*.md-checked :focus{
+    outline: none;
+}*/
+
+
+/*.md-select-placeholder.md-floating-placeholder{
+    visibility: hidden;
+    top: 0px;
+    left: 0px;
+    transform: scale(0);
+}*/
+
+
+
+.grapcol {
+    background-color: #f4f2f2;
+}
+
+.grapcol figure {
+    display: block !important;
+    top: 38px !important;
+}
+
+
+.DisabledEnv .md-checkbox-indeterminate.md-accent .md-checkbox-background, .md-checkbox-checked.md-accent .md-checkbox-background{
+    background-color: #396 !important;
+}
+
+/*.scrollType .md-tab-body .md-tab-body-active[_ngcontent-rvb-25]
+{
+    overflow-y: hidden !important;
+}*/
+
+/*.md-tab-body #md-tab-content-0-0{
+overflow-y: hidden !important;
+}*/
+
+ /*.scrollType .md-tab-body-content
+{
+    overflow-y: hidden !important;
+}*/
+
+/*Harsh Overridng style*/
+.md-dialog-container{
+  width: 40vw !important;
+  height: 62vh !important;
+  max-width:none !important;
+  overflow: hidden !important;
+}
+/*End Harsh Overridng style*/
+
+#microSelectRow
+{
+    display: flex ; 
+    flex-flow: row wrap ;
+    margin-left: 20px;
+
+}
+
+#microSelect{
+position : relative;
+width: 138px;
+height: 32px;
+border-radius: 2px;
+border: 1px solid rgba(218, 62, 2, 0.5);
+background-color: #ffffff;
+margin-right: 10px;
+margin-bottom: 5px;
+}
+

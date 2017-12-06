@@ -1,0 +1,369 @@
+<header-menu (changeProject)="changeProEvent()" (selectProject)="getProject()">
+</header-menu>
+<!--<header-menu></header-menu>-->
+<side-menu [flag]="flag"></side-menu>
+<div class="nav-height">
+</div>
+<div class="project-wrap tab-pad">
+    <div class="project-cont" [style.width.px]="resWidth" [style.height.px]="resHeight">
+        <div [hidden]="linkRepos" class="link-repo link-repo-top" (click)="onLinkRepoClick()">
+            Link existing repository
+        </div>
+        <md-tab-group class="repo-tab four-tab" [class.no-border]="noBorder">
+            <md-tab [disabled]="ftUser">
+                <template md-tab-label>
+                    BUNDLES & STACKS
+                </template>
+                <div class="bundle-tab-container" [class.no-border]="showBorder" [hidden]="deployTab">
+                    <md-tab-group class="build-tab">
+                        <div>
+                            <md-tab [disabled]="bsTab">
+                                <template md-tab-label>
+                                    <div class="build-tab-label" style="line-height: 14px !important; padding: 0px;">
+                                        <div class="build-label-cont">
+                                            <div class="build-label-icon">
+
+                                            </div>
+                                            <div class="build-label-content">
+                                                <p class="label-p margin-zero">Deploy a stack
+                                                    <span class="label-s margin-zero">Mobile, Big Data, IOT.</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
+                                <div class="bundle-content mt20">
+
+                                    <div class="deploy-content-container">
+                                        <router-outlet></router-outlet>
+                                    </div>
+                                </div>
+                            </md-tab>
+                        </div>
+                        <md-tab [disabled]="bsTab">
+                            <template md-tab-label>
+                                <div class="build-tab-label"  style="line-height: 14px !important; padding: 0px;">
+                                    <div class="build-label-cont">
+                                        <div class="build-label-icon">
+
+                                        </div>
+                                        <div class="build-label-content" (click)="onBuildClick()">
+                                            <p class="label-p margin-zero">Build & Test
+                                                <span class="label-s margin-zero">Move to QA/Stage Env.</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                            <div class="bundle-content mt20">
+                                <div class="deploy-content-container">
+                                    <build-test (buildClick)="buildSuccessClick()" (createLinkRepo)="createLinkRepo()" #buildTest></build-test>
+                                </div>
+                            </div>
+                        </md-tab>
+                    </md-tab-group>
+                    <div class="link-repo link-repo-top" (click)="onLinkRepoClick()" [class.notEvent]="ftUser" [hidden]="buildTest">
+                        Link existing repository
+                    </div>
+                    <div class="terms" [class.terms-visible]="onLinkRepo">
+                        <div class="terms-wrap link-wrap">
+                            <p class="normal-gray-txt"><b>Please choose a repository to link</b></p>
+                            <p class="xsmall-gray-txt mb20">Note: This repository will be linked to the <b class="normal-gray-txt">{{currentProject}}</b></p>
+
+                            <md-select (ngModelChange)="changedHost($event,selectedSCM)" class="width-90 select-link-wrap" placeholder="Choose a Repository Host"
+                                [(ngModel)]="selectedSCM">
+                                <md-option *ngFor='let item of scmArray' value={{item._id}}>
+                                    {{item.type}}
+                                </md-option>
+                                </md-select>
+
+                                <md-select class="width-90 select-link-wrap" placeholder="Choose a Repo" [(ngModel)]="selectedRepo" [disabled]="!repoArray.length > 0">
+                                    <md-option *ngFor='let item of repoArray' value={{item.id}}>
+                                        {{item.name}}
+                                    </md-option>
+                                </md-select>
+                                <!--//Allign the Progress bar below-->
+                                <div class="repo-progress" *ngIf="showProgress">
+                                    <md-progress-bar mode="indeterminate"></md-progress-bar>
+                                </div>
+
+                                <div class="popup-btn">
+                                    <button md-raised-button class="auto-btn-prime" (click)="onLinkRepoSubmitClick()" [disabled]="!selectedRepo || !selectedSCM">link</button>
+                                    <button md-raised-button class="auto-btn-gray" (click)="onLinkRepoClick()">cancel</button>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </md-tab>
+            <md-tab id="tabValue" [disabled]="ftUser">
+                <template md-tab-label>
+                    MANAGE
+                </template>
+                <div class="bundle-tab-container">
+                    <div class="flex-container" fxLayout="row" fxLayoutAlign="center center" id="repo-head">
+                        <div class="flex-item" fxFlex="50%">
+                            <p class="normal-gray-txt"><b>{{manageTitle[selectedItem] || 'Repository'}}</b></p>
+                        </div>
+                        <div class="flex-item" fxFlex="35%">
+                            <md-icon [ngClass]="rotateRefresh == false?'refresh-icon':'refresh-icon rotating'" (click)="onRefreshClick()" title="Click to Refresh">refresh</md-icon>
+                            <div class="search-deploy margin-zero">
+                                <md-icon class="search-icon" (click)="onSearchExp()" title="Click to Search">search</md-icon>
+                                <div class="search-input-wrap" [class.search-exp]="searchExp">
+                                    <md-input id="tableSearch" type="text" [(ngModel)]="tableSearch" class="search-input" placeholder="Search"></md-input>
+                                    <md-icon class="cancel-icon" (click)="onSearchExp()">clear</md-icon>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex-item" fxFlex="15%">
+                            <div class="droplist-label-hide">
+                                <md-select placeholder="Repository" class="repo-select-wrap fright" [(ngModel)]="selectedItem" (ngModelChange)="selectMng()">
+                                    <md-option value="1">Repository</md-option>
+                                    <md-option value="2">Build</md-option>
+                                    <md-option value="3">Something</md-option>
+                                </md-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div [hidden]="selectRepository">
+                        <div class="flex-container" fxLayout="row" fxLayoutAlign="center center" id="repo-table">
+                            <table cellspacing="0">
+                                <thead class="table-head">
+                                    <tr>
+                                        <th class="repo-table" (click)="filter('name')">Name
+                                            <span class="filter-arrow" [class.show-filter]="showArrowOne">
+                                             <span [hidden]="!nameFlag">
+                                            <md-icon class="sort-icon">arrow_upward</md-icon>
+                                        </span>
+                                            <span [hidden]="nameFlag">
+                                        <md-icon class="sort-icon">arrow_downward</md-icon>
+                                        </span>
+                                            </span>
+
+                                        </th>
+                                        <th class="repo-table" (click)="filter('type')">Provider
+                                            <span class="filter-arrow" [class.show-filter]="showArrowTwo">
+                                              <span [hidden]="!providerFlag">
+                                            <md-icon class="sort-icon">arrow_upward</md-icon>
+                                        </span>
+                                            <span [hidden]="providerFlag">
+                                        <md-icon class="sort-icon">arrow_downward</md-icon>
+                                        </span>
+                                            </span>
+
+                                        </th>
+                                        <th class="repo-table">Access</th>
+                                        <th class="repo-table" (click)="filter('stack')">Deployed stack
+                                            <span class="filter-arrow" [class.show-filter]="showArrowThree">
+                                             <span [hidden]="!stackFlag">
+                                            <md-icon class="sort-icon">arrow_upward</md-icon>
+                                                 </span>
+                                            <span [hidden]="stackFlag">
+                                            <md-icon class="sort-icon">arrow_downward</md-icon>
+                                        </span>
+                                            </span>
+
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-body" [class.table-body-scroll]="tbody" *ngIf="!showTableValue">
+                                    <tr class="repo-data flex-container" fxLayout="row" fxLayoutAlign="center center" *ngFor="let repoItem of empty" (click)="repoClick(repoItem)"
+                                        [class.activeDetail]="repoItem === currentDetail" [ngClass]="{'uncompleteData':repoItem === currentDetail && uncompData}">
+                                        <td class="repo-table flex-item" fxFlex="25%">{{repoItem.name}}</td>
+                                        <td class="repo-table flex-item" fxFlex="25%">{{repoItem.type}}</td>
+                                        <td class="repo-table flex-item word-break" fxFlex="25%">{{repoItem.repoURL}}</td>
+                                        <td class="repo-table flex-item" fxFlex="25%">{{repoItem.stack}}</td>
+                                        </tr>
+                                </tbody>
+                                <tbody class="table-body" [class.table-body-scroll]="tbody" *ngIf="showTableValue">
+                                    <tr class="repo-data flex-container" fxLayout="row" fxLayoutAlign="center center" *ngFor="let repoItem of repository | sort:sortName|search:tableSearch"
+                                        (click)="repoClick(repoItem)" [class.activeDetail]="repoItem === currentDetail">
+                                        <td class="repo-table flex-item" fxFlex="25%">{{repoItem.name}}</td>
+                                        <td class="repo-table flex-item" fxFlex="25%">{{repoItem.type}}</td>
+                                        <td class="repo-table flex-item word-break normal-link-txt" fxFlex="25%">{{repoItem.repoURL}}</td>
+                                        <td class="repo-table flex-item" fxFlex="25%">{{repoItem.stack}}</td>
+                                        </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <div *ngIf='(repository | search:tableSearch).length ==0' class="no-data" [class.display-flex]="true" [style.height.px]="nodataTop">
+                            <div class="text-center">
+                                <img src="images/search.png" />
+                                <p class="xsmall-gray-txt">Unfortunately, no result were found matching: <span class="normal-gray-txt">{{tableSearch}}</span></p>
+                                <p class="xsmall-gray-txt">Try modifying your search terms</p>
+                            </div>
+                        </div>
+                        <div class="flex-container" fxLayout="row" fxLayoutAlign="center center">
+                            <div class="flex-row">
+                                <div class="repo-proj-detail" id="repo-detail" [style.height.px]="detailHeight" *ngIf="currentDetail">
+                                    <div [hidden]="detailLoader">
+                                        <div class="detail-loader">
+                                            <md-spinner class="loader-size"></md-spinner>
+                                        </div>
+                                    </div>
+                                    <p class="normal-gray-txt mb20 pb20"><b>Details</b></p>
+                                    <div class="flex-container" fxLayout="row" fxLayoutAlign="center center">
+
+                                        <div class="flex-item" fxFlex="75%">
+                                            <div class="flex-container mb20" fxLayout="row" fxLayoutAlign="start center">
+                                                <div fxFlex="33%">
+                                                    <p class="normal-gray-txt">Project Name</p>
+                                                    <p class="xsmall-gray-txt">{{repoDetail?.name}}</p>
+                                                </div>
+                                                <div fxFlex="33%">
+                                                    <p class="normal-gray-txt">Pull Requests</p>
+                                                    <p class="xsmall-gray-txt">-</p>
+                                                </div>
+                                                <div fxFlex="33%">
+                                                    <p class="normal-gray-txt">Build Status</p>
+                                                    <p class="xsmall-gray-txt">-</p>
+                                                    <!--<p class="xsmall-gray-txt">-</p>-->
+                                                </div>
+                                            </div>
+                                            <div class="flex-container mb20" fxLayout="row" fxLayoutAlign="start center">
+                                                <div fxFlex="33%">
+                                                    <p class="normal-gray-txt">Access</p>
+                                                    <p class="xsmall-gray-txt word-break"> {{repoDetail?.clone_url}}</p>
+                                                </div>
+                                                <div fxFlex="33%">
+                                                    <p class="normal-gray-txt">Issues</p>
+                                                    <p class="xsmall-gray-txt">{{repoDetail?.open_issues}} </p>
+                                                </div>
+                                                <div fxFlex="33%">
+                                                    <p class="normal-gray-txt">&nbsp;</p>
+                                                </div>
+                                            </div>
+                                            <div class="flex-container mb20" fxLayout="row" fxLayoutAlign="start center">
+                                                <div fxFlex="33%">
+                                                    <p class="normal-gray-txt">Branches</p>
+                                                    <p class="xsmall-gray-txt">-</p>
+                                                </div>
+                                                <div fxFlex="33%">
+                                                    <p class="normal-gray-txt">Contributors</p>
+                                                    <p class="xsmall-gray-txt">-</p>
+                                                </div>
+                                                <div fxFlex="33%">
+                                                    <p class="normal-gray-txt">Cloud/Tool</p>
+                                                    <p class="xsmall-gray-txt">-</p>
+                                                </div>
+                                            </div>
+                                            <div class="flex-container mb20" fxLayout="row" fxLayoutAlign="start center">
+                                                <div fxFlex="33%">
+                                                    <p class="normal-gray-txt">Releases</p>
+                                                    <p class="xsmall-gray-txt">-</p>
+                                                </div>
+                                                <div fxFlex="33%">
+                                                    <p class="normal-gray-txt">Last Commit Date</p>
+                                                    <p class="xsmall-gray-txt">-</p>
+                                                </div>
+                                                <div fxFlex="33%">
+                                                    <p class="normal-gray-txt">Last Build Status</p>
+                                                    <p class="xsmall-gray-txt">-</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex-item" fxFlex="25%">
+                                            <div class="flex-row relative">
+                                                <div class="manage-repo-footer" [style.width.px]="contWidth">
+                                                    <div class="full-height" class="flex-container" fxLayout="row" fxLayoutAlign="center center">
+                                                        <div class="flex-item" fxFlex="50%" class="padding-10" fxLayoutAlign="start center" layout-align="start center">
+                                                            &nbsp;
+                                                        </div>
+                                                        <div class="flex-item" fxFlex="50%" class="padding-10" fxLayoutAlign="end center" layout-align="end center">
+                                                            <button md-raised-button class="orange-btn" (click)="onRepoLinkClick()">unlink</button>
+                                                            <!--<button md-raised-button class="orange-btn none mr10" [class.block]="compData" (click)="onRepoLinkClick()">unlink</button>
+                                                            <button md-raised-button class="orange-btn none mr10" [class.block]="uncompData">retry</button>
+                                                            <button md-raised-button class="auto-btn-gray none" [class.block]="uncompData">remove</button>-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="no-data" [class.display-flex]="noData" [style.height.px]="nodataTop">
+                                    <div class="text-center">
+                                        <img src="images/search.png" />
+                                        <p class="xsmall-gray-txt">Unfortunately, no result were found matching: <span class="normal-gray-txt">Project</span></p>
+                                        <p class="xsmall-gray-txt">Try modifying your search terms</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div [hidden]="selectBuild">
+                        <div class="flex-container" fxLayout="row" fxLayoutAlign="center center">
+                            <div class="flex-item" fxFlex="100%">
+                                <md-list class="bt-list-wrap">
+                                    <md-list-item *ngFor="let item of buildItem" class="bt-list">
+                                        <p class="normal-gray-txt" md-line>Build on {{item.timestamp}} </p>
+                                        <p class="normal-gray-txt" md-line>Executed in AWS with Job Id #{{item.job_id}} {{item.instanceIp}}</p>
+                                        <div class="mr8">
+                                            <p class="badge-{{item.status}} fleft">{{item.status}}</p>
+                                        </div>
+                                    </md-list-item>
+                                </md-list>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="manageLoader" [style.height.px]="resHeight" [style.width.px]="resWidth">
+                        <div class="detail-spinner-wrap" [style.width.px]="resWidth" [style.height.px]="resHeight">
+                            <md-progress-spinner mode="indeterminate" color="primary" class="detail-spinner"></md-progress-spinner>
+                        </div>
+                    </div>
+                </div>
+            </md-tab>
+            <md-tab [disabled]="ftRepo">
+                <template md-tab-label>
+                    REPOSITORY HOST
+                </template>
+
+                <div class="bundle-tab-container">
+
+                    <div class="bundle-content">
+                        <div class="deploy-content-container">
+                            <create-repository (unLink)="onScmUnlink()"></create-repository>
+                        </div>
+                    </div>
+                </div>
+            </md-tab>
+
+              <md-tab>
+                <template md-tab-label>
+                    TOOL CHAIN
+                </template>
+                <rep-Toolchain></rep-Toolchain>
+            </md-tab>
+        </md-tab-group>
+
+
+        <div class="repo-status">
+            <div class="terms" [class.terms-visible]="unlinkPop" (click)="onunlinkClick()">
+                <div class="terms-wrap width-auto">
+                    <h4 class="terms-ht text-center">Are you sure you want to unlink your Github account?</h4>
+                    <div class="popup-btn">
+                        <button md-raised-button class="auto-btn-prime">yes</button>
+                        <button md-raised-button class="auto-btn-gray">cancel</button>
+                    </div>
+                </div>
+            </div>
+            <div class="terms" [class.terms-visible]="repoLink">
+                <div class="terms-wrap width-auto">
+                    <h4 class="terms-ht text-center">Are you sure you want to unlink {{repoDetail?.name}} from DFP?</h4>
+                    <p>Note: Unlinking will not delete this repository from host.</p>
+                   <div class="popup-btn">
+                        <button md-raised-button class="auto-btn-prime" (click)="onUnlinkYes()">yes</button>
+                        <button md-raised-button class="auto-btn-gray" (click)="onRepoLinkClick()">cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="terms page-loader" [class.terms-visible]="showLoad">
+    <div>
+        <md-spinner class="loader-size"></md-spinner>
+    </div>
+</div>

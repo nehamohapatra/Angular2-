@@ -1,0 +1,80 @@
+<header-menu></header-menu>
+<side-menu></side-menu>
+<div class="project-wrap tab-pad">
+    <div class="project-cont">
+        <md-tab-group class="primary-tab">
+            <md-tab label="PROFILE">
+                <form [formGroup]="profileForm" (ngSubmit)="onUpdateClick()">
+                    <div class="create-profile">
+                        <div class="split-input">
+                            <md-input placeholder="First Name" formControlName="firstName" class="full-input"></md-input>
+                            <span class="error-txt" *ngIf="!profileForm.controls['firstName'].valid && profileForm.controls['firstName'].touched">First Name is Required</span>
+                        </div>
+                        <div class="split-input margin-zero">
+                            <md-input placeholder="Last Name" formControlName="lastName" class="full-input"></md-input>
+                            <span class="error-txt" *ngIf="!profileForm.controls['lastName'].valid && profileForm.controls['lastName'].touched">Last Name is Required</span>
+                        </div>
+                        <md-input placeholder="Email" formControlName="email" class="full-input" readonly></md-input>
+                        <div [hidden]="true">
+                            <md-input placeholder="tempFileName" formControlName="tempFileName" class="full-input"></md-input>
+                            <md-input placeholder="tempFileNameExt" formControlName="tempFileNameExt" class="full-input"></md-input>
+                        </div>
+                        <div class="select-flag">
+                            <img src="images/ind-flag.png" style="width:17px;height:11px;">
+                            <select>
+                    <option value="Project-World">+91</option>
+                </select>
+                        </div>
+                        <div class="input75">
+                            <md-input type="number" placeholder="Mobile Number" formControlName="mobile" class="full-input mt3"></md-input>
+                            <span class="error-txt" *ngIf="!profileForm.controls['mobile'].valid && profileForm.controls['mobile'].touched">Mobile No is Required</span>
+                        </div>
+                        <div class="full-input">
+                            <md-input placeholder="Company" formControlName="organization" class="full-input"></md-input>
+                            <span class="error-txt" *ngIf="!profileForm.controls['organization'].valid && profileForm.controls['organization'].touched">Required</span>
+                        </div>
+                        <div class="full-input">
+                            <!--<p class="resend-txt">Cancel change</p>-->
+                            <button type="submit" md-raised-button class="btn primary-btn save-btn update-btn">Edit</button>
+                        </div>
+
+                        <div class="change-pwd full-input">
+                            <div class="split-input">
+                                <div class="relative">
+                                    <md-input placeholder="Confirm Current Password" class="full-input"></md-input>
+                                    <md-icon class="str-color">done</md-icon>
+                                </div>
+                                <div class="relative">
+                                    <md-input placeholder="New Password" class="full-input"></md-input>
+                                    <md-icon class="str-color">done</md-icon>
+                                </div>
+                                <div class="relative">
+                                    <md-input placeholder="Confirm New Password" class="full-input"></md-input>
+                                    <md-icon class="str-color">done</md-icon>
+                                </div>
+                            </div>
+                        </div>
+                        <div [hidden]="false">
+                            <!--<p class="resend-txt">Cancel change</p>-->
+                            <button type="submit" (click)="openDialogBox()" md-raised-button class="btn primary-btn save-btn update-btn">Save</button>
+                        </div>
+                        <div [hidden]="false">
+                            <!--<p class="resend-txt">Cancel change</p>-->
+                            <button type="submit" md-raised-button class="btn primary-btn save-btn update-btn">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+                <div>
+                    <img [src]="imgSrc" class="add-photo" id="userPhoto" (click)="openDialog()" />
+                    <input hidden type="file" (change)="fileChange($event,this)" id="profilePhoto" accept=".jpg,.jpeg,.png" />
+                </div>
+            </md-tab>
+            <md-tab [disabled]="true" label="ADMINISTRATION">
+                <p>Phone</p>
+            </md-tab>
+            <md-tab [disabled]="true" label="BILLING">
+                <p>Phone</p>
+            </md-tab>
+        </md-tab-group>
+    </div>
+</div>

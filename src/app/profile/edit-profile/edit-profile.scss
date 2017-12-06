@@ -1,0 +1,84 @@
+.project-wrap {
+    // float: left;
+    // position: relative;
+    padding: 0 12px 0 60px;
+    // width: 100%;
+}
+.half-width{
+    width: 50% !important;
+}
+.project-cont {
+    border: 1px solid #ccc;
+    position: fixed;
+}
+
+.create-profile {
+    padding-left: 20px;
+    width: 435px;
+    float: left;
+    padding-top:14px;
+}
+.split-input{
+    margin-right: 10px;
+    width: 48.8%;
+    float: left;
+    font-size: $small-font-size;
+}
+.full-input{
+    width: 100%;    
+    font-size: $small-font-size;
+    float: left;
+}
+.select-flag {
+    width: 17%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.38);
+    float: left;
+    margin-right: 10px;
+}
+
+.select-flag select {
+    border: none;
+    background: transparent;
+    outline: none;
+    margin: 16px 0 7px;
+}
+
+.input75 {
+    width: 80.5%;
+    float: left;
+}
+.save-btn{
+    width: 58px !important;
+    height: 36px;
+    float: right;
+}
+.cancel-wrap{
+    margin: 16px 0 0 !important;
+}
+.str-color{
+    color: $success-color;
+    position: absolute;
+    top: 10px;
+    right: -30px;
+}
+.add-photo {
+    float: left;
+    width: 191px;
+    height: 191px;
+    margin: 16px 0 0 30px;
+    cursor: pointer;
+    background: rgba(204, 204, 204, 0.5);
+}
+.update-btn{
+   margin-right:10px;
+}
+.primary-tab{
+    position: relative;
+    width: 100%;
+    float: left;
+    margin-top: -64px;
+    border-bottom: none;
+}
+// .tab-pad{
+//     padding-top: 140px !important;
+// }

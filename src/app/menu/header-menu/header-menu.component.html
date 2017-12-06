@@ -1,0 +1,80 @@
+<div class="header-wrap">
+    <div class="split-wrap">
+        <div class="selpro-cont">
+            <img src="images/logo.png" class="logo-wrap">
+            <div class="project-selection" [hidden]="projectList">
+                <div class="selpro">
+                    <md-select class="width-90" (ngModelChange)="changedProject($event)" [(ngModel)]="selectedProject">
+                        <md-option *ngFor='let item of projectArray;let i = index' value={{item._id}}>
+                            {{item.name}}
+                        </md-option>
+                    </md-select>
+                </div>
+                <!--<div class="add-pro" (click)="createProject()">-->
+                <div class="add-pro">
+                    <md-icon>add_circle</md-icon>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="split-wrap">
+        <div class="notif-wrap">
+            <div class="fright" (click)="onNotifClick()" [class.notif-visible]="notifSet" tabindex="1">
+                <md-icon class="notif-icon">notifications</md-icon>
+                <span class="no-notif" *ngIf="notificationCount > 0">{{notificationCount}}</span>
+            </div>
+            <div id="profset" class="prof-set fright" [class.profile-wrap]="profSet">
+                <div (click)="onProfSet()" class="user-profile"></div>
+                <div [class.profopen]="profSet" (click)="onProfSet()">
+                    <div class="logout-wrap">
+                        <div class="logout-set" (click)="callManageProfile()">
+                            <img src="images/manage-profile-icon.png" />
+                            <p>Manage Profile</p>
+                        </div>
+                        <div class="logout-set" (click)='logout()'>
+                            <img src="images/logout-icon.png" class="logout-mar5" />
+                            <p>Logout</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div [class.notifopen]="notifSet">
+                <div class="notif-cont">
+                    <!-- <div class="notif-txt"><span class="fleft bold-gray-txt" style="line-height: 2px !important;">Notifications</span></div>
+                    <div class="notif-txt" tabindex="1" style="position: fixed;
+    width: 45%;
+    float: left;
+    height: 8%; background-color:gray;"><span class="fleft bold-gray-txt" >Notifications</span></div>
+                    <div class="notif-info-wrap" *ngFor="let item of notificationslist; let i = index" (click)="imgnotifClick(i)">
+                           <p class="margin-zero"><span class="notif-hd">{{item.repo}}</span><span class="notif-time">&nbsp;{{item.notif_time}}</span></p>
+                           <p class="notif-desc">{{item.notif_detail}}</p>
+                       </div> -->
+
+                    <!-- <div class="notif-info-wrap-head">
+                        <span class="fleft bold-gray-txt">Notifications</span>
+                        <span class="normal-gray-txt relative" style="line-height: 2px !important;">&nbsp;&nbsp;( {{notificationCount}} New &nbsp;&nbsp;&nbsp;&nbsp; <md-icon class="new-notif">arrow_upward</md-icon>)</span>
+                    </div> -->
+                    <!-- <p class="notif-txt"><span class="fleft bold-gray-txt" style="line-height: 2px !important;">Notifications</span><span class="normal-gray-txt relative"
+                            style="line-height: 2px !important;">&nbsp;&nbsp;( {{notificationCount}} New &nbsp;&nbsp;&nbsp;&nbsp; <md-icon class="new-notif">arrow_upward</md-icon>)</span></p> -->
+                    <div class="notif-info-wrap-head">
+                        <span class="fleft bold-gray-txt">Notifications</span>
+                        <span class="normal-gray-txt relative">&nbsp;&nbsp;( {{notificationCount}} New &nbsp;&nbsp;&nbsp;&nbsp; <md-icon class="new-notif">arrow_upward</md-icon>)</span>
+                    </div>
+
+                    <div class="notif-info-wrap" *ngFor="let item of notificationslist; let i = index" (click)="imgnotifClick(i)">
+                        <p class="margin-zero"><span class="notif-hd">{{item.repo}}</span><span class="notif-time">&nbsp;{{item.notif_time}}</span></p>
+                        <p class="notif-desc">{{item.notif_detail}}</p>
+                    </div>
+
+                    <div class="notif-info-wrap-load" *ngIf="notificationCount > 5">
+                        <div [class.hideload]="hideloadmore">
+                            <p class="show-more" (click)="getData()">
+                                Load more</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

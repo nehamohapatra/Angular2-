@@ -1,0 +1,97 @@
+<header-menu></header-menu>
+<side-menu [flag]="flag"></side-menu>
+<div class="nav-height">
+</div>
+<div class="project-wrap tab-pad">
+    <div class="project-cont" [style.width.px]="resWidth" [style.height.px]="resHeight">
+        <md-tab-group class="usermng-main-tab tab-min" [selectedIndex]="userIndex">
+            <md-tab>
+                <template md-tab-label>USERS</template>
+
+                <div class="bundle-tab-container pad-rlt">
+                    <div class="flex-container" fxLayout="row">
+                        <div class="flex-item" fxFlex="60%">
+                            <p class="bold-gray-txt">Users</p>
+                            <p class="normal-gray-txt mt20">Enter email address to invite #project</p>
+                            <div class="flex-container mt20" fxLayout="row">
+                                <div class="flex-item pr20" fxFlex="60%">
+                                    <md-input type="text" placeholder="Email" class="flex-row"></md-input>
+                                </div>
+                                <div class="flex-item pr20" fxFlex="20%">
+                                    <md-select placeholder="Role" class="flex-row mt9">
+                                        <md-option>Admin</md-option>
+                                        <md-option>Developer</md-option>
+                                    </md-select>
+                                </div>
+                                <div class="flex-item" fxFlex="10%">
+                                    <button md-raised-button class="auto-btn-prime">Add</button>
+                                </div>
+                            </div>
+                            <div class="flex-container mt20" fxLayout="row">
+                                <div class="role-scroll" [style.height.px]="roleHeight">
+                                    <md-list class="role-list-wrap {{item.role}}-role" *ngFor="let item of roleItem">
+                                        <md-list-item>
+                                            <img md-list-avatar src="images/{{item.role}}-icon.png" alt="{{item.role}}" class="role-user-img">
+                                            <h3 md-line class="normal-gray-txt">{{item.email}}</h3>
+                                            <p md-line>
+                                                <span> Invited as </span>
+                                                <md-select placeholder="{{item.role}}">
+                                                    <md-option>Developer</md-option>
+                                                    <md-option>Admin</md-option>
+                                                </md-select>
+                                                <span class="re-invite">Re-invite</span>
+                                                <md-icon class="user-remove" (click)="onRemoveRole()">clear</md-icon>
+                                            </p>
+                                        </md-list-item>
+                                    </md-list>
+                                </div>
+                                <!--<md-list class="role-list-wrap admin-role">
+                                    <md-list-item>
+                                        <img md-list-avatar src="images/developer-icon.png" alt="Developer" class="role-user-img">
+                                        <h3 md-line class="normal-gray-txt">someone@email.com</h3>
+                                        <p md-line>
+                                            <span> Invited as </span>
+                                            <md-select placeholder="Developer">
+                                                <md-option>Developer</md-option>
+                                                <md-option>Admin</md-option>
+                                            </md-select>                                            
+                                            <span class="re-invite">Re-invite</span>
+                                            <md-icon class="user-remove">clear</md-icon>
+                                        </p>
+                                    </md-list-item>
+                                </md-list>-->
+                            </div>
+                        </div>
+                        <div class="flex-item" fxFlex="40%">
+                            <div class="role-wrap">
+                                <div class="role-cont">
+                                    <img src="images/admin-icon.png" />
+                                    <p class="normal-gray-txt mt20">Admin - 1/5</p>
+                                </div>
+                                <div class="role-cont">
+                                    <img src="images/developer-icon.png" />
+                                    <p class="normal-gray-txt mt20">Developer- 0/10</p>
+                                </div>
+                            </div>
+                            <div class="upgrade-wrap mt20">
+                                <md-icon class="info-icon">info_outline</md-icon>
+                                <p class="normal-gray-txt"><span class="normal-link-txt">Upgrade</span>&nbsp;to add more</p>
+                            </div>
+                        </div>
+                        <!--<div class="flex-item" fxFlex="10%" fxLayoutAlign="end center" layout-align="end center">
+                        </div>-->
+                    </div>
+                </div>
+            </md-tab>
+        </md-tab-group>
+    </div>
+</div>
+<div class="terms" [class.terms-visible]="removeRole">
+    <div class="terms-wrap width-auto">
+        <h4 class="terms-ht text-center">Are you sure you want to remove xxx@companyname.com ?</h4>
+        <div class="popup-btn">
+            <button md-raised-button class="orange-btn">yes</button>
+            <button md-raised-button class="auto-btn-gray" (click)="onRemoveRole()">cancel</button>
+        </div>
+    </div>
+</div>

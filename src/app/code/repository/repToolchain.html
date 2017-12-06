@@ -1,0 +1,179 @@
+<div class="bundle-tab-container" [class.no-border]="showBorder">
+    <md-tab-group class="build-tab two-tab" [ngClass]="oneSubTab == true ? 'one-tab-width':'build-tab'" (selectedIndexChange)="selectedIndexChange($event)"
+        [selectedIndex]="selectedIndex">
+
+        <div>
+            <md-tab>
+                <template md-tab-label>
+                    <div class="build-tab-label" style="line-height: 14px !important; padding: 0px;">
+                        <div class="build-label-cont">
+                            <div class="build-label-content">
+                                <div class="build-label-icon tool-chain">
+                                    <img src="images/cloud-mng/add.svg" class="icon-tool-chain">
+                                </div>
+                                <p class="label-p margin-zero label-title" style="padding-top:10px"> Add New
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                </template>
+
+                <div class="build-tab-content" [style.height.px]="contHeight" style="margin-top:-10px">
+                    <div class="create-repo-container" id="toolkit-launch-style">
+                        <div class="flex-container" fxLayout="row">
+                            <div class="flex-item btn-margin" fxFlex="57%">
+
+                                <div class="repo-btn-wrap">
+
+                                    <button md-raised-button class="manage-repo-btn" (click)="onJenkinsClick1()" [class.primary-bgcolor]="activeJenkins1">
+                            <img src="images/cloud-mng/jenkins_160.png" class="manage-repo-icon " [hidden]="activeJenkins1" />
+                            <img src="images/cloud-mng/jenkins_160.png" class="manage-repo-icon " [hidden]="!activeJenkins1" />
+                            <p  class="manage-repo-name">Jenkins Tool Chain</p>
+                        </button>
+                                    <md-icon class="act-repo-arrow cloud-arrow mr2em" *ngIf="activeJenkins1">play_arrow</md-icon>
+
+
+                                </div>
+
+
+                                <!-- <div class="repo-btn-wrap">
+
+                                    <button md-raised-button class="manage-repo-btn" (click)="onJenkinsClick2()" [class.primary-bgcolor]="activeJenkins2">
+                            <img src="images/cloud-mng/jenkins.svg" class="manage-repo-icon tool-chain-img" [hidden]="activeJenkins2" />
+                            <img src="images/cloud-mng/jenkins.svg" class="manage-repo-icon tool-chain-img" [hidden]="!activeJenkins2" />
+                            <p class="manage-repo-name">Jenkins Tool Chain 2</p>
+                        </button>
+                                    <md-icon class="act-repo-arrow cloud-arrow mr2em" *ngIf="activeJenkins2">play_arrow</md-icon>
+
+
+                                </div> -->
+                            </div>
+                            <div class="flex-item" fxFlex="43%" [hidden]="!addDetail2 && !addDetail1" id="tool-chain-height">
+                                <div [hidden]="!activeJenkins2 && !activeJenkins1">
+                                    <p class="bold-gray-txt">Details</p>
+
+                                    <table class="jenkinsDetails">
+
+                                        <tr class="jenkinsDetails-row">
+                                            <td>Tool Chain:</td>
+                                            <td>Jenkins</td>
+                                            <td [hidden]="true">Version 5.0</td>
+
+                                        </tr>
+                                        <tr class="jenkinsDetails-row">
+                                            <td>Plugins:</td>
+                                            <td>1.&nbsp;&nbsp;JUnit</td>
+                                            <td [hidden]="true">Version 5.0</td>
+
+                                        </tr>
+
+                                        <tr class="jenkinsDetails-row">
+                                            <td></td>
+                                            <td>2.&nbsp;&nbsp;Veracode</td>
+                                            <td [hidden]="true">Version 6.0</td>
+
+                                        </tr>
+                                        <tr class="jenkinsDetails-row">
+                                            <td></td>
+                                            <td>3.&nbsp;&nbsp;Selenium</td>
+                                            <td [hidden]="true">Version 5.2</td>
+
+                                        </tr>
+                                        <tr class="jenkinsDetails-row">
+
+
+                                        </tr>
+
+                                    </table>
+
+                                    <div class="flex-container" fxLayout="row">
+                                        <div class="flex-item" fxFlex="28%">
+
+                                            <p>Cloud:</p>
+                                        </div>
+                                        <div class="flex-item" fxFlex="75%">
+                                            <md-select placeholder="AWS" class=" flex-row cloud-list" floatPlaceholder="never" [(ngModel)]="env">
+                                                <md-option *ngFor="let env of enviroment" [value]="enviroment.value">
+                                                    {{ env.viewValue }}
+                                                </md-option>
+                                            </md-select>
+
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+
+                                <div class="box-btn toolkit-launch-button">
+                                    <button md-raised-button class="auto-btn-prime" [hidden]="!addDetail2 && !addDetail1" (click)="clickMe()"> Launch</button>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+            </md-tab>
+
+            <md-tab *ngIf="toolchainselected">
+                <template md-tab-label>
+                    <div class="build-tab-label" style="line-height: 14px !important; padding: 0px;">
+                        <div class="build-label-cont">
+
+                            <div class="build-label-content">
+                                <div class="build-label-icon tool-chain jenkinsimage">
+                                    <img src="images/jenkins_grey.svg" class="icon-tool-chain">
+                                </div>
+                                <p class="label-p margin-zero label-title"> Jenkins
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <div class="toolkitDetail flex-container">
+                    <div class="small-txt mb10">Details
+                        <span class="fright" (click)="toolkitdetail()">
+                        <img *ngIf="show" src="images/down_arrow.png">
+                        <img *ngIf="!show" src="images/up_arrow.png">
+                    </span>
+                    </div>
+                    <div *ngIf="show" [@myAnimation]>
+                        <div fxLayout="row" class="hideShowContainer normal-gray-txt" *ngFor="let tc of toolchainDetail">
+                            <div fxFlex="1 6 30%">
+                                <div fxLayout="row" class="row-height">
+                                    <label fxFlex="1 6 50%">Status<br><span class="xsmall-gray-txt stcolor">{{Status}}</span></label>
+                                    <label fxFlex="1 6 50%">IP<br><span class="xsmall-gray-txt ipcolor">{{tc.Ip}}</span></label>
+                                </div>
+                                <div fxLayout="row" class="row-height">
+                                    <label fxFlex="1 6 50%">Port<br><span class="xsmall-gray-txt">{{tc.Port}}</span></label>
+                                    <label fxFlex="1 6 50%">Username<br><span class="xsmall-gray-txt">{{tc.Username}}</span></label>
+                                </div>
+                                <div fxLayout="row" class="row-height">
+                                    <label fxFlex="1 6 50%">Cloud<br><span class="xsmall-gray-txt">{{tc.Cloud}}</span></label>
+                                    <label fxFlex="1 6 50%">Password<br><span class="xsmall-gray-txt">{{tc.Password}}</span></label>
+                                </div>
+                            </div>
+                            <div fxFlex="1 6 8%">
+                                <label fxFlex="0 1 auto">Plugins<br><span class="xsmall-gray-txt">{{tc.Plugins}}</span></label>
+                            </div>
+
+                            <div fxFlex="1 6 62%">
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </md-tab>
+        </div>
+
+
+    </md-tab-group>
+
+
+</div>

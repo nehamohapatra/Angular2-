@@ -1,0 +1,140 @@
+<body>
+    <div class="row remove" id="landing-section">
+        <button type="button" class="btn" id="login-button" (click)="loginNavigate()">LOGIN</button>
+        <div class="container-fluid remove" id="landing-container">
+            <div id="landing-text-box">
+                <p class="remove">
+                    <span id="header1-part1">Digital Transformation</span>
+                    <span id="header1-part2"> is more than a tech revolution</span>
+                    <br />
+                    <span id="header2-part1">it's an </span>
+                    <span id="header2-part2">evolution</span>
+                    <br />
+                    <span id="header3">Are you a part of it?</span>
+                </p>
+            </div>
+            <form id="email-input-container" [formGroup]="emailForm" (submit)="onVerify()">
+                <input type="email" formControlName="email" placeholder="Be a part of it today!" id="email-input-text-box" />
+                <button type="button" class="btn" id="sign-up-button" [disabled]="!emailForm.valid" (click)="signUpNavigate()">SIGN UP</button>
+            </form>
+        </div>
+    </div>
+    <div class="row remove" id="video-section"></div>
+    <div class="row remove" id="quote-section">
+        <p id="quote-heading">Experience <span id="quote-heading-bold">NeoMegha</span></p>
+        <p id="quote-text">
+            A light-weight unified management solution for Cloud native development with inbuilt DevOps automation.
+            <br> Built on principles of Agile to satisfy the demand for business agility, enterprise grade robustness with
+            consumer grade use
+        </p>
+    </div>
+    <div class="row remove" id="start-off-fast">
+        <div class="col-sm-6 remove" id="left-text-box">
+            <p class="section-heading remove">Innovation ready</p>
+            <p class="section-text remove">
+                With cloud first moving to cloud only, bypass preparation and create environment for innovation. With our curated starter
+                kits, start off in minutes and code away. Get access to rich library of micro-services ready to deploy in
+                seconds. Deploy your code seamlessly in an environment of your choice with a unified governance structure.
+
+            </p>
+            <p class="section-learn-more-text remove">
+                <a href="learn more" class="link">LEARN MORE</a>
+            </p>
+        </div>
+        <div class="col-sm-6 remove">
+            <img class="img-responsive" src="../../images/start-off-fast.png" />
+        </div>
+    </div>
+    <div class="row remove" id="multipy-cloud">
+        <div class="col-sm-6 remove">
+            <img class="img-responsive" src="../../images/multi-cloud.png" />
+        </div>
+        <div class="col-sm-6 remove" id="right-text-box">
+            <p class="section-heading remove">Multi cloud platform</p>
+            <p class="section-text remove">
+                With our multi – cloud platform you can mix and match different clouds and virtualized environment to meet your cloud strategy
+                and easily manage your clouds. Enjoy cloud services within a few clicks and reap the benefits of smart cloud
+                monitoring,integrated multi – cloud dashboard and cloud optimization recommendations.
+            </p>
+            <p class="section-learn-more-text remove">
+                <a href="learn more" class="link">LEARN MORE</a>
+            </p>
+        </div>
+    </div>
+    <div class="row remove" id="measure-it">
+        <div class="col-sm-6 remove" id="left-text-box">
+            <p class="section-heading remove"> A thinking Dashboard</p>
+            <p class="section-text remove">
+                Let not your growing projects slow you down. Obtain unprecedented insights from our advanced dashboards that use sophisticated
+                algorithms for improving productivity, boosting cloud efficiency and optimizing your cloud spending with
+                no trouble. NeoMegha does the all the hard work smartly to help you optimize,organize and manage your projects
+                like never before.
+            </p>
+            <p class="section-learn-more-text remove">
+                <a href="learn more" class="link">LEARN MORE</a>
+            </p>
+        </div>
+        <div class="col-sm-6 remove">
+            <img class="img-responsive" src="../../images/measure-it.png" />
+        </div>
+
+    </div>
+
+    <div class="row remove" id="benefits">
+        <div class="col-sm-3 remove">
+            <div class="benefits-box" id="benefits-1">
+                <div class="benefits-footer-box">Accelerated development</div>
+            </div>
+        </div>
+        <div class="col-sm-3 remove">
+            <div class="benefits-box" id="benefits-2">
+                <div class="benefits-footer-box">Enhanced developer productivity</div>
+            </div>
+        </div>
+        <div class="col-sm-3 remove">
+            <div class="benefits-box" id="benefits-3">
+                <div class="benefits-footer-box">Reduced cloud operating costs</div>
+            </div>
+        </div>
+        <div class="col-sm-3 remove">
+            <div class="benefits-box" id="benefits-4">
+                <div class="benefits-footer-box">Prompt deliverables</div>
+            </div>
+        </div>
+    </div>
+    <div class="row remove" id="footer">
+        <div class="col-sm-2 col-xs-4">
+            <p>
+                <span class="footer-text-heading">DFP</span>
+            </p>
+            <ul class="footer-list">
+                <li><a href="about page" class="link">About</a></li>
+                <!--<li><a href="pricing page" class="link">Pricing</a></li>-->
+                <li><a href="tour page" class="link">Tour</a></li>
+                <li><a href="terms and conditions page" class="link">Terms & conditions</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-2 col-xs-4">
+            <p>
+                <span class="footer-text-heading">Support</span>
+            </p>
+            <ul class="footer-list">
+                <li><a href="contact us page" class="link">Contact us</a></li>
+                <li><a href="faq page" class="link">FAQ</a></li>
+                <li><a href="help center page" class="link">Help center</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-2 col-xs-4">
+            <p>
+                <span class="footer-text-heading">Connect</span>
+            </p>
+            <ul class="footer-list">
+                <li><a href="www.facebook.com" class="link">Facebook</a></li>
+                <li><a href="www.twitter.com" class="link">Twitter</a></li>
+                <li><a href="www.googleplus.com" class="link">Google+</a></li>
+            </ul>
+        </div>
+      <!--<button md-button (click)="openDialog()">Launch dialog</button>-->
+
+    </div>
+</body>

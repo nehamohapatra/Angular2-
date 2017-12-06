@@ -1,0 +1,26 @@
+<header-menu></header-menu>
+<div class="auth-wrap create-project-container" [style.top.px]="elemTop">
+    <img class="centered-img" src="../../images/Welcome.png"/>
+    <p class="info-txt padtop2"><span id="Hello-text">Hello!</span><br> Pleased to have you here. Let us start your journey begin by creating a project.</p>
+    <br/>
+    <div class="input-wrap">
+        <form [formGroup]="project" (ngSubmit)="onSubmit()">
+            <div class="auth-input">
+                <div class="project-input">
+                    <md-input placeholder="Project name" formControlName="projectName" #characterCountHintExample maxlength="30">
+                        <md-hint align="end">{{characterCountHintExample.characterCount}} / 30</md-hint>
+                    </md-input>
+                    <br/> <br/>
+                    <div class="ok-icon" [hidden]="!project.valid">
+                        <md-icon>done</md-icon>
+                    </div>
+                </div>
+                <md-textarea placeholder="Project description" #projectDetails maxlength="140" formControlName="projectDetails">
+                    <md-hint align="end">{{projectDetails.characterCount}} / 140</md-hint>
+                </md-textarea>
+                <br/> <br/>
+            </div>
+            <button md-raised-button class="btn primary-btn" [disabled]="!project.valid">Create my first project</button>
+        </form>
+    </div>
+</div>

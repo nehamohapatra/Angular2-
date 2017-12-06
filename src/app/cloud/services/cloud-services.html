@@ -1,0 +1,739 @@
+<div class="flex-container calc-width vm-menu" fxLayout="row" fxLayoutAlign="center center" style="position: relative ;top:10px ">
+  
+    <md-tab-group class="cloud-main-tab tab-min mt9 subheadTab" [selectedIndex]="serviceIndex" #tabGroup (selectChange)="onSelectChange($event)">
+      <md-tab (click)="launchViewToggle()">
+        <div class="flex-item" fxFlex="25%">
+          <template md-tab-label>
+            <div class="build-tab-label virtual-machine">
+              <div class="build-label-cont">
+  
+                <div class="build-label-content">
+                  <p class="normal-gray-txt">Launch</p>
+                  <!--<p class="xsmall-gray-txt">Compute IaaS</p>-->
+                </div>
+              </div>
+            </div>
+          </template>
+  
+        </div>
+      </md-tab>
+  
+      <!--<md-tab id="tabValue" [disabled]="ftUser">-->
+      <md-tab class="scrollType">
+  
+        <div class="flex-item" fxFlex="30%">
+          <template md-tab-label>
+            <div class="build-tab-label virtual-machine">
+              <div class="build-label-cont">
+                <div class="build-label-content">
+                  <p class="normal-gray-txt">Manage</p>
+  
+                </div>
+              </div>
+            </div>
+          </template>
+        </div>
+  
+        <div class="bundle-tab-container">
+          <div class="flex-container" fxLayout="row" fxLayoutAlign="center center" id="repo-head">
+  
+  
+  
+            <div class="flex-item" fxFlex="90%" [hidden]="!ftUser">
+              <md-icon [ngClass]="rotateRefresh == false?'refresh-icon':'refresh-icon rotating'" (click)="onRefreshClick()" title="Click to Refresh">refresh</md-icon>
+              <div class="search-deploy margin-zero">
+                <md-icon class="search-icon" (click)="onSearchExp()" title="Click to Search">search</md-icon>
+                <div class="search-input-wrap" [class.search-exp]="searchExp">
+                  <md-input id="tableSearch" type="text" [(ngModel)]="tableSearch" class="search-input" placeholder="Search"></md-input>
+                  <md-icon class="cancel-icon" (click)="onSearchExp()">clear</md-icon>
+                </div>
+              </div>
+            </div>
+  
+  
+            <div class="flex-item" fxFlex="10%" [hidden]="!ftUser" style="margin-top: 3px !important;">
+              <div class="droplist-label-hide">
+                <!--(ngModelChange)="selectMng()"-->
+                <md-select placeholder="AWS" class="repo-select-wrap fright hideplaceholder" id="manageAccount" [(ngModel)]="selectedItem" floatPlaceholder="never">
+                  <md-option value="1">AWS</md-option>
+                  <!--<md-option value="2">Azure</md-option>-->
+  
+                </md-select>
+              </div>
+            </div>
+          </div>
+  
+          <div [hidden]="selectRepository">
+            <div class="flex-container" fxLayout="row" fxLayoutAlign="center center" id="repo-table">
+              <table cellspacing="0">
+                <thead class="table-head virtualManage">
+                  <tr>
+                    <th class="repo-table vm-manage">
+                      <md-icon>arrow_upward</md-icon>Name </th>
+                    <th class="repo-table vm-manage">
+                      <md-icon>arrow_upward</md-icon>Region </th>
+                    <th class="repo-table vm-manage">Public IP</th>
+                    <th class="repo-table vm-manage">
+                      <md-icon>arrow_upward</md-icon>Created On
+                      <!--<span class="filter-arrow" [class.show-filter]="showArrowThree">
+                                             <span [hidden]="!stackFlag">
+                                            <md-icon class="sort-icon">arrow_upward</md-icon>
+                                                 </span>
+                    <span [hidden]="stackFlag">
+                                            <md-icon class="sort-icon">arrow_downward</md-icon>
+                                        </span>
+                    </span>-->
+  
+                    </th>
+                    <th class="repo-table vm-manage">
+                      <md-icon>arrow_downward</md-icon>Instance Type</th>
+  
+                    <th class="repo-table vm-manage detail">
+                      <md-icon>arrow_upward</md-icon>
+                    </th>
+                    <th class="repo-table vm-manage detail"></th>
+                    <!--<th class="repo-table vm-manage"><md-icon class="sort-icon">arrow_upward</md-icon>
+                    <span class="filter-arrow" [class.show-filter]="showArrowThree">
+                                             <span >
+                                            <md-icon class="sort-icon">arrow_upward</md-icon>
+                                                 </span>
+                    <span [hidden]="stackFlag">
+                                            <md-icon class="sort-icon">arrow_downward</md-icon>
+                                        </span>
+                    </span>
+  
+                  </th>-->
+  
+                  </tr>
+                </thead>
+  
+                <tbody class="table-body" [class.table-body-scroll]="tbody" *ngFor="let Tag of instanceFiltered  | search:tableSearch">
+                  <tr class="repo-data flex-container" fxLayout="row" fxLayoutAlign="center center">
+                    <td class="repo-table flex-item" fxFlex="18%" style="word-wrap : break-word ; line-height: 1.5;">{{Tag.Value}}</td>
+                    <td class="repo-table flex-item" fxFlex="18%">{{Tag.AvailabilityZone}}</td>
+                    <td class="repo-table flex-item" fxFlex="18%" style="position : relative;">{{Tag.PublicIpAddress}} &nbsp;
+                      <md-icon *ngIf="Tag.PublicIpAddress!=''" class="iconToggle">content_copy</md-icon>
+                    </td>
+                    <td class="repo-table flex-item word-break" fxFlex="18%">{{Tag.LaunchTime | date: 'dd-MMM-yyyy'}}</td>
+                    <td class="repo-table flex-item" fxFlex="17%">{{Tag.InstanceType}}
+                    </td>
+                    <td class="repo-table flex-item" fxFlex="9%">
+                      <md-icon style="color: green" *ngIf="Tag.runFlag" (click)="Tag.runFlag = !Tag.runFlag;Tag.stopFlag = !Tag.stopFlag;startInstance(Tag.InstanceId)">play_arrow</md-icon>
+                      <md-icon style="color: red" *ngIf="Tag.stopFlag" (click)="Tag.runFlag = !Tag.runFlag;Tag.stopFlag = !Tag.stopFlag;stopInstance(Tag.InstanceId)">stop</md-icon>
+                      <md-icon style="color: yellow" *ngIf="Tag.pendingFlag">replay</md-icon>
+                    </td>
+  
+  
+                    <td class="repo-table flex-item" fxFlex="3%">
+                      <md-icon (click)="hideDetails(Tag.InstanceId)" *ngIf="Tag.showInstance=='0'">keyboard_arrow_down</md-icon>
+                      <md-icon *ngIf="Tag.showInstance=='1'" (click)="hideDetails(Tag.InstanceId)">expand_less</md-icon>
+  
+                    </td>
+  
+                  </tr>
+  
+                  <div *ngIf="Tag.showInstance=='1'" style="width: 100%; height: 150px;border: 1px solid lightgray; position : relative">
+                    <div fxLayout="row" style="margin-top: 25px">
+                      <div class="flex-container" fxFlex="80%" fxLayoutAlign="center center">
+                        <div class=" flex-item detailTable" fxFlex="25%"><b>Instance ID</b> <br>
+                          <div class="table-data">{{Tag.InstanceId}}</div>
+                        </div>
+                        <div class=" flex-item " fxFlex="20%"> <b>Instance Type </b><br>
+                          <div class="table-data">{{Tag.InstanceType}}</div>
+                        </div>
+                        <div class=" flex-item " fxFlex="20%"><b>Public IP </b><br>
+                          <div class="table-data">{{Tag.PublicIpAddress}}</div>
+                        </div>
+                        <div class=" flex-item " fxFlex="20%"><b>Availability Zone</b> <br>
+                          <div class="table-data">{{Tag.AvailabilityZone}}</div>
+                        </div>
+                      </div>
+  
+                      <div class="flex-container" fxFlex="20%" fxLayoutAlign="center center">
+                        <div class=" flex-item" fxFlex="18%" style="color:red ;position: absolute; right: 105px;">
+                          <md-icon (click)="terminateInstance(Tag.InstanceId)">clear</md-icon>
+                        </div>
+                      </div>
+  
+                    </div>
+  
+  
+                    <div fxLayout="row" style="margin-top: 25px">
+  
+                      <div class="flex-container" fxFlex="80%" fxLayoutAlign="center center">
+  
+                        <div class=" flex-item detailTable " fxFlex="25%"><b>Private IP</b> <br>
+                          <div class="table-data">{{Tag.PrivateIpAddress}}</div>
+                        </div>
+  
+                        <div class=" flex-item " fxFlex="60%"><b>Region</b> <br>
+                          <div class="table-data">{{Tag.AvailabilityZone}}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+  
+                </tbody>
+              </table>
+  
+            </div>
+            <div *ngIf='(repository | search:tableSearch).length ==0' class="no-data" [class.display-flex]="true" [style.height.px]="nodataTop">
+              <!--<div class="text-center">
+                <img src="images/search.png" />
+                <p class="xsmall-gray-txt">Unfortunately, no result were found matching: <span class="normal-gray-txt">{{tableSearch}}</span></p>
+                <p class="xsmall-gray-txt">Try modifying your search terms</p>
+              </div>-->
+            </div>
+            <div class="flex-container" fxLayout="row" fxLayoutAlign="center center">
+              <!--<div class="flex-row">
+                <div class="repo-proj-detail" id="repo-detail" [style.height.px]="detailHeight" *ngIf="currentDetail">
+  
+                  <p class="normal-gray-txt mb20 pb20"><b>Details</b></p>
+                  <div class="flex-container" fxLayout="row" fxLayoutAlign="center center">
+  
+                    <div class="flex-item" fxFlex="75%">
+                      <div class="flex-container mb20" fxLayout="row" fxLayoutAlign="start center">
+                        <div fxFlex="33%">
+                          <p class="normal-gray-txt">Project Name</p>
+                          <p class="xsmall-gray-txt">{{repoDetail?.name}}</p>
+                        </div>
+                        <div fxFlex="33%">
+                          <p class="normal-gray-txt">Pull Requests</p>
+                          <p class="xsmall-gray-txt">-</p>
+                        </div>
+                        <div fxFlex="33%">
+                          <p class="normal-gray-txt">Build Status</p>
+                          <p class="xsmall-gray-txt">-</p>
+                        </div>
+                      </div>
+                      <div class="flex-container mb20" fxLayout="row" fxLayoutAlign="start center">
+                        <div fxFlex="33%">
+                          <p class="normal-gray-txt">Access</p>
+                          <p class="xsmall-gray-txt word-break"> {{repoDetail?.clone_url}}</p>
+                        </div>
+                        <div fxFlex="33%">
+                          <p class="normal-gray-txt">Issues</p>
+                          <p class="xsmall-gray-txt">{{repoDetail?.open_issues}} </p>
+                        </div>
+                        <div fxFlex="33%">
+                          <p class="normal-gray-txt">&nbsp;</p>
+                        </div>
+                      </div>
+                      <div class="flex-container mb20" fxLayout="row" fxLayoutAlign="start center">
+                        <div fxFlex="33%">
+                          <p class="normal-gray-txt">Branches</p>
+                          <p class="xsmall-gray-txt">-</p>
+                        </div>
+                        <div fxFlex="33%">
+                          <p class="normal-gray-txt">Contributors</p>
+                          <p class="xsmall-gray-txt">-</p>
+                        </div>
+                        <div fxFlex="33%">
+                          <p class="normal-gray-txt">Cloud/Tool</p>
+                          <p class="xsmall-gray-txt">-</p>
+                        </div>
+                      </div>
+                      <div class="flex-container mb20" fxLayout="row" fxLayoutAlign="start center">
+                        <div fxFlex="33%">
+                          <p class="normal-gray-txt">Releases</p>
+                          <p class="xsmall-gray-txt">-</p>
+                        </div>
+                        <div fxFlex="33%">
+                          <p class="normal-gray-txt">Last Commit Date</p>
+                          <p class="xsmall-gray-txt">-</p>
+                        </div>
+                        <div fxFlex="33%">
+                          <p class="normal-gray-txt">Last Build Status</p>
+                          <p class="xsmall-gray-txt">-</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flex-item" fxFlex="25%">
+                      <div class="flex-row relative">
+                        <div class="manage-repo-footer" [style.width.px]="contWidth">
+                          <div class="full-height" class="flex-container" fxLayout="row" fxLayoutAlign="center center">
+                            <div class="flex-item" fxFlex="50%" class="padding-10" fxLayoutAlign="start center" layout-align="start center">
+                              &nbsp;
+                            </div>
+                            <div class="flex-item" fxFlex="50%" class="padding-10" fxLayoutAlign="end center" layout-align="end center">
+                              <button md-raised-button class="orange-btn" (click)="onRepoLinkClick()">unlink</button>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="no-data" [class.display-flex]="noData" [style.height.px]="nodataTop">
+                  <div class="text-center">
+                    <img src="images/search.png" />
+                    <p class="xsmall-gray-txt">Unfortunately, no result were found matching: <span class="normal-gray-txt">Project</span></p>
+                    <p class="xsmall-gray-txt">Try modifying your search terms</p>
+                  </div>
+                </div>
+              </div>-->
+            </div>
+          </div>
+          <div [hidden]="selectBuild">
+            <div class="flex-container" fxLayout="row" fxLayoutAlign="center center">
+              <div class="flex-item" fxFlex="100%">
+                <!--<md-list class="bt-list-wrap">
+                  <md-list-item *ngFor="let item of buildItem" class="bt-list">
+                    <p class="normal-gray-txt" md-line>Build on {{item.timestamp}} </p>
+                    <p class="normal-gray-txt" md-line>Executed in AWS with Job Id #{{item.job_id}} {{item.instanceIp}}</p>
+                    <div class="mr8">
+                      <p class="badge-{{item.status}} fleft">{{item.status}}</p>
+                    </div>
+                  </md-list-item>
+                </md-list>-->
+              </div>
+            </div>
+          </div>
+          <div *ngIf="manageLoader" [style.height.px]="resHeight" [style.width.px]="resWidth">
+            <div class="detail-spinner-wrap" [style.width.px]="resWidth" [style.height.px]="resHeight">
+              <md-progress-spinner mode="indeterminate" color="primary" class="detail-spinner"></md-progress-spinner>
+            </div>
+          </div>
+        </div>
+  
+  
+      </md-tab>
+    </md-tab-group>
+  
+  
+  
+  
+  
+  </div>
+  
+  <div class="flex-item mt20" fxFlex="15%" [hidden]="ftUser" style="position: absolute ; top:-5px; right: 300px">
+    <div>
+  
+      <!-- Edited by Jeeva -->
+      <md-select id="vendorVariable" class="vm-select-wrap" (ngModelChange)="vendorUpdate($event)" [(ngModel)]="selectedVendor"
+        placeholder="AWS" name="vendorVariable" floatingPlaceholder="never">
+        <md-option *ngFor="let awsvendor of vendors" [value]="awsvendor.small">
+          {{awsvendor.caps}}
+        </md-option>
+      </md-select>
+    </div>
+  </div>
+  
+  <div class="flex-item mt20" fxFlex="15%" [hidden]="ftUser" style="position: absolute ; top:-15px; right: 125px">
+    <div>
+  
+      <md-select placeholder="Default Region" class="flex-row margint-10  mb20 vm-select-wrap hideplaceholder" [(ngModel)]="cloudDetailRegion">
+        <md-option *ngFor='let item of awsRegions; let i = index' value={{item.region}}>
+          {{item.region}}
+        </md-option>
+      </md-select>
+    </div>
+  
+  </div>
+  
+  <div [hidden]="!detailLoader">
+    <div class="detail-loader vm-launch-load">
+      <md-spinner class="loader-size"></md-spinner>
+    </div>
+  </div>
+  
+  <form [formGroup]="azureDetail" [style.height.px]="450" style="margin-top: 5px" [hidden]="ftUser">
+    <div class="flex-container ht45" fxLayout="row">
+      <div class="flex-item mt20 " fxFlex="15%">
+        <div class="relative flex-row mb20">
+          <label> Name: </label>
+        </div>
+      </div>
+      <div class="flex-row">
+        <div class="flex-item mt20 " fxFlex="25%">
+          <md-input formControlName="name" [(ngModel)]="name" type="text" placeholder="Instance Name" class="flex-row " style="margin-top:-10%"
+            [floatingPlaceholder]="false"></md-input>
+        </div>
+      </div>
+    </div>
+  
+  
+  
+    <div class="flex-container ht45" fxLayout="row">
+      <div class="flex-item mt20 " fxFlex="15%">
+        <div class="relative flex-row mb20" [ngClass]="!azureDetail.controls['name'].valid ? 'label-grey-color' : 'label-tertiary-color'">
+          <label> VPC: </label>
+        </div>
+      </div>
+      <div class="flex-row">
+        <div class="flex-item mt20 " fxFlex="25%">
+          <div class="project-input mb20">
+            <md-select placeholder="Choose/Create" class=" flex-row hideplaceholder" formControlName="vpcSelect" [(ngModel)]="vpcSelect"
+              [disabled]="!azureDetail.controls['name'].valid" floatPlaceholder="never">
+              <!--<md-optgroup label="items">-->
+              <md-option *ngFor="let vp of vpc" [value]="vp.value">
+                {{ vp.viewValue }}
+              </md-option>
+              <!--</md-optgroup>-->
+            </md-select>
+  
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  
+  
+    <div class="flex-container ht45" fxLayout="row">
+      <div class="flex-item mt20" fxFlex="15%">
+        <div class="relative flex-row mb20" [ngClass]="!azureDetail.controls['vpcSelect'].valid ? 'label-grey-color' : 'label-tertiary-color'">
+          <label>  Subnet: </label>
+        </div>
+      </div>
+  
+  
+      <div class="flex-row">
+        <div class="flex-item mt20">
+          <div class="project-input mb20">
+            <md-radio-group formControlName="subnetRadioSelect" [(ngModel)]="subnetRadioSelect" [disabled]="!azureDetail.controls['vpcSelect'].valid">
+              <md-radio-button [value]="'Public'" aria-label="Public" class=" flex-row" fxFlex="15%" [ngClass]="!azureDetail.controls['vpcSelect'].valid ? 'label-grey-color' : 'label-tertiary-color'">
+              Public </md-radio-button>
+  
+  
+              <md-radio-button [value]="'Private'" aria-label="Private" class=" flex-row" fxFlex="12.5%" [ngClass]="!azureDetail.controls['vpcSelect'].valid ? 'label-grey-color' : 'label-tertiary-color'">
+              Private</md-radio-button>
+  
+            </md-radio-group>
+  
+  
+            <md-select placeholder="Choose/Create" class=" flex-row hideplaceholder" fxFlex="29%" formControlName="subnetVpcSelect" [disabled]="!azureDetail.controls['vpcSelect'].valid">
+              <md-option *ngFor="let subnetVpc of subnetVpcSelect" [value]="subnetVpc.value">
+                {{ subnetVpc.viewValue }}
+              </md-option>
+            </md-select>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container" style="justify-content: space-between;">
+      <div class="flex-container ht45" fxLayout="row">
+        <div class="flex-item mt20" fxFlex="15%">
+          <div class="relative flex-row mb20" [ngClass]="!azureDetail.controls['subnetVpcSelect'].valid ? 'label-grey-color' : 'label-tertiary-color'">
+            <label>Family: </label>
+          </div>
+        </div>
+        <div class="flex-row">
+          <div class="flex-item mt20">
+            <div class="project-input mb20">
+  
+              <md-select placeholder="Choose" class=" flex-row hideplaceholder" fxFlex="25%" formControlName="familySelect1" [(ngModel)]="familySelect1Model"
+                [disabled]="!azureDetail.controls['subnetVpcSelect'].valid ">
+                <md-option *ngFor="let familyChoose of familySelect1" [value]="familyChoose.value">
+                  {{ familyChoose.viewValue }}
+                </md-option>
+              </md-select>
+  
+  
+  
+  
+              <!--<md-input  class="flex-row "   fxFlex="10%"></md-input>-->
+  
+  
+  
+              <md-select placeholder="Choose Type" class=" flex-row hideplaceholder" fxFlex="32%" formControlName="familySelect2" [(ngModel)]="familySelect2Model"
+                [disabled]="!azureDetail.controls['familySelect1'].valid" style="padding-left:3%">
+                <md-option *ngFor="let familyChooseType of familySelect2" [value]="familyChooseType.value" (click)="divInfo()">
+                  {{ familyChooseType.viewValue }}
+                </md-option>
+              </md-select>
+  
+  
+  
+  
+              <!--<table class=" flex-row" fxFlex="32%" *ngIf="divEnable"  style="padding-left:6%">-->
+  
+              <!--<table class=" flex-row" fxFlex="32%"  style="padding-left:6%">
+  <tr>
+  <th >vCPU</th>
+  <th>CPU Credits/hour</th>
+  <th>Mem(GiB)</th>
+  <th>Storage</th>
+  </tr>
+  <tr>
+  
+  </tr>
+  </table>-->
+  
+              <div class="expand-wrap">
+                <div class="project-input">
+                  <table class=" flex-row margin-zero padding-20 border-none">
+                    <tr class="instance-table-detail">
+                      <th>
+                        <p class="normal-gray-txt text-left">Model</p>
+                      </th>
+                      <th>
+                        <p class="normal-gray-txt text-right">vCPU</p>
+                      </th>
+                      <th>
+                        <p class="normal-gray-txt text-right">CPU Credits/ Hr</p>
+                      </th>
+                      <th>
+                        <p class="normal-gray-txt text-right">Mem (GiB)</p>
+                      </th>
+                    </tr>
+                    <tr class="instance-table-detail" *ngFor="let item of instanceItem">
+                      <td>
+                        <p>Text</p>
+                        <!--<md-radio-group [(ngModel)]="chosenOption">
+  <md-radio-button [value]="item.type" class="instance-option">
+  {{item.type}}
+  </md-radio-button>
+  </md-radio-group>-->
+  
+                      </td>
+                      <td>
+                        <p class="normal-gray-txt text-right">{{item.vcpu}}</p>
+                      </td>
+                      <td>
+                        <p class="normal-gray-txt text-right">{{item.hour}}</p>
+                      </td>
+                      <td>
+                        <p class="normal-gray-txt text-right">{{item.mem}}</p>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="flex-container ht45" fxLayout="row">
+      <div class="flex-item mt20" fxFlex="15%">
+        <div class="relative flex-row mb20" [ngClass]="!azureDetail.controls['familySelect2'].valid ? 'label-grey-color' : 'label-tertiary-color'">
+          <label>OS Type: </label>
+        </div>
+      </div>
+      <div class="flex-row">
+        <div class="flex-item mt20">
+          <div class="project-input mb20">
+            <md-select placeholder="Choose base" class=" flex-row hideplaceholder" fxFlex="25%" formControlName="osBase" [(ngModel)]="osBaseModel"
+              [disabled]="!azureDetail.controls['familySelect2'].valid">
+              <md-option *ngFor="let osBaseType of osBase" [value]="osBaseType.value">{{ osBaseType.viewValue }}</md-option>
+            </md-select>
+  
+            <md-select placeholder="Choose OS" class=" flex-row hideplaceholder" fxFlex="32%" formControlName="osBaseUbuntu" [(ngModel)]="osBaseUbuntuModel"
+              [disabled]="!azureDetail.controls['osBase'].valid" style="padding-left:3%">
+              <md-option *ngFor="let osBaseType of osBaseUbuntu" [value]="osBaseType.value">{{ osBaseType.viewValue }}</md-option>
+            </md-select>
+  
+            <md-select placeholder="Choose Version" class=" flex-row hideplaceholder" fxFlex="32%" formControlName="osBaseVersion" [(ngModel)]="osBaseVersionModel"
+              [disabled]="!azureDetail.controls['osBaseUbuntu'].valid" style="padding-left:3%">
+              <md-option *ngFor="let osBaseVersionType of osBaseVersion" [value]="osBaseVersionType.value">{{ osBaseVersionType.viewValue }}</md-option>
+            </md-select>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="flex-container ht45" fxLayout="row">
+      <div class="flex-item mt20" fxFlex="15%">
+        <div class="relative flex-row mb20" [ngClass]="!azureDetail.controls['osBaseVersion'].valid ? 'label-grey-color' : 'label-tertiary-color'">
+          <label> Disk Count: </label>
+        </div>
+      </div>
+      <div class="flex-row">
+        <div class="flex-item mt20">
+          <button class=" flex-row button-style" fxFlex="5%" [class.changeIconColor]="azureDetail.controls['osBaseVersion'].valid"
+            [disabled]="!azureDetail.controls['osBaseVersion'].valid" (click)="minRange()">
+            <md-icon class="material-icons">remove_circle</md-icon>
+          </button>
+  
+          <md-input type="number" align="center" class=" flex-row" fxFlex="5%" [(ngModel)]="countNum" style="margin-top:-10% ;" formControlName="diskCount"
+            [disabled]="true" (click)="disCountClick()" class="placeholdCenter">
+          </md-input>
+  
+  
+          <button class=" flex-row button-style" fxFlex="5%" [class.changeIconColor]="azureDetail.controls['osBaseVersion'].valid"
+            [disabled]="!azureDetail.controls['osBaseVersion'].valid" (click)="maxRange()">
+            <md-icon class="material-icons">add_circle</md-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  
+  
+    <!--<div [hidden]="true" class="flex-container" fxLayout="row">
+        <div class="flex-item mt20" fxFlex="15%">
+            <div class="relative flex-row mb20">
+                <label>  Root Disk: </label>
+            </div>
+        </div>
+  
+  
+        <div class="flex-row">
+            <div class="flex-item mt20">
+  
+  
+                <md-input type="number" placeholder="Enter Size" class="flex-row " fxFlex="10%" formControlName="rootDiskCount" min="0" step="1"
+                    [(ngModel)]="rootDiskCount" (ngModelChange)="validate($event)" [disabled]="!azureDetail.controls['familySelect2'].valid"
+                    style="text-align: left"></md-input>
+  
+  
+                <md-select placeholder="GB" class=" flex-row" fxFlex="15%" formControlName="rootDiskGb" [(ngModel)]="rootDiskGbModel" [disabled]="!azureDetail.controls['subnetRadioSelect'].valid"
+                    style="padding-left:2%">
+                    <md-option *ngFor="let rootDiskGbType of rootDiskGb" [value]="rootDiskGbType.value">
+                        {{ rootDiskGbType.viewValue }}
+                    </md-option>
+                </md-select>
+                <i class="material-icons">error_outline</i>
+                <md-radio-group formControlName="rootDiskRadioType" [(ngModel)]="rootDiskRadioType" [disabled]="!azureDetail.controls['familySelect2'].valid">
+                    <md-radio-button value="1" aria-label="Public" fxFlex="25%" style="padding-left:3%"> Magnetic
+                    </md-radio-button>
+  
+                    <md-radio-button ng-value="specialValue" aria-label="Private" fxFlex="25%" style="padding-left:3%">
+                        General Purpose SSD
+                    </md-radio-button>
+  
+                    <md-radio-button value="2" aria-label="Private" fxFlex="25%" style="padding-left:3%">
+                        Provisoned IOPS SSD
+                    </md-radio-button>
+                </md-radio-group>
+  
+            </div>
+        </div>
+    </div>-->
+  
+    <div *ngFor="let disk of disks; let i=index;" class="flex-container ht45" fxLayout="row">
+      <div class="flex-item mt20" fxFlex="15%">
+        <div class="relative flex-row mb20">
+          <label> Disk {{countNum}}: </label>
+        </div>
+      </div>
+  
+  
+      <div class="flex-row">
+        <div class="flex-item mt20">
+          <div class="project-input mb20">
+            <md-input type="number" formControlName="entrTxtArray" [(ngModel)]="entrTxtArray[i]" class="flex-row hideplaceholder" fxFlex="15%"></md-input>
+            <md-select placeholder="GB" fxFlex="15%" formControlName="dropGbType" [(ngModel)]="dropGbType[i]">
+              <md-option *ngFor="let disk1GbType of disk1Gb" [value]="disk1GbType">{{ disk1GbType.viewValue }}</md-option>
+            </md-select>
+            <i class="material-icons" fxFlex="5%">error_outline</i>
+            <md-radio-group formControlName="disk1RadioType" [(ngModel)]="disk1RadioType[i]">
+              <md-radio-button value="1" aria-label="Public" fxFlex="25%" style="padding-left:3%" (click)="iopSdIsk(1)"> Magnetic
+              </md-radio-button>
+  
+              <md-radio-button value="gp2" [checked]="true" aria-label="Private" fxFlex="25%" style="padding-left:3%" (click)="iopSdIsk(2)">
+                General Purpose SSD
+              </md-radio-button>
+  
+              <md-radio-button value="3" aria-label="Private" fxFlex="25%" style="padding-left:3%" (click)="iopSdIsk(3)">
+                Provisoned IOPS SSD
+              </md-radio-button>
+            </md-radio-group>
+            <span *ngIf="iopsDisplay">:</span>
+            <md-input type="number" class="flex-row " fxFlex="5%" *ngIf="iopsDisplay"></md-input>
+            <span *ngIf="iopsDisplay">IOPS</span> <i class="material-icons" *ngIf="iopsDisplay">error_outline</i>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="flex-container ht45" fxLayout="row">
+      <div class="flex-item mt20" fxFlex="15%">
+        <div class="relative flex-row mb20" [ngClass]="!azureDetail.controls['osBaseVersion'].valid ? 'label-grey-color' : 'label-tertiary-color'">
+            <label> Security Group: </label>
+        </div>
+      </div>
+      <div class="flex-row">
+        <div class="flex-item mt20" fxFlex="25%">
+          <div class="project-input mb20">
+            <md-select placeholder="Choose/Create" class=" flex-row hideplaceholder" formControlName="securityGroup" [(ngModel)]="securityGroupModel" [disabled]="!azureDetail.controls['osBaseVersion'].valid" >
+              <md-option *ngFor="let securityGroupType of securityGroup" [value]="securityGroupType">{{securityGroupType.GroupName }}</md-option>
+            </md-select>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+    <div class="flex-container ht45" fxLayout="row">
+      <div class="flex-item mt20" fxFlex="15%">
+        <div class="relative flex-row mb20"[ngClass]="!azureDetail.controls['securityGroup'].valid ? 'label-grey-color' : 'label-tertiary-color'">
+          <label>  Key Pair: </label>
+        </div>
+      </div>
+  
+  
+      <div class="flex-row">
+        <div class="flex-item mt20" fxFlex="25%">
+          <div class="project-input mb20">
+            <md-select placeholder="Choose/Create" class=" flex-row hideplaceholder" formControlName="keyPair" [(ngModel)]="keyPairModel" [disabled]="!azureDetail.controls['securityGroup'].valid">
+              <md-option *ngFor="let keyP of keyPairArray" [value]="keyP">{{keyP.KeyName }}</md-option>
+            </md-select>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- IP Address  starts -->
+    <!--<div class="flex-container" fxLayout="row">
+        <div class="flex-item mt20" fxFlex="15%">
+            <div class="relative flex-row mb20">
+                <label>  IP address: </label>
+            </div>
+        </div>
+  
+  
+        <div class="flex-row">
+            <div class="flex-item mt20" fxFlex="80%">
+                <div class="project-input mb20">
+                    <md-radio-group formControlName="ipAddressType" [(ngModel)]="ipAddressType" [disabled]="!azureDetail.controls['familySelect2'].valid">
+                        <md-radio-button [value]="specialValue" ng-value="specialValue" aria-label="Public" fxFlex="20%"> Automatic</md-radio-button>
+  
+                        <md-radio-button [value]="1" value="1" aria-label="Private" fxFlex="20%">
+                            Manual
+                        </md-radio-button>
+  
+                    </md-radio-group>
+  
+                </div>
+            </div>
+        </div>
+    </div>-->
+    <!-- IP Address  ends -->
+    <!--Elastic IP starts-->
+    <!--<div class="flex-container" fxLayout="row" *ngIf="elasticIpshow">-->
+    <!--<div class="flex-container" fxLayout="row">
+        <div class="flex-item mt20" fxFlex="15%">
+            <div class="relative flex-row mb20">
+                <label> Elastic IP: </label>
+            </div>
+        </div>
+  
+  
+        <div class="flex-row">
+            <div class="flex-item mt20" fxFlex="80%">
+                <div class="project-input mb20">
+                    <md-radio-group formControlName="elasticIpType" [(ngModel)]="elasticId" [disabled]="!azureDetail.controls['familySelect2'].valid">
+                        <md-radio-button value="yes" aria-label="Public" fxFlex="20%">Yes
+                        </md-radio-button>
+  
+                        <md-radio-button ng-value="specialValue" value="no" aria-label="Private" fxFlex="20%">
+                            No
+                        </md-radio-button>
+  
+                    </md-radio-group>
+                </div>
+            </div>
+        </div>
+    </div>-->
+    <!--Elastic IP ends -->
+  
+  
+    <div class="cloudBtn launchBtnPos">
+      <button md-raised-button class="auto-btn-prime" [disabled]="!azureDetail.valid || !azureDetail.controls['keyPair'].valid"
+        (click)="launchVm()">Launch</button>
+  
+  
+    </div>
+  </form>

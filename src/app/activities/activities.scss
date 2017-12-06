@@ -1,0 +1,29 @@
+.act-scroll {
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.act-scroll::-webkit-scrollbar {
+    width: 10px;
+}
+ 
+.act-scroll::-webkit-scrollbar-track {
+    background: transparent; 
+}
+ 
+.act-scroll::-webkit-scrollbar-thumb {
+    background: #ccc; 
+    height: 50px;
+}
+.act-arrow {
+    position: absolute;
+    top: 13px;
+    right: 0;
+    color: #666;
+}
+.act-input{
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+    clear: both;
+}

@@ -1,0 +1,58 @@
+<md-dialog-content class="accent-color flex-container">
+    <p class="normal-gray-txt text-center dialogHead"><b>Choose reference architecture</b></p>
+    <form [formGroup]="custAppDetail" (ngSubmit)="submitDialogData()" fxLayout="column">
+
+        <div fxLayout="row" class="row-height">
+            <label fxFlex="1 6 10%"></label>
+            <label fxFlex="1 6 40%" fxFlexAlign="center"> Architecture file source</label>
+            <md-select fxFlex="3 1 40%" fxFlexAlign="center" placeholder="Neomegha/Github" formControlName="archFileSource" (ngModelChange)="toNeoGit($event)">
+                <md-option *ngFor="let env of archFileSrc" [value]="env.value">
+                    {{ env.viewValue }}
+                </md-option>
+            </md-select>
+            <label fxFlex="1 6 10%"></label>
+        </div>
+        <div fxLayout="row" class="row-height">
+            <label fxFlex="1 6 10%"></label>
+            <label fxFlex="1 6 40%" fxFlexAlign="center"> Architecture file</label>
+            <md-select fxFlex="3 1 40%" fxFlexAlign="center" placeholder="Choose file" formControlName="archFile">
+                <md-option *ngFor="let env of archF" [value]="env.value">
+                    {{ env.viewValue }}
+                </md-option>
+            </md-select>
+            <label fxFlex="1 6 10%"></label>
+        </div>
+        <div fxLayout="row" class="row-height">
+            <label fxFlex="1 6 10%"></label>
+            <label fxFlex="1 6 40%" fxFlexAlign="center"> Name</label>
+            <md-input fxFlex="3 1 40%" fxFlexAlign="center" placeholder="Enter Name" formControlName="name">
+            </md-input>
+            <label fxFlex="1 6 10%"></label>
+        </div>
+        <div fxLayout="row" class="row-height">
+            <label fxFlex="1 6 10%"></label>
+            <label fxFlex="1 6 40%" fxFlexAlign="center"> Cloud</label>
+            <md-select fxFlex="3 1 40%" fxFlexAlign="center" placeholder="Choose Cloud" formControlName="cloudType" (ngModelChange)="toEnv($event)">
+                <md-option *ngFor="let env of cloud" [value]="env.value">
+                    {{ env.viewValue }}
+                </md-option>
+            </md-select>
+            <label fxFlex="1 6 10%"></label>
+        </div>
+        <div fxLayout="row" class="row-height">
+            <label fxFlex="1 6 10%"></label>
+            <label fxFlex="1 6 40%" fxFlexAlign="center"> Enviroment</label>
+            <md-select fxFlex="3 1 40%" fxFlexAlign="center" placeholder="Choose Environment" formControlName="selEnv">
+                <md-option *ngFor="let env of enviroment" [value]="env.value">
+                    {{ env.viewValue }}
+                </md-option>
+            </md-select>
+            <label fxFlex="1 6 10%"></label>
+        </div>
+        <div class="box-btn-dialog mt9">
+            <button md-raised-button class="auto-btn-prime">LAUNCH</button>
+            <button md-raised-button class="auto-btn-gray" >CANCEL</button>
+        </div>
+    </form>
+
+</md-dialog-content>

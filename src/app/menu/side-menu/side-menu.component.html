@@ -1,0 +1,31 @@
+<div class="side-menu">
+        <ul class="sidemenu-list">
+            <li (click)="navigation('project-landing','one')" class="{{checkFlag('one')}}">
+                <md-icon class="sidemenu-icon">timeline</md-icon>
+            </li>
+            <li (click)="navigation('cloud-management','two')" class="{{checkFlag('two')}}">
+                <md-icon class="sidemenu-icon">cloud_queue</md-icon>
+            </li>
+            <li (click)="navigation('code','three')" class="{{checkFlag('three')}}">
+                <md-icon class="sidemenu-icon">code</md-icon>
+            </li>
+            <li (click)="navigation('apps-sidemenu','four')" class="{{checkFlag('four')}}">
+                <md-icon class="sidemenu-icon">apps</md-icon>
+            </li>
+            <li  class="{{checkFlag('five')}}"><img src="images/chat.png" class="sidemenu-img"></li>
+            
+            <li (click)="navigation('group','six')" class="{{checkFlag('six')}}">
+                <md-icon class="sidemenu-icon">group</md-icon>
+            </li>
+            <!--<li>
+                <md-icon class="sidemenu-icon add-pri">person_add</md-icon>
+            </li>-->
+            <!--<li (click)="navigation('activities','five')" class="{{checkFlag('five')}}"><img src="images/chat.png" class="sidemenu-img"></li>-->
+            <!--<li (click)="navigation('user-management','six')" class="{{checkFlag('six')}}">
+                <md-icon class="sidemenu-icon">group</md-icon>
+            </li>-->
+            <!--<li>
+                <md-icon class="sidemenu-icon add-pri">person_add</md-icon>
+            </li>-->
+        </ul>
+    </div>

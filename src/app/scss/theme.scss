@@ -1,0 +1,48 @@
+/*color*/
+$primary-color: #e0301e;
+$secondary-color: #fff;
+$font-primary-color: #666;
+$primary-btn-color: #fff;
+$secondary-btn-color: #e0301e;
+$font-secodary-color: #999;
+$font-pharah-color: #ccc;
+$error-color: #c33;
+$success-color: #396;
+$header-bg-color: #eaeaea;
+$ac-create-bg: #999;
+$secondary-txt-color: #fff;
+$small-font-txt: $font-primary-color;
+$manage-repo-btn: #666;
+$orange-color: #f90;
+$stop-color: #f90;
+$badge-color:#fff;
+$tertiary-color:#666;
+$grey-color:#ccc;
+$link-color: #0099cc;
+
+$admin-color: #396;
+$admin-border-color: rgba(51, 153, 102, 0.5);
+$developer-color: #f90;
+$developer-border-color: rgba(255, 153, 0, 0.5);
+
+$notif-color: #f90;
+$warn-color :#FF9900;
+$remove-env : #dd4b39;
+//font family
+// @import 'https://fonts.googleapis.com/css?family=PT+Sans';
+$primary-font: PT Sans, sans-serif;
+//Font size
+$medium-font-size: 17px;
+$small-font-size: 15px;
+$xsmall-font-size: 13px;
+$ac-title-size: 19px;
+
+$medium-font-size-tab: 14px;
+$small-font-size-tab: 12px;
+$ac-title-size-tab: 16px;
+$ms-font-size: $medium-font-size-tab;
+
+$notif-font-size: 14px;
+/*athentication background*/
+$bg-img: url(../images/bg.png);
+$bg-img1: url(../images/scroll-bar.png);

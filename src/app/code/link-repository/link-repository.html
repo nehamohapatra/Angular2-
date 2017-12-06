@@ -1,0 +1,94 @@
+<form [formGroup]="launchRepo">
+    <div class="build-tab-content" [style.height.px]="contHeight">
+        <div class="create-repo-container">
+            <p class="normal-gray-txt"><b>You've Selected</b></p>
+            <br/>
+            <div class="build-label-cont">
+                <div class="build-label-icon mt3">
+                </div>
+                <div class="build-label-content  build-content">
+                    <p class="normal-gray-txt padding10">{{packageDetails?.name}}</p>
+                </div>
+            </div>
+            <br/>
+            <div class="flex-container mb20" fxLayout="row" fxLayoutAlign="center center">
+                <div class="flex-item" fxFlex="50%">
+                    <div class="project-input">
+                        <md-input (keyup)="changeName()" class="width-90" formControlName="repoName" maxlength="30" placeholder="Name your repository"
+                            [(ngModel)]="yourRepo" [class.errorBorder]="launchRepo.controls['repoName'].touched && !launchRepo.controls['repoName'].valid"></md-input>
+                        <br/>
+                        <div class="clear-icon repo-ok-icon" *ngIf="launchRepo.controls['repoName'].touched && !launchRepo.controls['repoName'].valid">
+                            <md-icon>clear</md-icon>
+                        </div>
+                        <div class="ok-icon repo-ok-icon" *ngIf="launchRepo.controls['repoName'].valid">
+                            <md-icon>done</md-icon>
+                        </div>
+                        <div *ngIf="launchRepo.controls['repoName'].touched && !launchRepo.controls['repoName'].valid">
+                            <div class="error-txt">{{passwordError}}</div>
+                        </div>
+                        <div *ngIf="alreadyDeploy">
+                            <div class="error-txt">{{repositoryName}}</div>
+                            <div class="clear-icon repo-ok-icon">
+                                <md-icon class="white-bg">clear</md-icon>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="flex-item" fxFlex="50%">
+
+                    <div class="project-input">
+                        <md-select class="width-90 margint-10" formControlName="selectRepo" placeholder="Choose Repo - Github/Bitbucket">
+                            <md-option *ngFor='let item of scmArray;let i = index' [value]="item._id">
+                                {{item.type}}
+                            </md-option>
+                        </md-select>
+                        <span class="error-txt" *ngIf="false">{{passwordError}}</span>
+                        <br/>
+                        <div class="clear-icon" *ngIf="false">
+                            <md-icon>clear</md-icon>
+                        </div>
+                        <div class="ok-icon repo-ok-icon" *ngIf="selectedSCM">
+                            <md-icon>done</md-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-container" fxLayout="row" fxLayoutAlign="start center" [hidden]="packageDetails?.name=='EMPTY'">
+
+                <div class="flex-item block" fxFlex="50%" fxLayoutAlign="start center" layout-align="start center">
+                    <p class="normal-gray-txt"><b>What can you build with this?</b></p>
+                    <br/>
+
+                    <p class="xsmall-gray-txt">{{packageDetails?.description}}</p>
+                </div>
+                <div *ngIf="showBundleDetails" class="flex-item block" fxFlex="50%" fxLayoutAlign="start center" layout-align="start center">
+                    <p class="normal-gray-txt"><b>Bundle / Stack Details</b></p>
+                    <br/>
+                    <div class="flex-container" fxLayout="row" fxLayoutAlign="center center" *ngFor="let item of packageDetails?.contents">
+                        <div fxFlex="100%">
+                            <p class="xsmall-gray-txt">{{item?.code}}</p>
+                        </div>
+                        <div fxFlex="100%">
+                            <p class="xsmall-gray-txt">{{item?.version}}</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="repo-footer" [style.width.px]="contWidth">
+            <div class="flex-container" fxLayout="row" fxLayoutAlign="center center">
+                <div class="flex-item padding-20" fxFlex="50%" fxLayoutAlign="start center" layout-align="start center">
+                    <md-icon class="active">flare</md-icon>
+                    <p class="footer-tip-txt">Pro Tip: All bundles & stacks comes with docker container support by default</p>
+                </div>
+                <div class="flex-item padding-20" fxFlex="50%" fxLayoutAlign="end center" layout-align="end center">
+                    <button (click)="onNextClick()" [disabled]="!launchRepo.valid" md-raised-button class="auto-btn-prime mr10" [class.notEventBg]="launchDisable">Launch </button>
+                    <button (click)="onBackClick()" md-raised-button class="auto-btn-gray">Back </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,1396 @@
+.padding-zero{
+    padding:0 !important;
+}
+.margin-zero{
+    margin:0 !important;
+}
+.padtop2{
+    padding-top: .1px !important;
+}
+.text-center{
+    text-align: center;
+}
+.text-cap{
+    text-transform: capitalize !important;
+}
+a{
+    text-decoration: none;
+}
+p{
+    margin: 15px 0;
+}
+.relative{
+    position: relative !important;
+    float: left;
+}
+.martop6{
+    margin-top: 6px !important;
+}
+.mt3{
+    margin-top: 3px !important;
+}
+.mt17{
+    margin-top: 17px !important;
+}
+.mt8{
+    margin-top: 8px !important;
+}
+.mt9{
+    margin-top: 9px !important;
+}
+.mb10{
+    margin-bottom: 10px !important;
+}
+.ml10{
+    margin-left: 10px !important;
+}
+.mb20{
+    margin-bottom: 20px !important;
+}
+.mb15{
+    margin-bottom: 15px !important;
+}
+.mt20{
+    margin-top: 20px !important;
+}
+.mr20{
+    margin-right: 20px !important;
+}
+.mr8{
+    margin-right: 8px !important;
+}
+.mr10{
+    margin-right: 10px !important;
+}
+.pt20{
+    padding-top: 20px !important;
+}
+.pt5{
+    padding-top: 5px !important;
+}
+.pb20{
+    padding-bottom: 20px !important;
+}
+.pb-zero{
+    padding-bottom: 0 !important;
+}
+.pr10{
+    padding-right: 10px !important;
+}
+.pl10{
+    padding-left: 10px !important;
+}
+.pr20{
+    padding-right: 20px !important;
+}
+.pad-rlt{
+    padding: 20px 20px 0 !important;
+}
+.mr2em{
+    margin-right: 2em !important;
+}
+.br{
+    bottom: 0 !important;
+    right: 0 !important;
+}
+.margin-auto{
+    margin: 0 auto !important;
+}
+.cursor-pointer{
+    cursor: pointer !important;
+}
+.fleft{
+    float: left !important;
+}
+.fright{
+    float: right !important;
+}
+.top61{
+    top:61px !important;
+}
+.flex-row{
+    width: 100%;
+    clear: both;
+}
+
+.flex-row.button-style{
+    border: none;
+    background: transparent;
+}
+.flex-container{
+   color: #666666;
+   font-family: "PT Sans";
+   font-size: 15px;
+   font-weight: 400;
+}
+
+.flex-container.calc-width.vm-menu{
+    margin-top: -35px;
+}
+.full-width{
+    width: 100% !important;
+}
+.width-93{
+    width:93% !important;
+}
+.none{
+    display: none !important;
+}
+.block{
+    display: block !important;
+}
+.display-flex{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+.width-auto{
+    width: auto !important;
+}
+.lh-zero{
+    line-height: 0 !important;
+}
+.notEvent{
+    pointer-events: none;
+    cursor: not-allowed;
+    color: grey !important;
+}
+.notEventBg{
+    pointer-events: none;
+    cursor: not-allowed;
+    color: rgba(0, 0, 0, 0.38) !important;
+    background: rgba(0, 0, 0, 0.12) !important;
+}
+.height-inherit{
+    height: inherit !important;
+}
+.ftlb{
+    left: 17px !important;
+    bottom: 25px !important;
+}
+.ftalg{
+    left: 17px !important;
+    bottom: 5px !important;
+    padding-bottom: 20px;
+    height: inherit !important;
+}
+.top0{
+    top: 0 !important;
+}
+.md-textarea{
+    font-size:15px !important;
+}
+/*input override*/
+.md-input-underline .md-input-ripple{
+    background-color: $primary-color !important;
+}
+.padding10{
+    padding: 10px !important;
+}
+.pr0{
+    padding-right: 0 !important;
+}
+/*Authendication layout*/
+.auth-bg {
+    background: $bg-img;
+    width: 100%;
+    height: 100vh;
+    /*@include flex;*/
+    background-size: cover;
+}
+.setup-bg{
+     background: $bg-img;
+    width: 100%;
+    height: 100vh;
+    /*@include flex;*/
+    background-size: cover;
+    margin-top:-20px;
+}
+.auth-wrap{
+    width: 370px;
+    position: relative;
+    margin:0 auto;
+    top:150px;
+}
+.input-wrap{
+    width: 300px;
+    margin: 0 auto;
+    position: relative;
+}
+.info-txt {
+    color: $font-primary-color;
+    font-size: $medium-font-size;
+    font-weight: 400;
+    font-family: $primary-font;
+    margin-bottom: 20;
+    text-align: center;
+}
+.resend-txt{
+    color: $primary-color;
+    font-family: $primary-font;
+    font-size: $small-font-size;
+    font-weight: 400;
+    margin: 0;
+    text-align: right;
+    cursor: pointer;
+}
+
+.resend-txt.mb20 .text-left .azureIdColor{
+width: 130px;
+height: 12px;
+color: #0099cc;
+font-family: "PT Sans";
+font-size: 13px;
+font-weight: 400;
+}
+
+.resend-txt.text-left.onBoardLink{
+color: #0099cc;
+}
+.info-msg{
+    color: $primary-color;
+    font-family: $primary-font;
+    font-size: $small-font-size;
+    font-weight: 400;
+    margin: 0;
+    text-align: center;
+}
+.error-txt, .success-txt{
+    font-size: $small-font-size;
+    color: $error-color;
+}
+.success-txt{
+    color: $success-color;
+}
+.text-center{
+    text-align: center !important;
+}
+.text-right{
+    text-align: right !important;
+}
+.text-left{
+    text-align: left !important;
+}
+.word-break{
+    word-wrap: break-word;
+}
+//button
+.btn{
+    width: 100%;
+    height: 50px;
+    text-transform: uppercase !important;
+    font-weight:400 !important;
+    font-family:$primary-font !important;
+    margin: 10px 0 0;
+}
+.primary-btn{
+    background: $primary-color;
+    color: $primary-btn-color;
+}
+
+
+.secondary-btn{
+    background: $secondary-color;
+    color: $secondary-btn-color;
+    box-shadow: 0 2px 5px rgba(51, 51, 51, 0.23);
+}
+.tertiary-btn{
+    background: $tertiary-color;
+    color:$primary-btn-color
+}
+.auto-btn{
+    text-transform: uppercase;
+    width: initial;
+    padding: 15px;
+    min-width: 0;
+    line-height: 0;
+    border-radius: 2px;
+    height: 36px;
+}
+.auto-btn-prime {
+    @extend .auto-btn;
+    background-color: $primary-color;
+    color: $primary-btn-color;
+}
+
+.auto-btn-gray {
+    background-color: $font-primary-color;
+    color: $primary-btn-color;
+    margin-left: 10px;
+    @extend .auto-btn;
+}
+.orange-btn{
+    background-color: $orange-color;
+    color: $primary-btn-color;
+    font-family: $primary-font;
+    @extend .auto-btn;
+}
+
+// .orange-btn.cloudOnboard{
+//     margin-top: -100px
+// }
+.grey-btn{
+    background-color: $manage-repo-btn;
+    @extend .auto-btn;
+}
+
+
+.btn.repo-btn.martop6.microSelect{
+    text-transform: none!important;
+height: 72px !important;
+border-radius: 2px !important;
+border: 1px solid rgba(204, 204, 204, 0.5)!important;
+background-color: #ffffff !important;
+box-shadow: none!important;
+}
+.out-email{
+    position: absolute;
+    top: 134px;
+    right: -30px;
+    color: #396;
+}
+.out-pwd{
+    position: absolute;
+    top: 182px;
+    right: -30px;
+    color: #396;
+}
+.secondary-txt{
+    color: $secondary-txt-color;
+    font-size: $medium-font-size;
+    font-family: $primary-font;
+    font-weight: 700;
+    margin: 0;
+}
+.small-txt{
+    color: $small-font-txt;
+    font-size: $small-font-size;
+    font-family: $primary-font;
+    font-weight: 700;
+    margin: 0;
+}
+.bold-gray-txt, .normal-gray-txt{
+    color: $font-primary-color;
+    font-size: $small-font-size;
+    font-family: $primary-font;
+    font-weight: 700;
+    margin: 0;
+}
+.normal-gray-txt .material-icons{
+    line-height: inherit !important;
+}
+ .normal-ccc-txt{
+    color: $font-pharah-color;
+    font-size: $small-font-size;
+    font-family: $primary-font;
+    font-weight: 400;
+    margin: 0;
+ }
+.xsmall-txt{
+    font-size: $xsmall-font-size;
+    font-family: $primary-font;
+    font-weight: 400;
+    margin: 0;
+}
+.xsmall-gray-txt{
+    color: $font-secodary-color;
+    @extend .xsmall-txt;
+}
+
+.xsmall-gray-txt.warn-text{
+    color: $primary-color;
+    @extend .xsmall-txt;
+}
+p.xsmall-gray-txt.secondary-btn{
+    color:$warn-color;
+}
+.xsmall-passed-txt{
+    @extend .xsmall-txt;
+    color: $success-color;
+}
+.xsmall-failed-txt{
+    @extend .xsmall-txt;
+    color: $error-color;
+}
+.xsmall-stopped-txt{
+    @extend .xsmall-txt;
+    color: $success-color;
+}
+.normal-gray-txt{
+    font-weight: 400;
+}
+.width-90{
+    width:90%;
+}
+.margint-10{
+    margin-top:10px !important;
+}
+.marginr-10{
+    margin-right:10px !important;
+}
+
+.btn-ac-icon{
+    float: left;
+    margin: -6px 0 0;
+}
+.primary-bgcolor{
+    background-color: $primary-color !important;
+}
+.lh22, .manage-repo-name.lh22{
+    line-height: 22px !important;
+}
+.input_visibility {
+    position: absolute;
+    top: 17px;
+    color: $font-primary-color;
+    right: 0;
+    cursor: pointer;
+    font-size: $small-font-size;
+}
+.box-btn{
+   position: absolute;
+    bottom: 20px;
+    right: 20px;
+
+}
+
+.toolkit-launch-button
+{
+   bottom: -160px !important;
+   right: -40px;
+
+}
+
+.box-btn-dialog{
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    text-align: center;
+}
+
+
+.cloudBtn{
+  position: absolute;
+  right: 20px;
+}
+
+.nameAlign{
+    margin-top: 12px;
+    display: inline-block;
+}
+
+.box-btn.envUnlink{
+    bottom:310px;
+}
+
+.enviroment{
+// width: 89px;
+height: 11px;
+color: #666666;
+// font: PT-sans;
+font-size: 15px;
+font-weight: 700;
+}
+
+.infoBox{
+
+    border-radius: 2px;
+    position: relative;
+     border: 1px solid $ac-create-bg;
+    margin:3px;
+    padding: 8px;
+
+min-height: 30px;
+    height: auto;
+    width: auto;
+    min-width: 13pc
+}
+
+#unlinkPos{
+    float: right;
+    bottom: 310px;
+    right: 20px;
+}
+.form-input-wrap{
+    width: 300px;
+}
+.link-txt-common{
+  color: $primary-color;
+  float: left;
+  font-weight: 400;
+  cursor: pointer;
+}
+.xsmall-link-txt{
+    @extend .link-txt-common;
+    font-size: $xsmall-font-size;
+}
+.normal-link-txt{
+    @extend .link-txt-common;
+    font-size: $small-font-size;
+}
+.flex-box{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+/*badge*/
+.badge{
+    min-width: 3rem;
+    padding: 0 6px;
+    color:$badge-color;
+    font-size: $xsmall-font-size;
+    text-align: center;
+    line-height: 21px;
+    box-sizing: border-box;
+    border-radius: 2px;
+    font-weight: 400;
+    text-transform: capitalize;
+}
+.badge-passed{
+     @extend .badge;
+    background: $success-color;
+}
+.badge-stopped{
+    @extend .badge;
+    background: $stop-color;
+}
+.badge-Queued{
+    @extend .badge;
+    background: $success-color;
+}
+.badge-in-progress{
+    @extend .badge;
+    background: $success-color;
+}
+.badge-success{
+    @extend .badge;
+    background: $success-color;
+}
+.badge-fatal{
+    @extend .badge;
+    background: $stop-color;
+}
+.badge-failure{
+    @extend .badge;
+    background: $error-color;
+}
+.detail-spinner-wrap{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height:100%;
+    background: rgba(33, 33, 33, 0.5);
+}
+.detail-spinner{
+    width: 50px;
+    height: 50px;
+}
+
+/*icon style here*/
+
+.icon-wrap{
+    width: 30px;
+    height: 30px;
+    border-radius: 2px;
+    float: left;
+    margin-right: 10px;
+    background-color: #ccc;
+    @extend .display-flex;
+}
+.icon-txt{
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-transform: uppercase;
+    color: $font-secodary-color;
+    float: left;
+    font-size: $small-font-size;
+    margin:0 !important;
+}
+.aws-icon{
+    width: 20px;
+    height: 20px;
+}
+.azure-icon{
+    width: 18px;
+    height: 18px;
+}
+.gcp-icon{
+    width: 20px;
+    height: 18px;
+}
+.github-icon{
+    width: 16px;
+    height: 14px;
+}
+.gitlab-icon{
+    width: 16px;
+    height: 19px;
+}
+.bitbucket-icon{
+    width: 16px;
+    height: 19px;
+}
+.link-icon{
+    width: 20px;
+    height: 15px;
+}
+/*collapse Input*/
+.collapse-cont {
+    position: relative;
+    float: left;
+    width: 100%;
+    height: 52px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.collapse-img-wrap {
+    width: 50%;
+    float: left;
+}
+
+.version-txt {
+    width: 40%;
+    float: left;
+    text-align: right;
+    margin: 0 !important;
+    color: $font-primary-color;
+    padding-right: 5px;
+    font-size: $small-font-size;
+    font-weight: 400;
+}
+
+.collapse-icon {
+    float: left;
+    cursor: pointer;
+}
+
+.collapse-img {
+    float: left;
+    padding: 0 10px 0 20px;
+}
+
+.collapse-img-txt {
+    float: left;
+    margin: 0 !important;
+    line-height: 32px;
+    color: $font-primary-color;
+    font-size: $small-font-size;
+    font-weight: 400;
+}
+.expand-icon{
+    // line-height: 32px;
+    color: $font-primary-color;
+}
+.border-none{
+    border:none !important;
+}
+.collapse-wrap {
+    position: relative;
+    float: left;
+    width: 100%;
+    margin: 10px 0 20px;
+    border: 1px solid rgba(204, 204, 204, 0.5);
+    border-radius: 2px;
+    box-shadow: 0 2px 0 rgba(51, 51, 51, 0.17);
+}
+.expand-wrap{
+    float: left;
+    height: 0px;
+    overflow: hidden;
+    transition: height 0.5s;
+    position: relative;
+    clear: both;
+    width: 100%;
+}
+
+.choose-wrap {
+    width: 90%;
+    float: right;
+    padding: 0 20px;
+    position: relative;
+}
+
+.choose-txt {
+    float: right;
+    color: $primary-color;
+    font-size: $small-font-size;
+    font-weight: 400;
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-right: 20px;
+    cursor:pointer;
+}
+
+.cancel-txt {
+    color: $font-primary-color;
+    font-size: $small-font-size;
+    font-weight: 400;
+    text-transform: uppercase;
+    margin-top: 0;
+    float: right;
+    cursor:pointer;
+}
+.cont-app-icon{
+    color: $font-primary-color;
+    position: absolute;
+    top: -5px;
+    right: 30px;
+    font-size: 25px;
+    cursor: pointer
+}
+.table-progress{
+    position: absolute;
+left: 0;
+bottom: -3px;
+}
+.white-bg{
+    background: #fff !important;
+}
+
+.graph-padding{
+    margin-top: 20px;
+}
+
+.graph-header-area {
+    width: 627px;
+    height: 50px;
+    background-color: #697884;
+    // background-image: linear-gradient(to top, #767271 0%, #667988 100%);
+}
+
+.graph-header-border {
+    width: 627px;
+    height: 1px;
+    background-image: linear-gradient(to top, #475247 0%, #655b3f 100%);
+}
+
+.graph-header-text {
+  color: #ffffff;
+  font-family: "PT Sans";
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 29px;
+  padding-left:42px;
+  padding-top:10px;
+}
+
+.graph-header-toggle{
+    width: 30px;
+    height: 12px;
+}
+
+.overview-item {
+    width: 627px;
+    height: 245px;
+    background-color: #999999;
+    background-image: linear-gradient(to top, #767271 0%, #667988 100%);
+}
+
+.gradient-color{
+    width: 627px;
+    background-image: linear-gradient(to top, #767271 0%, #667988 100%);
+}
+.exp-img{
+   width: 19%;
+   margin: 0 auto;
+   margin-top: 171px;
+}
+.exp-foot{
+    margin: 0 auto;
+    margin-top: 40px;
+    text-align: center;
+    color: #999999;
+    font-size: 15px;
+    font-weight: 400;
+}
+.exp-msg{
+    // font-family: "PT Sans";
+    margin: 0 auto;
+    margin-top: 40px;
+    text-align: center;
+    color: #999999;
+    font-size: 20px;
+    font-weight: 400;
+}
+.exp-links{
+    margin: 0 auto;
+    margin-top: 14px;
+    color: #0099cc;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 24px;
+    cursor: pointer;
+}
+.exp-bottom-txt{
+    margin: 0 auto;
+    margin-top: 170px;
+    text-align: center;
+    color: #cccccc;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 24px;
+}
+.exp-app-logo{
+    margin: 0 auto;
+    margin-top: 20px;
+    text-align: center;
+}
+
+
+.resend-txt.mb20.text-left.azureLink{
+width: 176px;
+height: 14px;
+color:$link-color;
+font-family: "PT Sans";
+font-size: 15px;
+font-weight: 400;
+}
+.md-radio-container{
+width: 15px;
+height: 15px;
+}
+.md-radio-outer-circle {
+width: 15px;
+height: 15px;
+}
+
+.md-radio-inner-circle{
+    width: 15px;
+height: 15px;
+}
+// .diskCountButton{
+//     border: none;
+//     background: transparent;
+//     color: gray;
+// }
+
+
+.buttonEnv{
+color: $primary-color;
+border: none;
+background: transparent;
+}
+
+.flex-item.mt20.microTab
+{
+    border: 1px solid rgba(204, 204, 204, 0.5);
+    background-color: rgba(248, 247, 247, 0.9);
+    margin-left: 20px;
+    padding-top: 2px;
+    height:100%;
+
+}
+
+.flex-item.microFlex{
+
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+}
+
+
+.detailTable{
+    position: absolute !important;
+    left: 10px !important;
+
+}
+
+.table-data{
+   margin-top: 20px;
+}
+.secondary-txt.lisTitle{
+
+    color: $font-primary-color;
+    font-family: "PT Sans";
+    font-size: 15px;
+    font-weight: 700;
+    margin-top: 15px;
+    margin-left: 20px;
+
+}
+.envIcon{
+    position: absolute;
+    float : left ;
+    width: 50px
+}
+
+.envButton{
+    color: $remove-env;
+     border :none ;
+    background: transparent;
+    position: absolute;
+    right: 12px;
+    top: 18px
+}
+.envButton:hover{
+    cursor: pointer;
+}
+     .enviromentType{
+    position: absolute;
+    left: 55px;
+    top:20px;
+    }
+.btn.repo-btn.martop6.microSelect.button-clicked{
+
+// width: 129px;
+// height: 32px;
+border-radius: 2px !important;
+border: 1px solid rgba(218, 62, 2, 0.5) !important;
+background-color: #ffffff !important;
+}
+
+// .hideplaceholder.md-select-placeholder.md-floating-placeholder{
+//         transform: scale(0) !important;
+
+// }
+
+.ht45{
+        height: 50px;
+}
+
+.change-name-color{
+    color:lightgrey ;
+}
+
+.header{
+        margin-top: 10px;
+}
+
+.env-inactive{
+ height: 75px;
+color :$ac-create-bg;
+}
+.DisabledEnv{
+    color :$ac-create-bg;
+
+}
+
+.active-Env{
+    color: $secondary-btn-color;
+}
+
+.checked-Env{
+ color: $secondary-btn-color;
+}
+
+.iconToggle{
+position: absolute;
+top : 4px ;
+ font-size: 20px;
+}
+
+// .scrollType.md-tab-body#md-tab-content-0-0{
+//     overflow-y: hidden !important;
+// }
+#manageAccount{
+    width: 120px;
+}
+.radioEnv{
+    width: 15px;
+    height: 15px;
+}
+.env-info
+{
+    display: block;
+    float: right;
+    margin-right: 12px;
+    position: relative;
+}
+.arrow-info {
+    position: absolute;
+    right: 3px;
+    width: 10px;
+    height: 20px;
+
+}
+.example-card{
+    // display: none;
+    position: absolute;
+    bottom: -25px;
+    right: -237px;
+    z-index: 1;
+    width: 200px;
+    height: 128px;
+    border-radius: 2px;
+    border: 1px solid rgba(204, 204, 204, 0.5);
+    background-color: #ffffff;
+}
+.subtitle-card{
+
+width: 40px;
+height: 12px;
+color: #666666;
+font-family: "PT Sans";
+font-size: 13px;
+font-weight: 400;
+line-height: 22px;
+}
+
+.content-card
+{
+    padding-left: 20px;
+}
+
+
+#details{
+
+    padding:0;
+    margin:0;
+    position:absolute;
+}
+#hoverdetails{
+    height:10%;
+    width:100%;
+
+    position:absolute;
+    bottom:0;
+    margin:0;
+    padding:0;
+    // visibility:hidden;
+}
+// #details:hover > #hoverdetails{
+//     visibility:visible;
+// }
+
+
+
+#infoDetails{
+
+    padding:0;
+    margin:0;
+    position:absolute;
+    top: 85px;
+    right: 10px;
+}
+#infoDetailsTable{
+    height:10%;
+    width:100%;
+
+    position:absolute;
+    bottom:0;
+    margin:0;
+    padding:0;
+    visibility:hidden;
+}
+#infoDetails:hover > #infoDetailsTable{
+    visibility:visible;
+}
+
+
+
+#infoDetails1{
+
+    padding:0;
+    margin:0;
+    position:absolute;
+    top: 110px;
+    right: 10px;
+}
+#infoDetailsTable1{
+    height:10%;
+    width:100%;
+
+    position:absolute;
+    bottom:0;
+    margin:0;
+    padding:0;
+    visibility:hidden;
+}
+#infoDetails1:hover > #infoDetailsTable1{
+    visibility:visible;
+}
+
+#infoDetails2{
+
+    padding:0;
+    margin:0;
+    position:absolute;
+    top: 135px;
+    right: 10px;
+}
+#infoDetailsTable2{
+    height:10%;
+    width:100%;
+
+    position:absolute;
+    bottom:0;
+    margin:0;
+    padding:0;
+    visibility:hidden;
+}
+#infoDetails2:hover > #infoDetailsTable2{
+    visibility:visible;
+}
+
+.cloud-list
+{
+    width: 36%;
+    margin-top:10px;
+    margin-left:-10px;
+}
+
+#tool-chain-height{
+position: relative;
+}
+
+#toolkit-launch-style
+{
+    height: 400px;
+}
+
+.label-grey-color
+{
+    color: $grey-color;
+}
+
+.label-tertiary-color
+{
+    color : $tertiary-color;
+}
+/*Start Harsh's style Please do suggest if the styles needs to be moved to some other file*/
+.reqAccess{
+  color: #e0301e;
+  font-family: PT Sans, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  margin: 0;
+  cursor: pointer;
+  width: 38%;
+  float: left;
+}
+
+.loginAccess{
+  width: 100%;
+  text-align: center;
+}
+
+.userAssist1{
+  margin-top: 30px;
+}
+
+
+.toolkitDetail{
+    overflow: hidden;
+    margin: 14px 0 0 0;
+}
+.hideShowContainer{
+    border-top: 2px solid rgba(204, 204, 204, 0.5);
+    border-bottom: 2px solid rgba(204, 204, 204, 0.5);
+    padding: 20px 0px 5px 20px;
+    background-color: rgba(248, 247, 247, 0.9)
+}
+.row-height{
+    height: 55px;
+}
+
+.removeborder{
+    border-bottom: none !important;
+}
+
+.row-heightLess{
+    height: 10px;
+}
+
+.detailData{
+    color: rgba(0, 0, 0, 0.38);
+}
+
+.wid > .build-tab.md-tab-header {
+    width: 320px !important;
+}
+
+.stcolor{
+    color:orange !important;
+}
+
+.ipcolor{
+    color:red !important;
+}
+
+.jenkinsimage{
+    height: 34px !important;
+    width: 32px !important;
+}
+
+.cust-link{
+ color: #e0301e ;
+ cursor: pointer;
+ position: fixed;
+ font-size: 15px;
+ font-weight: 600;
+ top: 89px !important;
+ right: 18px !important;
+ z-index: 11;
+}
+
+
+/*End Harsh's style*/
+.build-tab .two-tab .md-tab-header {
+    background: red;
+}
+
+
+#unlink-btn
+{
+    bottom: -32px;
+    right: -12px;
+}
+
+
+.micro-icon
+{
+    position: absolute;
+    float: left;
+    left: 10px;
+    top: 6px;
+    right: 6px;
+}
+
+.micro-text
+{
+    position: absolute;
+    top: 6px;
+    left: 50px;
+}
+
+#microUnSelect
+{
+    position: absolute;
+    left: 120px;
+    top: 12px;
+    width: 8px;
+    height: 8px;
+}
+
+.app-launch-info{
+  float: right;
+  color: $notif-color;
+  margin-top: -40px;
+  width: 400px;
+  height: 13px;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: "PT Sans";
+  position: relative;
+}
+
+#app-launch-info-icon
+{
+  position: absolute;
+  bottom: -12px;
+  left: 35px;
+}
+
+#app-launch-info-text
+{
+    position: absolute;
+    left: 65px;
+    bottom: -10px;
+}
+
+#app-launch-info-env
+{
+    position: absolute;
+    left: 290px;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    width: 111px;
+    height: 766px;
+}
+
+// style="width: 54px;
+//     font-family: 'PT Sans', sans-serif !important;height: 11px;color: #666666;font-size: 15px;font-weight: 400;"
+.microForm-details
+{
+width: 300px;
+height: 161px;
+border-radius: 2px;
+border: 1px solid rgba(204, 204, 204, 0.5);
+background-color: #ffffff;
+}
+
+.micro-back-btn
+{
+width: 77px;
+height: 36px;
+margin-right: 10px;
+}
+.microservice-scrollbar{
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+    height: 400px !important;
+    align-items: end !important;
+}
+.table-microservice{
+    margin-bottom: 0px !important;
+}
+// .microser-container{
+//     height: 388px;
+//     overflow-y: auto;
+//     overflow: auto;
+// }
+
+.formDesign
+{
+    width: 54px;
+    font-family: 'PT Sans', sans-serif !important;
+    height: 11px;color: #666666;font-size: 15px;
+    font-weight: 400;
+}
+
+.formDisplay
+{
+    display: inline-flex ;
+    flex-flow: row wrap;
+     position: absolute;
+
+}
+
+.formDataDisplay{
+    padding: 10px;
+    margin-left:15px;
+    position: relative;
+    width: 280px;
+    border-radius: 2px;
+    border: 1px solid rgba(51, 153, 102, 0.5);
+    background-color: #ffffff;
+    height: 110px;
+
+}
+
+.table-data-wrap
+{
+    word-wrap : break-word ;
+    line-height: 1.5;
+}
+
+.bundle-data-container
+{
+  height: 395px;
+  overflow-y: scroll;
+}
+
+#scroll-style
+{
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+#scroll-style::-webkit-scrollbar-thumb
+{
+background:$bg-img1;
+background-color: transparent !important;
+background-repeat: no-repeat;
+}
+
+

@@ -1,0 +1,29 @@
+
+
+.last-code-input{
+    margin-right: 0 !important;
+}
+.ok-icon{
+    position: absolute;
+    top: 15px;
+    right: -40px;
+    color: #396;
+}
+.clear-icon{
+    position: absolute;
+    top: 15px;
+    right: -40px;
+    color: #c33;
+}
+.success-msg{
+    color: #396;
+    font-family: $primary-font;
+font-size: 15px;
+font-weight: 400;
+}
+.msg-container{
+    padding:20px 0;
+}
+.flex-horizontal{
+    @include flex-horizontal;
+}

@@ -1,0 +1,554 @@
+<div class="flex-container calc-width vm-menu" fxLayout="row" fxLayoutAlign="center center" style="position: relative ;top:10px ">
+
+  <md-tab-group class="cloud-main-tab tab-min mt3 subheadTab" [selectedIndex]="serviceIndex" #tabGroup (selectChange)="onSelectChange($event)">
+    <md-tab (click)="launchViewToggle()">
+      <div class="flex-item" fxFlex="25%">
+        <template md-tab-label>
+          <div class="build-tab-label virtual-machine">
+            <div class="build-label-cont">
+
+              <div class="build-label-content">
+                <p class="normal-gray-txt">Launch</p>
+                <!--<p class="xsmall-gray-txt">Compute IaaS</p>-->
+              </div>
+            </div>
+          </div>
+        </template>
+      </div>
+    </md-tab>
+
+    <!--<md-tab id="tabValue" [disabled]="ftUser">-->
+    <md-tab >
+
+      <div class="flex-item" fxFlex="30%">
+        <template md-tab-label>
+          <div class="build-tab-label virtual-machine">
+            <div class="build-label-cont">
+              <div class="build-label-content" >
+                <p class="normal-gray-txt">Manage</p>
+
+              </div>
+            </div>
+          </div>
+        </template>
+      </div>
+      <!--<div class="flex-item" fxFlex="35%" [disabled]="ftUser">
+            <md-icon [ngClass]="rotateRefresh == false?'refresh-icon':'refresh-icon rotating'" (click)="onRefreshClick()" title="Click to Refresh">refresh</md-icon>
+            <div class="search-deploy margin-zero">
+              <md-icon class="search-icon" (click)="onSearchExp()" title="Click to Search">search</md-icon>
+              <div class="search-input-wrap" [class.search-exp]="searchExp">
+                <md-input id="tableSearch" type="text" [(ngModel)]="tableSearch" class="search-input" placeholder="Search"></md-input>
+                <md-icon class="cancel-icon" (click)="onSearchExp()">clear</md-icon>
+              </div>
+            </div>
+          </div>
+
+
+             <div class="flex-item" fxFlex="15%">
+            <div class="droplist-label-hide">
+              <md-select placeholder="Repository" class="repo-select-wrap fright" [(ngModel)]="selectedItem" (ngModelChange)="selectMng()">
+                <md-option value="1">AWS</md-option>
+                <md-option value="2">Azure</md-option>
+
+              </md-select>
+            </div>
+          </div>-->
+      <div class="bundle-tab-container">
+        <div class="flex-container" fxLayout="row" fxLayoutAlign="center center" id="repo-head">
+
+          <!--<div [hidden]="detailLoader">
+                  <div class="detail-loader">
+                    <md-spinner class="loader-size"></md-spinner>
+                  </div>
+                </div>-->
+        </div>
+
+        <div [hidden]="selectRepository">
+          <div class="flex-container" fxLayout="row" fxLayoutAlign="center center" id="repo-table">
+            <table cellspacing="0"> 
+              <thead class="table-head virtualManage">
+                <tr>
+                  <th class="repo-table vm-manage"> Name
+                  </th>
+                  <th class="repo-table vm-manage">Region
+
+
+                  </th>
+                  <th class="repo-table vm-manage">Public IP</th>
+                  <th class="repo-table vm-manage">Created On
+                    <!--<span class="filter-arrow" [class.show-filter]="showArrowThree">
+                                             <span [hidden]="!stackFlag">
+                                            <md-icon class="sort-icon">arrow_upward</md-icon>
+                                                 </span>
+                    <span [hidden]="stackFlag">
+                                            <md-icon class="sort-icon">arrow_downward</md-icon>
+                                        </span>
+                    </span>-->
+
+                  </th>
+                  <th class="repo-table vm-manage">Instance Type
+                    <span class="filter-arrow" [class.show-filter]="showArrowThree">
+                                             <span >
+                                            <md-icon class="sort-icon">arrow_upward</md-icon>
+                                                 </span>
+                    <span [hidden]="stackFlag">
+                                            <md-icon class="sort-icon">arrow_downward</md-icon>
+                                        </span>
+                    </span>
+
+                  </th>
+
+
+                  <!--<th class="repo-table vm-manage"><md-icon class="sort-icon">arrow_upward</md-icon>
+                    <span class="filter-arrow" [class.show-filter]="showArrowThree">
+                                             <span >
+                                            <md-icon class="sort-icon">arrow_upward</md-icon>
+                                                 </span>
+                    <span [hidden]="stackFlag">
+                                            <md-icon class="sort-icon">arrow_downward</md-icon>
+                                        </span>
+                    </span>
+
+                  </th>-->
+
+                </tr>
+              </thead>
+              <tbody class="table-body" [class.table-body-scroll]="tbody" >
+                <tr class="repo-data flex-container" fxLayout="row" fxLayoutAlign="center center" *ngFor="let Tag of instanceFiltered">
+                  <td fxFlex="20%" style="word-wrap : break-word ; line-height: 1.5;">{{Tag.Value}}</td>
+                  <td class="repo-table flex-item" fxFlex="20%">{{Tag.AvailabilityZone}}</td>
+                  <td class="repo-table flex-item" fxFlex="20%"> <span>{{Tag.PublicIpAddress}}
+                    </span></td>
+                  <td class="repo-table flex-item word-break" fxFlex="20%">{{Tag.LaunchTime | date: 'dd-MMM-yyyy'}}</td>
+                  <td class="repo-table flex-item" fxFlex="20%">{{Tag.InstanceType}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+          <div *ngIf='(repository | search:tableSearch).length ==0' class="no-data" [class.display-flex]="true" [style.height.px]="nodataTop">
+            <div class="text-center">
+              <img src="images/search.png" />
+              <p class="xsmall-gray-txt">Unfortunately, no result were found matching: <span class="normal-gray-txt">{{tableSearch}}</span></p>
+              <p class="xsmall-gray-txt">Try modifying your search terms</p>
+            </div>
+          </div>
+          <div class="flex-container" fxLayout="row" fxLayoutAlign="center center">
+            <div class="flex-row">
+              <div class="repo-proj-detail" id="repo-detail" [style.height.px]="detailHeight" *ngIf="currentDetail">
+                <!--<div [hidden]="detailLoader">
+                  <div class="detail-loader">
+                    <md-spinner class="loader-size"></md-spinner>
+                  </div>
+                </div>-->
+                <p class="normal-gray-txt mb20 pb20"><b>Details</b></p>
+                <div class="flex-container" fxLayout="row" fxLayoutAlign="center center">
+
+                  <div class="flex-item" fxFlex="75%">
+                    <div class="flex-container mb20" fxLayout="row" fxLayoutAlign="start center">
+                      <div fxFlex="33%">
+                        <p class="normal-gray-txt">Project Name</p>
+                        <p class="xsmall-gray-txt">{{repoDetail?.name}}</p>
+                      </div>
+                      <div fxFlex="33%">
+                        <p class="normal-gray-txt">Pull Requests</p>
+                        <p class="xsmall-gray-txt">-</p>
+                      </div>
+                      <div fxFlex="33%">
+                        <p class="normal-gray-txt">Build Status</p>
+                        <p class="xsmall-gray-txt">-</p>
+                        <!--<p class="xsmall-gray-txt">-</p>-->
+                      </div>
+                    </div>
+                    <div class="flex-container mb20" fxLayout="row" fxLayoutAlign="start center">
+                      <div fxFlex="33%">
+                        <p class="normal-gray-txt">Access</p>
+                        <p class="xsmall-gray-txt word-break"> {{repoDetail?.clone_url}}</p>
+                      </div>
+                      <div fxFlex="33%">
+                        <p class="normal-gray-txt">Issues</p>
+                        <p class="xsmall-gray-txt">{{repoDetail?.open_issues}} </p>
+                      </div>
+                      <div fxFlex="33%">
+                        <p class="normal-gray-txt">&nbsp;</p>
+                      </div>
+                    </div>
+                    <div class="flex-container mb20" fxLayout="row" fxLayoutAlign="start center">
+                      <div fxFlex="33%">
+                        <p class="normal-gray-txt">Branches</p>
+                        <p class="xsmall-gray-txt">-</p>
+                      </div>
+                      <div fxFlex="33%">
+                        <p class="normal-gray-txt">Contributors</p>
+                        <p class="xsmall-gray-txt">-</p>
+                      </div>
+                      <div fxFlex="33%">
+                        <p class="normal-gray-txt">Cloud/Tool</p>
+                        <p class="xsmall-gray-txt">-</p>
+                      </div>
+                    </div>
+                    <div class="flex-container mb20" fxLayout="row" fxLayoutAlign="start center">
+                      <div fxFlex="33%">
+                        <p class="normal-gray-txt">Releases</p>
+                        <p class="xsmall-gray-txt">-</p>
+                      </div>
+                      <div fxFlex="33%">
+                        <p class="normal-gray-txt">Last Commit Date</p>
+                        <p class="xsmall-gray-txt">-</p>
+                      </div>
+                      <div fxFlex="33%">
+                        <p class="normal-gray-txt">Last Build Status</p>
+                        <p class="xsmall-gray-txt">-</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex-item" fxFlex="25%">
+                    <div class="flex-row relative">
+                      <div class="manage-repo-footer" [style.width.px]="contWidth">
+                        <div class="full-height" class="flex-container" fxLayout="row" fxLayoutAlign="center center">
+                          <div class="flex-item" fxFlex="50%" class="padding-10" fxLayoutAlign="start center" layout-align="start center">
+                            &nbsp;
+                          </div>
+                          <div class="flex-item" fxFlex="50%" class="padding-10" fxLayoutAlign="end center" layout-align="end center">
+                            <button md-raised-button class="orange-btn" (click)="onRepoLinkClick()">unlink</button>
+                            <!--<button md-raised-button class="orange-btn none mr10" [class.block]="compData" (click)="onRepoLinkClick()">unlink</button>
+                            <button md-raised-button class="orange-btn none mr10" [class.block]="uncompData">retry</button>
+                            <button md-raised-button class="auto-btn-gray none" [class.block]="uncompData">remove</button>-->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="no-data" [class.display-flex]="noData" [style.height.px]="nodataTop">
+                <div class="text-center">
+                  <img src="images/search.png" />
+                  <p class="xsmall-gray-txt">Unfortunately, no result were found matching: <span class="normal-gray-txt">Project</span></p>
+                  <p class="xsmall-gray-txt">Try modifying your search terms</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div [hidden]="selectBuild">
+          <div class="flex-container" fxLayout="row" fxLayoutAlign="center center">
+            <div class="flex-item" fxFlex="100%">
+              <!--<md-list class="bt-list-wrap">
+                <md-list-item *ngFor="let item of buildItem" class="bt-list">
+                  <p class="normal-gray-txt" md-line>Build on {{item.timestamp}} </p>
+                  <p class="normal-gray-txt" md-line>Executed in AWS with Job Id #{{item.job_id}} {{item.instanceIp}}</p>
+                  <div class="mr8">
+                    <p class="badge-{{item.status}} fleft">{{item.status}}</p>
+                  </div>
+                </md-list-item>
+              </md-list>-->
+            </div>
+          </div>
+        </div>
+        <div *ngIf="manageLoader" [style.height.px]="resHeight" [style.width.px]="resWidth">
+          <div class="detail-spinner-wrap" [style.width.px]="resWidth" [style.height.px]="resHeight">
+            <md-progress-spinner mode="indeterminate" color="primary" class="detail-spinner"></md-progress-spinner>
+          </div>
+        </div>
+      </div>
+
+    </md-tab>
+  </md-tab-group>
+
+</div>
+
+<div class="flex-item mt20" fxFlex="15%" [hidden]="ftUser" style="position: absolute ; top:-5px; right: 325px">
+  <div>
+    <md-select  class="flex-row vm-select-wrap hideplaceholder" (ngModelChange)="cloudEnvUpdate($event)"
+     [(ngModel)]="selectedAzureVendor" placeholder="Azure" name="vendorVariable" floatingPlaceholder="never">
+       <md-option  *ngFor="let vendors of cloudvendors" [value]="vendors.small">
+          {{vendors.caps}}
+        </md-option>
+    </md-select>
+</div>
+  <div>
+  </div>
+</div>
+
+<div class="flex-item mt20" fxFlex="15%" [hidden]="ftUser" style="position: absolute ; top:-15px; right: 165px">
+  <div>
+    <md-select placeholder="America" class="flex-row margint-10  mb20 vm-select-wrap" [(ngModel)]="cloudDetailRegion">
+      <md-option *ngFor='let item of awsRegions; let i = index' value={{item.region}}>
+        {{item.region}}
+      </md-option>
+    </md-select>
+  </div>
+
+</div>
+<div class="flex-item mt20" fxFlex="15%" [hidden]="ftUser" style="position: absolute ; top:-15px; right: 10px">
+  <div>
+    <md-select placeholder="Region" class="flex-row margint-10  mb20 vm-select-wrap" [(ngModel)]="cloudDetailRegion">
+      <md-option *ngFor='let item of awsRegions; let i = index' value={{item.region}}>
+        {{item.region}}
+      </md-option>
+    </md-select>
+  </div>
+
+</div>
+
+
+<div [hidden]="!detailLoader">
+                  <div class="detail-loader vm-launch-load">
+                    <md-spinner class="loader-size"></md-spinner>
+                  </div>
+</div>
+
+<div>
+
+<form [formGroup]="azureDetail" [style.height.px]="455" style="margin-top:0px;overflow-y:hidden" [hidden]="ftUser" >
+  <div class="flex-container height45" fxLayout="row">
+    <div class="flex-item mt20 " fxFlex="15%">
+      <div class="relative flex-row mb20">
+        <label > Name: </label>
+      </div>
+    </div>
+    <div class="flex-row">
+      <div class="flex-item mt20 " fxFlex="20%">
+        <md-input formControlName="name" [(ngModel)]="name" type="text"  placeholder="DFP Machine" class="flex-row hideinputplaceholder" style="margin-top:-10%;"
+          ></md-input>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="flex-container height45" fxLayout="row">
+    <div class="flex-item mt20 " fxFlex="15%">
+      <div class="relative flex-row mb20 changeColorLabel">
+        <label [class.formLabelColor]="azureDetail.controls['name'].valid"> Vnet: </label>
+      </div>
+    </div>
+    <div class="flex-row">
+      <div class="flex-item mt20 " fxFlex="20%">
+        <div class="project-input mb20">
+          <md-select placeholder="Choose/Create" class=" flex-row hideplaceholder"  formControlName="vnetSelect" [(ngModel)]="vnetSelect" [disabled]="!azureDetail.controls['name'].valid">            
+            <md-option *ngFor="let vnt of vnet" [value]="vnt.value">
+              {{ vnt.viewValue }}
+            </md-option>          
+          
+          </md-select>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+    <div class="flex-container height45" fxLayout="row">
+    <div class="flex-item mt20 " fxFlex="15%">
+      <div class="relative flex-row mb20 changeColorLabel">
+        <label [class.formLabelColor]="azureDetail.controls['vnetSelect'].valid"> Subnet: </label>
+      </div>
+    </div>
+    <div class="flex-row">
+      <div class="flex-item mt20 " fxFlex="20%">
+        <div class="project-input mb20">
+          <md-select placeholder="Choose/Create" class=" flex-row hideplaceholder" formControlName="subnetSelect" [(ngModel)]="subnetSelect" [disabled]="!azureDetail.controls['vnetSelect'].valid">
+            <!--<md-optgroup label="items">-->
+            <!-- <md-option *ngFor="let subSelect of subnet" [value]="subSelect.value"> -->
+              <!-- {{ vp.viewValue }} -->
+              <md-option *ngFor="let subnt of subnet" [value]="subnt.value">
+              {{ subnt.viewValue }}
+            </md-option>
+            <!-- </md-option> -->
+          </md-select>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="container" style="justify-content: space-between;">
+    <div class="flex-container height45" fxLayout="row">
+      <div class="flex-item mt20" fxFlex="15%">
+        <div class="relative flex-row mb20 changeColorLabel">
+          <label [class.formLabelColor]="azureDetail.controls['subnetSelect'].valid">VM Size: </label>
+        </div>
+      </div>
+      <div class="flex-row">
+        <div class="flex-item mt20">
+          <div class="project-input mb20">
+            <md-select placeholder="Choose Series" class=" flex-row hideplaceholder" fxFlex="20%" formControlName="vmSelect1" [(ngModel)]="vmSelect1Model"
+              [disabled]="!azureDetail.controls['subnetSelect'].valid">
+              <md-option *ngFor="let VM of vm" [value]="VM.value">
+              {{ VM.viewValue }}
+              </md-option>             
+            </md-select>
+            <md-select placeholder="Choose Size" class=" flex-row hideplaceholder" fxFlex="20%" formControlName="vmSelect2" [(ngModel)]="vmSelect2Model"
+              [disabled]="!azureDetail.controls['vmSelect1'].valid" style="padding-left:3%">
+              <md-option *ngFor="let VM2 of vm2" [value]="VM2.value" (click)="divInfo()">
+                {{ VM2.viewValue }}
+              </md-option> 
+                                                      
+            </md-select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="flex-container height45" fxLayout="row">
+    <div class="flex-item mt20 " fxFlex="15%">
+      <div class="relative flex-row mb20 changeColorLabel">
+        <label  [class.formLabelColor]="azureDetail.controls['vmSelect2'].valid"> Resource Group: </label>
+      </div>
+    </div>
+    <div class="flex-row">
+      <div class="flex-item mt20 " fxFlex="20%">
+        <div class="project-input mb20">
+          <md-select placeholder="Choose/Create" class=" flex-row hideplaceholder" formControlName="resourcegrp" [(ngModel)]="resourcegrp" [disabled]="!azureDetail.controls['vmSelect2'].valid">
+            <!--<md-optgroup label="items">-->
+            <md-option *ngFor="let Resource of resource" [value]="Resource.value">
+              {{ Resource.viewValue }}
+            </md-option> 
+            <!--</md-optgroup>-->
+          </md-select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex-container height45" fxLayout="row">
+    <div class="flex-item mt20" fxFlex="15%">
+      <div class="relative flex-row mb20 changeColorLabel">
+        <label  [class.formLabelColor]="azureDetail.controls['resourcegrp'].valid">  Storage Account: </label>
+      </div>
+    </div>
+    <div class="flex-row">
+      <div class="flex-item mt20">
+        <div class="project-input mb20">
+          <md-select placeholder="Choose/Create" class=" flex-row hideplaceholder"   fxFlex="20%" formControlName="storageAccountSelect" [(ngModel)]="storageAccountSelect"
+            [disabled]="!azureDetail.controls['resourcegrp'].valid">
+             <md-option *ngFor="let storage of storageAccount" [value]="storage.value">
+              {{ storage.viewValue }}
+            </md-option>  
+          </md-select>
+         <md-radio-group class=" flex-row"  style="padding-left:3%;" fxFlex="30%" formControlName="storageAccountRadio" [(ngModel)]="storageAccountRadio" [disabled]="!azureDetail.controls['storageAccountSelect'].valid">
+            <md-radio-button [value]="'LRS'" aria-label="Public" class=" flex-row changeColorLabel" fxFlex="7%">LRS</md-radio-button>
+            <md-radio-button [value]="'GRS'" aria-label="Public" class=" flex-row changeColorLabel" fxFlex="7%">GRS</md-radio-button>
+            <md-radio-button [value]="'ZRS'" aria-label="Public" class=" flex-row changeColorLabel" fxFlex="7%">ZRS</md-radio-button>
+            <md-radio-button [value]="'RA_GHS'" aria-label="Public" class="flex-row changeColorLabel" fxFlex="7%">RA-GHS</md-radio-button>
+          </md-radio-group>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex-container height45" fxLayout="row">
+    <div class="flex-item mt20" fxFlex="15%">
+      <div class="relative flex-row mb20 changeColorLabel">
+        <label [class.formLabelColor]="azureDetail.controls['storageAccountSelect'].valid">OS Type: </label>
+      </div>
+    </div>
+    <div class="flex-row">
+      <div class="flex-item mt20">
+        <div class="project-input mb20">
+          <md-select placeholder="Choose base" class=" flex-row hideplaceholder" fxFlex="20%" formControlName="osBase" [(ngModel)]="osBaseModel" [disabled]="!azureDetail.controls['storageAccountRadio'].valid">
+            <md-option *ngFor="let osBaseType of osBase" [value]="osBaseType.value">{{ osBaseType.viewValue }}</md-option> 
+          </md-select>
+          <md-select placeholder="Choose publisher" class=" flex-row hideplaceholder" fxFlex="20%" formControlName="osBasePublish" [(ngModel)]="osBasePublishModel"
+            [disabled]="!azureDetail.controls['osBase'].valid" style="padding-left:3%">
+            <md-option *ngFor="let osBaseType of osBasePublish" [value]="osBaseType.value">{{ osBaseType.viewValue }}</md-option> 
+          </md-select>
+          <md-select placeholder="Choose Offer" class=" flex-row hideplaceholder" fxFlex="20%" formControlName="osBaseOffer" [(ngModel)]="osBaseOfferModel"
+            [disabled]="!azureDetail.controls['osBasePublish'].valid" style="padding-left:3%">
+            <md-option *ngFor="let osBaseVersionType of osBaseOffer" [value]="osBaseVersionType.value">{{ osBaseVersionType.viewValue }}</md-option> 
+          </md-select>
+          <md-select placeholder="Choose Sku" class=" flex-row hideplaceholder" fxFlex="20%" formControlName="osBaseSku" [(ngModel)]="osBaseSkuModel"
+            [disabled]="!azureDetail.controls['osBaseOffer'].valid" style="padding-left:3%">
+            <md-option *ngFor="let osBaseOfferType of osBaseSku" [value]="osBaseOfferType.value">{{ osBaseOfferType.viewValue }}</md-option>
+          </md-select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex-container height45" fxLayout="row">
+    <div class="flex-item mt20" fxFlex="15%">
+      <div class="relative flex-row mb20 changeColorLabel">
+        <label  [class.formLabelColor]="azureDetail.controls['storageAccountSelect'].valid"> Disk Count: </label>
+      </div>
+    </div>
+    <div class="flex-row paddingleft">
+      <div class="flex-item mt20">
+        <button class=" flex-row button-style" fxFlex="2%" [class.changeIconColor]="azureDetail.controls['storageAccountSelect'].valid"
+          [disabled]="!azureDetail.controls['osBaseSku'].valid" (click)="minRange()">
+          <md-icon class="material-icons">remove_circle</md-icon>
+        </button>
+
+        <md-input type="text" formControlName="diskCount" align="center"  class=" flex-row hideinputplaceholder" fxFlex="4%" [(ngModel)]="diskCount" style="margin-top:-10%;text-align:center;margin-left:2%" 
+          [disabled]="true" (click)="disCountClick()" class="placeholdCenter">
+        </md-input>
+        <button class=" flex-row button-style" fxFlex="2%" [class.changeIconColor]="azureDetail.controls['storageAccountSelect'].valid"
+          [disabled]="!azureDetail.controls['storageAccountSelect'].valid" (click)="maxRange()">
+          <md-icon class="material-icons">add_circle</md-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="flex-container height45" fxLayout="row">
+    <div class="flex-item mt20" fxFlex="15%">
+      <div class="relative flex-row mb20 changeColorLabel">
+        <label   [class.formLabelColor]="azureDetail.controls['storageAccountSelect'].valid"> Disk 1: </label>
+      </div>
+    </div>
+    <div class="flex-row">
+      <div class="flex-item mt20" fxFlex="45%">
+        <div class="project-input mb20">
+          <md-radio-group formControlName="diskSelect" [(ngModel)]="diskRadioSelect" [disabled]="!azureDetail.controls['storageAccountSelect'].valid">
+            <md-radio-button [value]="'Standarad'" aria-label="Public" class=" flex-row changeColorLabel" fxFlex="20%"> Standard </md-radio-button>
+            <md-radio-button [value]="'Medium'" aria-label="Public" class=" flex-row changeColorLabel" fxFlex="20%"> Premium </md-radio-button>
+          </md-radio-group>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex-container height45" fxLayout="row">
+    <div class="flex-item mt20" fxFlex="15%">
+      <div class="relative flex-row mb20 changeColorLabel">
+        <label [class.formLabelColor]="azureDetail.controls['storageAccountSelect'].valid">  IP Address: </label>
+      </div>
+    </div>
+    <div class="flex-row">
+      <div class="flex-item mt20" fxFlex="45%">
+        <div class="project-input mb20">
+          <md-radio-group formControlName="ipAddress" [(ngModel)]="ipAddressSelect" [disabled]="!azureDetail.controls['storageAccountSelect'].valid">
+            <md-radio-button [value]="'Static'" aria-label="Public" class=" flex-row changeColorLabel" fxFlex="20%"> Static </md-radio-button>
+            <md-radio-button [value]="'Dynamic'" aria-label="Public" class=" flex-row changeColorLabel" fxFlex="20%"> Dynamic</md-radio-button>
+          </md-radio-group>
+          <md-checkbox aria-label="Public" class=" flex-row changeColorLabel" fxFlex="20%" [class.formLabelColor]="!azureDetail.controls['storageAccountSelect'].valid">Public IP</md-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <div class="flex-container height45" fxLayout="row">
+    <div class="flex-item mt20 " fxFlex="15%">
+      <div class="relative flex-row mb20 changeColorLabel">
+        <label [class.formLabelColor]="azureDetail.controls['storageAccountSelect'].valid"> NSG: </label>
+      </div>
+    </div>
+    <div class="flex-row">
+      <div class="flex-item mt20 " fxFlex="20%">
+        <div class="project-input mb20">
+          <md-select placeholder="Choose/Create" class=" flex-row hideplaceholder" formControlName="nsgSelect" [(ngModel)]="nsgSelect" [disabled]="!azureDetail.controls['ipAddress'].valid">
+            <!--<md-optgroup label="items">-->
+            <md-option value="1">NSG 1</md-option>
+            <md-option value="2">NSG 2</md-option>          
+           </md-select>
+
+        </div>
+
+      </div>
+    </div>
+  </div> 
+
+  <div class="cloudBtn  cloudButtonSty">
+    <button md-raised-button class="auto-btn-prime" [disabled]="!azureDetail.valid || !azureDetail.controls['ipAddress'].valid"
+      (click)="launchVm()">Launch</button>
+  </div> 
+</form>
+
+</div>
+

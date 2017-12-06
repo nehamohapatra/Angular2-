@@ -1,0 +1,209 @@
+<div class="update-data" (click)="updateData()" [hidden]="true"></div>
+<div class="build-tab-content" [style.height.px]="contHeight">
+    <div class="create-repo-container">
+        <div class="flex-container" fxLayout="row">
+            <div class="flex-item" fxFlex="50%">
+                <p class="small-txt mb10">Cloud Accounts</p>
+                <!--AWS Account Button Start Here-->
+                <div class="repo-btn-wrap">
+                    <div [hidden]="addDetail">
+                        <button md-raised-button class="manage-repo-btn" (click)="onAwsClick()" [class.primary-bgcolor]="activeAws">
+                            <img src="images/cloud-mng/aws.png" class="manage-repo-icon" [hidden]="activeAws" />
+                            <img src="images/cloud-mng/aws.png" class="manage-repo-icon" [hidden]="!activeAws" />
+                            <p class="manage-repo-name">onboard aws Account</p>
+                        </button>
+                        <md-icon class="act-repo-arrow cloud-arrow mr2em" *ngIf="activeAws">play_arrow</md-icon>
+                    </div>
+                    <div [hidden]="!addDetail">
+
+                        <div fxLayout="row">
+                            <div fxFlex="90%">
+                                <div class="act-repo-wrap">
+                                    <img src="images/cloud-mng/aws.png" class="act-repo-icon" />
+                                    <div class="act-repo-txt txt-handler">
+                                        <p class="act-repo-txt1">AWS: Owner : Account X</p>
+                                        <p class="act-repo-txt2">Provide the AWS cloud account credentials to deploy your cloud workloads</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div fxFlex="10%">
+                                <md-icon class="act-repo-arrow cloud-arrow mr2em">play_arrow</md-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--AWS Account Button End Here-->
+                <!--Azure Account Button Start Here-->
+                <div class="repo-btn-wrap">
+                    <div [hidden]="azureAdd">
+                        <!--<button md-raised-button class="manage-repo-btn" (click)="onAzureClick()" [class.primary-bgcolor]="azureAct">-->
+                        <button md-raised-button class="manage-repo-btn" (click)="onAzureClick()" [class.primary-bgcolor]="azureAct">
+                            <img src="images/cloud-mng/azure.png" class="manage-repo-icon"/>
+                            <p class="manage-repo-name">onboard azure Account</p>
+                        </button>
+                        <md-icon class="act-repo-arrow cloud-arrow mr2em" *ngIf="azureAct">play_arrow</md-icon>
+                    </div>
+                    <div [hidden]="!azureAdd">
+                        <div fxLayout="row">
+                            <div fxFlex="90%">
+                                <div class="act-repo-wrap">
+                                    <img src="images/cloud-mng/azure.png" class="act-repo-icon" />
+                                    <div class="act-repo-txt txt-handler">
+                                        <p class="act-repo-txt1">AZURE: Owner : Account X</p>
+                                        <p class="act-repo-txt2">Provide the AZURE cloud account credentials to deploy your cloud workloads</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div fxFlex="10%">
+                                <md-icon class="act-repo-arrow cloud-arrow mr2em">play_arrow</md-icon>
+                            </div>
+                        </div>
+                        <br/>
+                    </div>
+                </div>
+                <!--Azure Account Button End Here-->
+                <!--GCP Account Button Start Here-->
+                <!--<div class="repo-btn-wrap">
+                    <button md-raised-button class="manage-repo-btn"><img src="images/cloud-mng/google_cloud.png" class="manage-repo-icon"/><p class="manage-repo-name">onboard GCP ACCOUNT</p></button>
+                </div>-->
+                <!--GCP Account Button End Here-->
+
+            </div>
+            <div class="flex-item" fxFlex="50%">
+                <!--AWS Account Form Start Here-->
+                <div [hidden]="!activeAws">
+                    <p class="bold-gray-txt">Details</p>
+                    <form [formGroup]="awsDetail" [style.height.px]="formHeight" [hidden]="addDetail">
+                        <div class="form-input-wrap margin-zero">
+                            <div class="auth-input">
+                                <div class="project-input">
+                                    <md-input formControlName="name" type="text" placeholder="Account Name" [class.errorBorder]="!awsDetail.controls['name'].valid && awsDetail.controls['name'].touched"></md-input>
+                                    <span class="error-txt" *ngIf="!awsDetail.controls['name'].valid && awsDetail.controls['name'].touched">Please enter your account name</span>
+                                    <br/>
+                                    <div class="clear-icon" *ngIf="!awsDetail.controls['name'].valid && awsDetail.controls['name'].touched">
+                                        <md-icon>clear</md-icon>
+                                    </div>
+                                    <div class="ok-icon" *ngIf="awsDetail.controls['name'].valid && awsDetail.controls['name'].touched">
+                                        <md-icon>done</md-icon>
+                                    </div>
+                                </div>
+                                <!-- <div class="project-input">
+                                    <md-input class="cloud-input1 visible-input" formControlName="accessKey" [type]="accessType" placeholder="Access key ID"
+                                        [class.errorBorder]="!awsDetail.controls['accessKey'].valid && awsDetail.controls['accessKey'].touched"></md-input>
+                                        <br/>
+                                        <div class="clear-icon" *ngIf="!awsDetail.controls['accessKey'].valid && awsDetail.controls['accessKey'].touched">
+                                            <md-icon>clear</md-icon>
+                                        </div>
+                                        <div class="ok-icon" *ngIf="awsDetail.controls['accessKey'].valid && awsDetail.controls['accessKey'].touched">
+                                            <md-icon>done</md-icon>
+                                        </div>
+                                        <div [hidden]="!accessVisible">
+                                            <md-icon (click)="onAccessVisible()" class="input_visibility">visibility_off</md-icon>
+                                        </div>
+                                        <div [hidden]="accessVisible">
+                                            <md-icon (click)="onAccessVisibleOff()" class="input_visibility">visibility</md-icon>
+                                        </div>
+                                </div> -->
+                                <!-- <div class="project-input">
+                                    <md-input class="cloud-input2 visible-input" formControlName="secretKey" [type]="secType" placeholder="Secret Access Key"
+                                        [class.errorBorder]="!awsDetail.controls['secretKey'].valid && awsDetail.controls['secretKey'].touched"></md-input>
+                                        <span class="error-txt" *ngIf="!awsDetail.controls['secretKey'].valid && awsDetail.controls['secretKey'].touched">{{secretKey}} </span>
+                                        <br/>
+                                        <div class="clear-icon" *ngIf="!awsDetail.controls['secretKey'].valid && awsDetail.controls['secretKey'].touched">
+                                            <md-icon>clear</md-icon>
+                                        </div>
+                                        <div class="ok-icon" *ngIf="awsDetail.controls['secretKey'].valid && awsDetail.controls['secretKey'].touched">
+                                            <md-icon>done</md-icon>
+                                        </div>
+                                        <div [hidden]="!secVisible">
+                                            <md-icon (click)="onSecVisible()" class="input_visibility">visibility_off</md-icon>
+                                        </div>
+                                        <div [hidden]="secVisible">
+                                            <md-icon (click)="onSecVisibleOff()" class="input_visibility">visibility</md-icon>
+                                        </div>
+                                </div> -->
+                                <!-- <div class="project-input form-input-wrap margint-10 mb20">
+                                    <md-select formControlName="selectRepo" placeholder="Select Region" class="form-input-wrap" [(ngModel)]="awsCloudRegions">
+                                        <md-option class="flex-row" *ngFor='let item of awsRegions; let i = index ' value={{item.region}}>
+                                            {{item.region}}
+                                        </md-option> -->
+
+
+                                        <!-- <md-option class="flex-row" value="Region2">Region2</md-option>
+                                          <md-option class="flex-row" value="Region3">Region3</md-option>  -->
+                                    <!-- </md-select> -->
+                                    <!--<span class="error-txt" *ngIf="!awsDetail.controls['region'].valid && awsDetail.controls['region'].touched">Please select your region</span>
+                                    <br/>
+                                    <div class="clear-icon" *ngIf="!awsDetail.controls['region'].valid && awsDetail.controls['region'].touched">
+                                        <md-icon>clear</md-icon>
+                                    </div>
+                                    <div class="ok-icon" *ngIf="awsDetail.controls['region'].valid && awsDetail.controls['region'].touched">
+                                        <md-icon>done</md-icon>
+                                    </div>-->
+
+                                <!-- </div> -->
+                            </div>
+                            <!-- <div class="box-btn">
+                                <button md-raised-button class="auto-btn-prime" [disabled]="!awsDetail.valid" (click)="onDetailAdd()">add</button>
+                            </div> -->
+                        </div>
+                        <a href="http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSGettingStartedGuide/AWSCredentials.html" target="_blank"
+                            class="resend-txt mb20 text-left azureIdColor">Need help finding keys ?</a>
+                            <br/><br/>
+                            <p class="xsmall-gray-txt s">
+                                <md-icon class="info_outline">info_outline</md-icon>&nbsp;We dont store your keys. Instead, an IAM role is created for DFP to access your account securely.<br>
+                                Kindly delete any 'DFP' role (if already present)from your account before adding. </p>
+                    </form>
+                    <div class="relative flex-row" [style.height.px]="formHeight" [hidden]="!addDetail">
+                        <div class="form-input-wrap margin-zero">
+                            <md-input placeholder="Account Name" type="text" class="flex-row" [(ngModel)]="cloudDetail" readonly></md-input>
+                            <md-select placeholder="Default Region" (ngModelChange)="enableUpdate()" class="flex-row margint-10  mb20" [(ngModel)]="cloudDetailRegion"
+                                [hidden]="!addDetail">
+                                <md-option *ngFor='let item of awsRegions; let i = index' value={{item.region}}>
+                                    {{item.region}}
+                                </md-option>
+                                </md-select>
+
+                                <a href="https://aws.amazon.com" target="_blank" class="resend-txt text-left">https://aws.amazon.com/</a>
+                        </div>
+                        <div class="box-btn br">
+                            <span *ngIf="enableUpdateFlag == true">
+                            <button md-raised-button class="orange-btn" (click)="onOpenPopUp()">unlink</button>
+                             </span>
+                            <span *ngIf="enableUpdateFlag == false">
+                            <button md-raised-button class="orange-btn" (click)="updateAwsDetail()" [disabled]="enableUpdateFlag">update</button>
+                            <button md-raised-button class="auto-btn-gray" (click)="onCancel()">cancel</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!--AWS Account Form End Here-->
+                <!--Azure Account Form Start Here-->
+                <div [hidden]="!azureAct">
+                    <azure-account></azure-account>
+                </div>
+                <!--Azure Account Form End Here-->
+
+            </div>
+        </div>
+    </div>
+    <div *ngIf="cloudLoader" [style.height.px]="resHeight" [style.width.px]="resWidth">
+        <div class="detail-spinner-wrap" [style.width.px]="resWidth" [style.height.px]="resHeight">
+            <md-progress-spinner mode="indeterminate" color="primary" class="detail-spinner"></md-progress-spinner>
+        </div>
+    </div>
+    <div class="repo-status">
+        <div class="terms" [class.terms-visible]="unlinkPop">
+            <div class="terms-wrap width-auto">
+                <h4 class="terms-ht text-center">Are you sure you want to unlink your AWS account?</h4>
+                 <p>Note: Unlinking will not affect any of your running services.</p>
+                 <div class="popup-btn">
+                    <button md-raised-button class="auto-btn-prime" (click)='onUnlink()'>yes</button>
+                    <button md-raised-button class="auto-btn-gray" (click)="onOpenPopUp()">cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

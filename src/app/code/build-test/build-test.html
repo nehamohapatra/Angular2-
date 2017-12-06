@@ -1,0 +1,150 @@
+<div class="build-tab-content" [style.height.px]="contHeight">
+    <div [hidden]="!((showNoCloudPH == false) && (showNoRepoPH == false))">
+        <div class="flex-container" fxLayout="row">
+            <div class="flex-item" fxFlex="50%">
+                <div class="flex-container margin-t20" fxLayout="row" fxLayoutAlign="center center">
+                    <div class="flex-item" fxFlex="85%">
+                        <p class="bold-gray-txt">Setup a Dev Test Environment</p>
+                        <p class="normal-gray-txt">A temporary dev environment setup before releasing it to QA</p>
+                    </div>
+
+                    <div class="flex-item" fxFlex="15%">
+                        <div>
+                            <md-select placeholder="Dev Test" class="repo-select-wrap bt-select fright" [(ngModel)]="actionId">
+                                <md-option value="USER_DEVTEST_REPO_REQUEST">Dev Test</md-option>
+                            </md-select>
+                        </div>
+                    </div>
+                </div>
+                <form [formGroup]="selectRepo">
+                    <div class="project-input">
+                        <md-select placeholder="Select repository" class="flex-row mt20" formControlName="selectedRepo" (ngModelChange)="checkDockerStatus($event,selectRepo.controls['selectedRepo'])">
+                            <!--<md-option disabled>Select a repository</md-option>-->
+                            <md-option *ngFor='let item of repoArray; let i = index' [value]="item"> {{item.name}} </md-option>
+                        </md-select>
+                        <span class="error-txt top0" *ngIf="!selectRepo.controls['selectedRepo'].valid && selectRepo.controls['selectedRepo'].touched">Please select your repository</span>
+                        <br/>
+                        <div class="clear-icon" *ngIf="!selectRepo.controls['selectedRepo'].valid && selectRepo.controls['selectedRepo'].touched">
+                            <md-icon>clear</md-icon>
+                        </div>
+                        <div class="ok-icon" *ngIf="selectRepo.controls['selectedRepo'].valid && selectRepo.controls['selectedRepo'].touched">
+                            <md-icon>done</md-icon>
+                        </div>
+                    </div>
+                    <div class="project-input">
+                        <md-select placeholder="Choose cloud account" [(ngModel)]="selectedCloud" class="flex-row mt20" formControlName="selectedCloud">
+                            <!--<md-option disabled>Choose cloud account</md-option>-->
+                            <md-option value="AWS">AWS</md-option>
+                            <!--<md-option *ngFor='let item of cloudAccount; let i = index' value={{item.region}}> {{item.region}} </md-option>-->
+                        </md-select>
+                        <span class="error-txt top0" *ngIf="!selectRepo.controls['selectedCloud'].valid && selectRepo.controls['selectedCloud'].touched">Please select your cloud account</span>
+                        <br/>
+                        <div class="clear-icon" *ngIf="!selectRepo.controls['selectedCloud'].valid && selectRepo.controls['selectedCloud'].touched">
+                            <md-icon>clear</md-icon>
+                        </div>
+                        <div class="ok-icon" *ngIf="selectRepo.controls['selectedCloud'].valid && selectRepo.controls['selectedCloud'].touched">
+                            <md-icon>done</md-icon>
+                        </div>
+                    </div>
+                    <div class="project-input">
+                        <md-select placeholder="Choose KeyPair" class="flex-row mt20" formControlName="selectedKeyPair">
+                            <!--<md-option disabled>Choose KeyPair</md-option>-->
+                            <md-option *ngFor='let item of keyPairArray; let i = index' value={{item.KeyName}}> {{item.KeyName}} </md-option>
+                        </md-select>
+                        <span class="error-txt top0" *ngIf="!selectRepo.controls['selectedKeyPair'].valid && selectRepo.controls['selectedKeyPair'].touched">Please select your Key Pair</span>
+                        <br/>
+                        <div class="clear-icon" *ngIf="!selectRepo.controls['selectedKeyPair'].valid && selectRepo.controls['selectedKeyPair'].touched">
+                            <md-icon>clear</md-icon>
+                        </div>
+                        <div class="ok-icon" *ngIf="selectRepo.controls['selectedKeyPair'].valid && selectRepo.controls['selectedKeyPair'].touched">
+                            <md-icon>done</md-icon>
+                        </div>
+                    </div>
+                </form>
+                <div class="flex-row mt20">
+
+                    <p class="xsmall-gray-txt" *ngIf="selectRepo.controls['selectedRepo'].valid">Docker status: &nbsp;<span [ngClass]="dockerFileNotValid == true ? 'badge-failed':'badge-passed'">{{dockerStatusBool}}</span></p>
+                    <p class="xsmall-link-txt" *ngIf="selectRepo.controls['selectedRepo'].valid" (click)="showModalClick()">Edit Docker file <span *ngIf="editorLoader"> (Loading...)</span></p>
+                    <button md-raised-button class="auto-btn-prime fright" (click)="onDeployClick()" [disabled]="(!selectRepo.valid || disableDeployButton)">DEPLOY</button>
+                </div>
+                <div class="flex-container flex-row" *ngIf="false">
+                    <div class="flex-item fleft" fxFlex="33%">
+                        <p class="xsmall-gray-txt">Last build status for <span class="xsmall-link-txt fright">#repo-name</span>&nbsp;</p>
+                        <p class="xsmall-gray-txt">Yesterday at 10:00 PM &nbsp;</p>
+
+                    </div>
+                    <div class="flex-item fleft" fxFlex="70%">
+                        <p class="badge-passed mt8 ml10">passed</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-item" fxFlex="5%"></div>
+            <div class="flex-item margin-t20" fxFlex="45%" *ngIf="false">
+                <md-list class="bt-list-wrap">
+                    <md-list-item *ngFor="let item of buildItem" class="bt-list">
+                        <p class="normal-gray-txt" md-line>Build on {{item.period}} </p>
+                        <p class="normal-gray-txt" md-line>Executed in #{{item.acname}}</p>
+                        <div class="mr8">
+                            <p class="badge-{{item.status}} fleft">{{item.status}}</p>
+                        </div>
+                    </md-list-item>
+                </md-list>
+            </div>
+        </div>
+    </div>
+    <!--PlaceHolder if not allowed-->
+    <div [hidden]="!showNoCloudPH" [style.height.px]="onboardHeight">
+        <div class="flex-box">
+            <div class="text-center">
+                <img src="images/cloud-mng/add-cloud-icon.png" />
+                <p class="normal-gray-txt mt20" (click)="onBoardClick()"><span class="normal-link-txt">Onboard</span>&nbsp;a cloud account</p>
+            </div>
+        </div>
+    </div>
+
+    <div [hidden]="(showNoCloudPH == true) || !showNoRepoPH" [style.height.px]="onboardHeight">
+        <div class="flex-box">
+            <div class="text-center">
+                <img src="images/cloud-mng/stack_icon.png" />
+                <p class="normal-gray-txt mt20" (click)="onCreateRepoClick()"><span class="normal-link-txt">Create / Link</span>&nbsp; a repository </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="repo-footer height-inherit" [style.width.px]="contWidth" [hidden]="true">
+    <div class="full-height" class="flex-container">
+        <div class="flex-item padding-20" fxFlex="100%" fxLayoutAlign="start center" layout-align="start center">
+            <md-icon class="active">flare</md-icon>
+            <p class="footer-tip-txt">Geek Tip: Type "Build #repo-name to QA in #azure" to intiate a build</p>
+        </div>
+    </div>
+</div>
+<div class="repo-footer" [style.width.px]="contWidth">
+    <div class="full-height" class="flex-container" fxLayout="row" fxLayoutAlign="center center">
+        <div class="flex-item padding-20" fxFlex="50%" fxLayoutAlign="start center" layout-align="start center">
+            <md-icon class="active">flare</md-icon>
+            <p class="footer-tip-txt">Pro Tip: All bundles & stacks comes with docker container support by default</p>
+        </div>
+        <div class="flex-item padding-20" fxFlex="50%" fxLayoutAlign="end center" layout-align="end center">
+
+        </div>
+    </div>
+</div>
+<div class="terms" [class.terms-visible]="showModal">
+    <div class="terms-wrap modal-width">
+        <h4 class="editor-heading">Docker Editor</h4>
+        <ace-editor #editor class="code-editor" [mode]="'dockerfile'" [(text)]="code" [theme]="'xcode'">
+        </ace-editor>
+        <!--<codemirror [(ngModel)]="code" [config]="config"></codemirror>-->
+        <div class="editor-footer" fxLayout="row" fxLayoutAlign="center center">
+            <div fxFlex="50%" fxLayourAlign="start center">
+                <button md-raised-button class="auto-btn-gray" (click)="editDockerCancel()">cancel</button>
+            </div>
+            <div fxFlex="50%" fxLayourAlign="end center">
+                <button md-raised-button class="primary-btn" (click)="editDockerVerify()">VERIFY</button>
+                <button md-raised-button class="auto-btn-gray" (click)="editDockerApply()">APPLY</button>
+            </div>
+        </div>
+    </div>
+</div>

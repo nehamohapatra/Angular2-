@@ -1,0 +1,79 @@
+<header-menu (changeProject)="changeEvent()"></header-menu>
+<side-menu [flag]="flag"></side-menu>
+<div class="nav-height">
+</div>
+<div class="project-wrap tab-pad">
+        <div class="project-cont" [style.width.px]="resWidth" [style.height.px]="resHeight">
+        <md-tab-group class="cloud-main-tab tab-min" [selectedIndex]="cloudIndex">
+            <md-tab (click)="vmClick()">
+                <template md-tab-label>
+                    VIRTUAL MACHINES
+                </template>
+                <div class="bundle-tab-container pad-rlt" [hidden]=isLoaded>
+                    <cloud-services (selectedCloudEnv)="selectedCloudEnv($event)"></cloud-services>
+                </div>
+                <div class="bundle-tab-container pad-rlt" *ngIf="!azureSelected">
+                    <cloud-azure (selectedCloudEnv)="selectedCloudEnv($event)"></cloud-azure>
+                </div>
+            </md-tab>
+
+            <md-tab>
+                <template md-tab-label>
+                    CLOUD ACCOUNTS
+                </template>
+                <div class="bundle-tab-container" style="height: 466px;">
+                    <cloud-account (disconnect)="disconnectAcc()" (getConnect)="afterConnect()"></cloud-account>
+                </div>
+            </md-tab>
+            <!--<md-tab [disabled]="disableTab">
+                <template md-tab-label>
+                    CONTAINER
+                </template>
+                <div class="bundle-tab-container">
+                    <div class="flex-container mt20" fxLayout="row">
+
+                        <div class="flex-item" fxFlex="60%">
+                            <form [formGroup]="contDetail">
+                                <div class="search-deploy full-width margin-zero">
+
+                                    <div class="search-input-wrap search-exp width-93">
+                                        <md-input formControlName="searchTxt" id="tableSearch" type="text" [(ngModel)]="tableSearch" class="search-input full-width"
+                                            placeholder="Search"></md-input>
+                                        <md-icon (click)="onSearchList()" class="cont-app-icon">search</md-icon>
+                                        <md-icon class="dashboard-icon search-icon">apps</md-icon>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="flex-container mt20" fxLayout="row" fxLayoutAlign="center center" *ngIf="searchItem">
+                        <div class="flex-item" fxFlex="100%">
+                            <md-list class="bt-list-wrap">
+                                <md-list-item *ngFor="let item of containerItem" class="bt-list">
+                                    <p class="bold-gray-txt" md-line>Title {{item.name}} </p>
+                                    <p class="normal-gray-txt" md-line>description {{item.description}}</p>
+
+                                </md-list-item>
+                            </md-list>
+                        </div>
+                    </div>
+                </div>
+            </md-tab>-->
+        </md-tab-group>
+        <!--<div class="repo-status">
+            <p class="secondary-txt repo-list">Add your cloud accounts</p>
+            <div class="repo-button active">
+                <p class="icon-placeholder"></p>
+                <p class="repo-name">Cloud Accounts
+                    <br/>Onboard a cloud Provider
+                </p>
+            </div>
+        </div>-->
+    </div>
+</div>
+<div class="terms page-loader" [class.terms-visible]="showLoad">
+    <div>
+        <md-spinner class="loader-size"></md-spinner>
+    </div>
+</div>

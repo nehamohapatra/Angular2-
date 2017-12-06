@@ -1,0 +1,73 @@
+<div>
+    <div class="flex-container" fxLayout="row" fxLayoutAlign="center center">
+        <div fxFlex="100">
+            <div class="search-deploy">
+                <md-icon class="search-icon" (click)="onSearchExp()">search</md-icon>
+                <div class="search-input-wrap" [class.search-exp]="searchExp">
+                    <md-input id="bundlesSearch" type="text" class="search-input" [(ngModel)]="filter" placeholder="Search"></md-input>
+                    <md-icon class="cancel-icon" (click)="onSearchExp()">clear</md-icon>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="build-tab-content" [style.height.px]="contHeight">
+    <div>
+        <div class="flex-container" fxLayout="row">
+            <div class="flex-item" fxFlex="50%">
+                <p class="small-txt mb20">Bundles</p>
+                <div class="mb20" *ngFor="let item of deploy | search:filter;let index=index">
+                    <div *ngIf="item.isBundle" class="build-label-cont" (click)="selectBundle(index,item.ID)">
+                        <div class="build-label-icon mt3">
+                        </div>
+                        <div class="build-label-content build-content">
+                            <p class="normal-gray-txt {{checkFlag(index)}}">{{item.name}}</p>
+                            <p class="xsmall-gray-txt {{checkFlag(index)}}">{{item.description}}</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="flex-item" fxFlex="50%">
+                <div>
+                    <p class="bold-gray-txt mb20">Stacks</p>
+                    <div class="mb20" *ngFor="let item of deploy | search:filter;let i=index">
+                        <div *ngIf="!item.isBundle && item.name!='EMPTY'" class="build-label-cont" (click)="selectStack(i,item.ID)">
+                            <div class="build-label-icon mt3">
+                            </div>
+                            <div class="build-label-content build-content">
+                                <p class="normal-gray-txt {{testFlag(i)}}">{{item.name}}</p>
+                                <p class="xsmall-gray-txt {{testFlag(i)}}">{{item.description}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="deployLoader" class="no-data search-data display-flex deploy-loader" [style.height.px]="loaderHeight">
+                <div class="text-center">
+                    <md-spinner class="loader-size"></md-spinner>
+                </div>
+            </div>
+            <div *ngIf='(deploy | search:filter).length ==0' class="no-data search-data" [class.display-flex]="true" [style.height.px]="nodataTop">
+                <div class="text-center">
+                    <img src="images/search.png" />
+                    <p class="xsmall-gray-txt">Unfortunately, no result were found matching: <span class="normal-gray-txt">{{filter}}</span></p>
+                    <p class="xsmall-gray-txt">Try modifying your search terms</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="repo-footer" [style.width.px]="contWidth">
+    <div class="full-height" class="flex-container" fxLayout="row" fxLayoutAlign="center center">
+        <div class="flex-item padding-20" fxFlex="50%" fxLayoutAlign="start center" layout-align="start center">
+            <md-icon class="active">flare</md-icon>
+            <p class="footer-tip-txt">Pro Tip: All bundles & stacks comes with docker container support by default</p>
+        </div>
+        <div class="flex-item padding-20" fxFlex="50%" fxLayoutAlign="end center" layout-align="end center">
+            <button md-raised-button class="auto-btn-prime mr10" (click)="selectedItem=102; onNextClick()">Create empty repository </button>
+            <button (click)="onNextClick()" [disabled]="!enableNext" md-raised-button class="auto-btn-prime next-btn">Next </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,73 @@
+<div class="update-data" (click)="updateData()" [hidden]="true"></div>
+<div class="build-tab-content" [style.height.px]="contHeight">
+    <div class="create-repo-container">
+        <div class="flex-container" fxLayout="row" fxLayoutAlign="center center">
+            <div fxFlex="50%" class="flex-item">
+                <p class="small-txt mb10">Add/Manage repository</p>
+                <div class="repo-btn-wrap">
+                    <button md-raised-button class="manage-repo-btn" (click)="onGithubClick()" [class.gitHubHidden]="gitHub"><img src="images/GitHub.png" class="manage-repo-icon" /><p class="manage-repo-name">Github Account</p></button>
+                    <div [class.gitHubBlock]="gitHub" class="gitHubHidden">
+                        <div class="act-repo-wrap">
+                            <img src="images/GitHub.png" class="act-repo-icon" />
+                            <div class="act-repo-txt">
+                                <p class="act-repo-txt1">Github Owner : {{ownerDetails.name}}</p>
+                                <p class="act-repo-txt2">Use the account authorized by admin to launch your project</p>
+                            </div>
+                            <md-icon class="act-repo-arrow">play_arrow</md-icon>
+                        </div>
+                    </div>
+                </div>
+                <div class="repo-btn-wrap">
+                    <button md-raised-button class="manage-repo-btn"><img src="images/BitBucket.png" class="manage-repo-icon" /><p class="manage-repo-name">Bitbucket Account</p></button>
+                </div>
+                <div class="repo-btn-wrap">
+                    <button md-raised-button class="manage-repo-btn"><img src="images/GitLab.png" class="manage-repo-icon" /><p class="manage-repo-name">Gitlab Account</p></button>
+                </div>
+            </div>
+            <div fxFlex="50%" class="flex-item">
+                <div [class.gitHub]="gitHub" class="github-wrap">
+                    <p class="bold-gray-txt mb20">Details</p>
+                    <div class="mb20">
+                        <p class="normal-gray-txt">Owner</p>
+                        <p class="xsmall-gray-txt">{{ownerDetails.name||'No Value'}}</p>
+                    </div>
+                    <div class="mb20">
+                        <p class="normal-gray-txt">Profile Url</p>
+                        <p class="xsmall-gray-txt">{{ownerDetails.profileUrl || 'No Value'}}</p>
+                    </div>
+                    <div class="mb20">
+                        <p class="normal-gray-txt">Connected on</p>
+                        <p class="xsmall-gray-txt">{{ownerDetails.connectedOn|date}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <div class="repo-footer ftlb height-inherit" [style.width.px]="contWidth">
+        <div class="flex-container" fxLayout="row" fxLayoutAlign="center center">
+            <div fxFlex="50%" class="padding-20 flex-item" fxLayoutAlign="start center" layout-align="start center">
+                <md-icon class="active">flare</md-icon>
+                <p class="footer-tip-txt">Pro Tip: All bundles & stacks comes with docker container support by default
+                </p>
+            </div>
+            <div fxFlex="50%" class="padding-20 flex-item" fxLayoutAlign="end center" layout-align="end center">
+                <div *ngIf="gitHub">
+                    <button md-raised-button class="orange-btn mb15" (click)="onunlinkClick()">unlink</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="terms" [class.terms-visible]="unlinkPop" (click)="onunlinkClick()">
+        <div class="terms-wrap width-auto">
+            <h4 class="terms-ht text-center">Are you sure you want to unlink your Github account?</h4>
+            <p>Note: Unlinking will not delete any of your repositories.</p>
+            <p>But they will be unlinked from DFP.</p>
+            <div class="popup-btn">
+                <button md-raised-button (click)="onunlinkConfirmClick()" class="auto-btn-prime">Confirm</button>
+                <button md-raised-button class="auto-btn-gray">cancel</button>
+            </div>
+        </div>
+    </div>
